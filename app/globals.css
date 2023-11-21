@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  a {
+    @apply cursor-pointer;
+  }
+  a:hover {
+    @apply opacity-70;
+  }
+  nav a {
+    @apply font-medium underline underline-offset-4;
+  }
+  article {
+    @apply py-8;
+  }
+  nav li {
+    @apply list-none;
+  }
+  .btn {
+    @apply inline-block my-4 px-2 py-1 uppercase border text-zinc-100 bg-zinc-800;
+  }
+  #admin h1 {
+    @apply text-2xl;
+  }
+  form {
+    @apply bg-zinc-100 px-8 py-8 mx-auto flex max-w-2xl flex-col space-y-4;
+  }
+  input {
+    @apply border border-zinc-400 px-2 py-2 text-lg;
+  }
+}
