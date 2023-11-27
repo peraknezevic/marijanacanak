@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 @layer base {
-  a {
-    @apply cursor-pointer hover:text-[#C29842];
-  }
   body {
-    @apply max-w-7xl mx-auto;
+    @apply max-w-7xl mx-auto text-slate-900;
+  }
+  a {
+    @apply text-slate-900 cursor-pointer hover:text-slate-700;
   }
   header {
     @apply flex flex-col lg:flex-row justify-between items-center px-4 lg:px-16;
@@ -19,13 +19,13 @@
     @apply flex text-lg uppercase justify-start gap-6 items-baseline;
   }
   .main-nav a {
-    @apply no-underline font-bold hover:text-red-800 tracking-wider;
+    @apply no-underline font-bold tracking-wider;
   }
   main {
     @apply h-full;
   }
   h1 {
-    @apply text-center py-16 text-6xl font-bold text-zinc-400;
+    @apply text-center py-16 text-6xl font-bold text-slate-500;
   }
   h2 {
     @apply text-3xl font-bold mb-8;

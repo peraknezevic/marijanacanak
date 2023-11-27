@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <header>
       <div className="logo">
-        <Link href="/" className={`${kaushan.className}`}>
+        <Link href="/" className={`${kaushan.className} text-slate-500`}>
           Marijana Čanak
         </Link>
       </div>

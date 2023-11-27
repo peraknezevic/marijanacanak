@@ -1,7 +1,11 @@
 import React from "react"
 
 const Press = () => {
-  return <div>Press</div>
+  return (
+    <div>
+      <h1>Press</h1>
+    </div>
+  )
 }
 
 export default Press

@@ -2,9 +2,9 @@ import React from "react"
 
 const Biografija = () => {
   return (
-    <article>
+    <div>
       <h1>Biografija</h1>
-    </article>
+    </div>
   )
 }
 

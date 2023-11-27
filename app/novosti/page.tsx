@@ -1,7 +1,9 @@
-import React from "react"
-
 const Novosti = () => {
-  return <div>Novosti</div>
+  return (
+    <div>
+      <h1>Novosti</h1>
+    </div>
+  )
 }
 
 export default Novosti
