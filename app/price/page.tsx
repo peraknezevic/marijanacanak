@@ -10,7 +10,7 @@ const Tekstovi = async () => {
   })
   return (
     <div>
-      <h1>Tekstovi</h1>
+      <h1>Priče</h1>
       <ul>
         {tekstovi.map((tekst) => (
           <TekstKarta tekst={tekst} key={tekst.id} />
