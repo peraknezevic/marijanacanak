@@ -44,6 +44,7 @@ export async function PATCH(
     data: {
       naziv: body.naziv,
       slug: body.slug,
+      sazetak: body.sazetak,
       zanr: body.zanr,
       izdavac: body.izdavac,
       zaIzdavaca: body.zaIzdavaca,

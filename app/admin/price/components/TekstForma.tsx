@@ -15,7 +15,6 @@ type TekstPodaci = z.infer<typeof tekstSchema>
 
 const TekstForma = ({ tekst }: { tekst?: Tekst }) => {
   const [error, setError] = useState("")
-  const [slugSuggestion, setSlugSuggestion] = useState(tekst?.slug || "")
   const router = useRouter()
 
   const {
@@ -31,7 +30,7 @@ const TekstForma = ({ tekst }: { tekst?: Tekst }) => {
     try {
       if (tekst) await axios.patch("/api/tekstovi/" + tekst.slug, data)
       else await axios.post("/api/tekstovi/", data)
-      router.push("/admin/tekstovi")
+      router.push("/admin/price")
       router.refresh()
     } catch (error) {
       setError("Unexpected error accured")
@@ -47,12 +46,12 @@ const TekstForma = ({ tekst }: { tekst?: Tekst }) => {
       )}
       <form onSubmit={onSubmit}>
         <div>
-          <label htmlFor="naslov">Naslov teksta</label>
+          <label htmlFor="naslov">Naslov priče</label>
           <input
             type="text"
             id="naslov"
             defaultValue={tekst?.naslov}
-            placeholder="Naslov teksta"
+            placeholder="Naslov priče"
             {...register("naslov")}
           />
           <ErrorMessage>{errors.naslov?.message}</ErrorMessage>
@@ -60,7 +59,7 @@ const TekstForma = ({ tekst }: { tekst?: Tekst }) => {
 
         <div>
           <label htmlFor="slug">
-            URL Slug (npr. naslov-teksta, bez č, ć, ž, š, đ)
+            URL Slug (npr. naslov-priče, bez č, ć, ž, š, đ)
           </label>
           <input
             type="text"
@@ -73,7 +72,7 @@ const TekstForma = ({ tekst }: { tekst?: Tekst }) => {
         </div>
 
         <div>
-          <label htmlFor="uvod">Uvod teksta ili tizer za Patreon</label>
+          <label htmlFor="uvod">Uvod priče ili tizer za Patreon</label>
           <Controller
             name="uvod"
             defaultValue={tekst?.uvod || ""}
@@ -103,6 +102,10 @@ const TekstForma = ({ tekst }: { tekst?: Tekst }) => {
         </div>
 
         <div>
+          <strong>Ako je priče na Patreonu:</strong>
+        </div>
+
+        <div>
           <label htmlFor="patreonLink">Patreon Link</label>
           <input
             type="text"
@@ -114,45 +117,45 @@ const TekstForma = ({ tekst }: { tekst?: Tekst }) => {
         </div>
 
         <div>
-          <strong>Ako je tekst na drugom sajtu:</strong>
+          <strong>Ako je priče na drugom sajtu:</strong>
         </div>
 
         <div>
           <label htmlFor="nazivSpoljnogLinka">
-            Naziv sajta na kom je tekst
+            Naziv sajta na kom je priča
           </label>
           <input
             type="tekst"
             id="nazivSpoljnogLinka"
             defaultValue={tekst?.nazivSpoljnogLinka || ""}
-            placeholder="Naziv sajta na kom je tekst"
+            placeholder="Naziv sajta na kom je priča"
             {...register("nazivSpoljnogLinka")}
           />
           <ErrorMessage>{errors.nazivSpoljnogLinka?.message}</ErrorMessage>
         </div>
 
         <div>
-          <label htmlFor="spoljniLink">Link ka tekstu na drugom sajtu</label>
+          <label htmlFor="spoljniLink">Link ka priči na drugom sajtu</label>
           <input
             type="tekst"
             id="spoljniLink"
             defaultValue={tekst?.spoljniLink || ""}
-            placeholder="Link ka tekstu na drugom sajtu"
+            placeholder="Link ka priči na drugom sajtu"
             {...register("spoljniLink")}
           />
           <ErrorMessage>{errors.spoljniLink?.message}</ErrorMessage>
         </div>
 
         <div>
-          <label htmlFor="spoljniLink">Status teksta</label>
+          <label htmlFor="spoljniLink">Status priče</label>
           <select {...register("status")}>
-            <option value="Objavljeno">Objavljen</option>
+            <option value="Objavljeno">Objavljena</option>
             <option value="Nacrt">Nacrt</option>
           </select>
           <ErrorMessage>{errors.status?.message}</ErrorMessage>
         </div>
 
-        <button className="btn">Dodaj</button>
+        <button className="btn">{tekst ? "Izmeni" : "Dodaj"}</button>
       </form>
     </div>
   )

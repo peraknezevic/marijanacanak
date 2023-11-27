@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic"
 
 const TekstForma = dynamic(
-  () => import("@/app/admin/tekstovi/components/TekstForma"),
+  () => import("@/app/admin/price/components/TekstForma"),
   {
     ssr: false,
   }

@@ -6,14 +6,14 @@ const Tekstovi = async () => {
   const tekstovi = await prisma.tekst.findMany()
   return (
     <div className="admin-page">
-      <Link href={`/admin/tekstovi/novi`} className="btn">
-        Dodaj novi tekst
+      <Link href={`/admin/price/novi`} className="btn">
+        Dodaj novu priču
       </Link>
       <ul className="spisak">
-        <li>Tekstovi:</li>
+        <li>Priče:</li>
         {tekstovi.map((tekst) => (
           <li key={tekst.id}>
-            <Link href={`/admin/tekstovi/${tekst.id}`}>{tekst.naslov}</Link>
+            <Link href={`/admin/price/${tekst.id}`}>{tekst.naslov}</Link>
           </li>
         ))}
       </ul>

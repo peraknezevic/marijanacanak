@@ -6,7 +6,7 @@ const TekstKarta = ({ tekst }: { tekst: Tekst }) => {
   return (
     <li className="list-none">
       <h2>
-        <Link href={`/tekstovi/${tekst.slug}`}>{tekst.naslov}</Link>
+        <Link href={`/price/${tekst.slug}`}>{tekst.naslov}</Link>
       </h2>
       {tekst.uvod && <p>{tekst.uvod}</p>}
       {tekst.patreonLink && (

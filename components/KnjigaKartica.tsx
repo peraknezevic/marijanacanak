@@ -1,6 +1,7 @@
 import { Knjiga } from "@prisma/client"
 import React from "react"
 import Image from "next/image"
+import ReactMarkdown from "react-markdown"
 
 const KnjigaKartica = ({ knjiga }: { knjiga: Knjiga }) => {
   return (
@@ -23,6 +24,7 @@ const KnjigaKartica = ({ knjiga }: { knjiga: Knjiga }) => {
         </div>
         <div className="knjiga-info">
           <h2 className="knjiga-naslov">{knjiga.naziv}</h2>
+          {knjiga.sazetak && <ReactMarkdown>{knjiga.sazetak}</ReactMarkdown>}
           {knjiga.zanr && (
             <p>
               <span>Žanr:</span> {knjiga.zanr}

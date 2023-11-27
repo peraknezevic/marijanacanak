@@ -3,11 +3,13 @@ import { knjigeSchema } from "@/app/validationSchemas"
 import { Knjiga } from "@prisma/client"
 import React, { useState } from "react"
 import { z } from "zod"
-import { useForm } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 import { useRouter } from "next/navigation"
 import axios from "axios"
 import ErrorMessage from "../../components/ErrorMessage"
 import { zodResolver } from "@hookform/resolvers/zod"
+import SimpleMDE from "react-simplemde-editor"
+import "easymde/dist/easymde.min.css"
 
 type KnjigaPodaci = z.infer<typeof knjigeSchema>
 
@@ -68,6 +70,19 @@ const KnjigaForma = ({ knjiga }: { knjiga?: Knjiga }) => {
             {...register("slug")}
           />
           <ErrorMessage>{errors.slug?.message}</ErrorMessage>
+        </div>
+
+        <div>
+          <label htmlFor="sazetak">Sažetak</label>
+          <Controller
+            name="sazetak"
+            defaultValue={knjiga?.sazetak || ""}
+            control={control}
+            render={({ field }) => (
+              <SimpleMDE placeholder="Sazetak" id="sazetak" {...field} />
+            )}
+          />
+          <ErrorMessage>{errors.sazetak?.message}</ErrorMessage>
         </div>
 
         <div>
@@ -228,7 +243,7 @@ const KnjigaForma = ({ knjiga }: { knjiga?: Knjiga }) => {
           <ErrorMessage>{errors.kupovina?.message}</ErrorMessage>
         </div>
 
-        <button className="btn">Dodaj</button>
+        <button className="btn">{knjiga ? "Izmeni" : "Dodaj"}</button>
       </form>
     </div>
   )

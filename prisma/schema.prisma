@@ -66,6 +66,7 @@ model Knjiga {
   id               String  @id @default(auto()) @map("_id") @db.ObjectId
   naziv            String
   slug             String  @unique
+  sazetak          String?
   zanr             String?
   zaIzdavaca       String?
   izdavac          String?
@@ -101,6 +102,28 @@ model Stranica {
   slug      String   @unique
   uvod      String?
   tekst     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  status    Status   @default(Objavljeno)
+}
+
+model Press {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  naslov    String   @unique
+  opis      String?
+  link      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  status    Status   @default(Objavljeno)
+}
+
+model Novost {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  naslov    String   @unique
+  slug      String   @unique
+  uvod      String?
+  tekst     String
+  link      String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   status    Status   @default(Objavljeno)

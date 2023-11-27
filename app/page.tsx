@@ -2,7 +2,7 @@ import prisma from "@/prisma/client"
 
 const Home = async () => {
   const dobrodosli = await prisma.stranica.findUnique({
-    where: { slug: "dobro-došli" },
+    where: { slug: "dobro-dosli" },
   })
   if (!dobrodosli) return <h1>Dobro došli</h1>
   return (

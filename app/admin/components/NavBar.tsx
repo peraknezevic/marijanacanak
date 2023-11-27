@@ -7,10 +7,13 @@ const NavBar = () => {
       <ul>
         <li>Admin</li>
         <li>
-          <Link href="/admin/knjige">Knjige</Link>
+          <Link href="/admin/novosti">Novosti</Link>
         </li>
         <li>
-          <Link href="/admin/tekstovi">Tekstovi</Link>
+          <Link href="/admin/price">Priče</Link>
+        </li>
+        <li>
+          <Link href="/admin/knjige">Knjige</Link>
         </li>
         <li>
           <Link href="/admin/stranice">Stranice</Link>

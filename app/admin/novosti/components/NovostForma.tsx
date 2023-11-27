@@ -1,6 +1,6 @@
 "use client"
-import { stranicaSchema } from "@/app/validationSchemas"
-import { Stranica } from "@prisma/client"
+import { novostSchema } from "@/app/validationSchemas"
+import { Novost } from "@prisma/client"
 import { useState } from "react"
 import { z } from "zod"
 import { Controller, useForm } from "react-hook-form"
@@ -11,11 +11,10 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import SimpleMDE from "react-simplemde-editor"
 import "easymde/dist/easymde.min.css"
 
-type StranicaPodaci = z.infer<typeof stranicaSchema>
+type NovostPodaci = z.infer<typeof novostSchema>
 
-const StranicaForma = ({ stranica }: { stranica?: Stranica }) => {
+const TekstForma = ({ novost }: { novost?: Novost }) => {
   const [error, setError] = useState("")
-  const [slugSuggestion, setSlugSuggestion] = useState(stranica?.slug || "")
   const router = useRouter()
 
   const {
@@ -23,15 +22,15 @@ const StranicaForma = ({ stranica }: { stranica?: Stranica }) => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<StranicaPodaci>({
-    resolver: zodResolver(stranicaSchema),
+  } = useForm<NovostPodaci>({
+    resolver: zodResolver(novostSchema),
   })
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      if (stranica) await axios.patch("/api/stranice/" + stranica.slug, data)
-      else await axios.post("/api/stranice/", data)
-      router.push("/admin/stranice")
+      if (novost) await axios.patch("/api/novosti/" + novost.slug, data)
+      else await axios.post("/api/novosti/", data)
+      router.push("/admin/novosti")
       router.refresh()
     } catch (error) {
       setError("Unexpected error accured")
@@ -47,12 +46,12 @@ const StranicaForma = ({ stranica }: { stranica?: Stranica }) => {
       )}
       <form onSubmit={onSubmit}>
         <div>
-          <label htmlFor="naslov">Naslov stranice</label>
+          <label htmlFor="naslov">Naslov novosti</label>
           <input
             type="text"
             id="naslov"
-            defaultValue={stranica?.naslov}
-            placeholder="Naslov stranice"
+            defaultValue={novost?.naslov}
+            placeholder="Naslov priče"
             {...register("naslov")}
           />
           <ErrorMessage>{errors.naslov?.message}</ErrorMessage>
@@ -60,12 +59,12 @@ const StranicaForma = ({ stranica }: { stranica?: Stranica }) => {
 
         <div>
           <label htmlFor="slug">
-            URL Slug (npr. naslov-teksta, bez č, ć, ž, š, đ)
+            URL Slug (npr. naslov-novosti, bez č, ć, ž, š, đ)
           </label>
           <input
             type="text"
             id="slug"
-            defaultValue={stranica?.slug}
+            defaultValue={novost?.slug}
             placeholder="URL slug"
             {...register("slug")}
           />
@@ -73,23 +72,23 @@ const StranicaForma = ({ stranica }: { stranica?: Stranica }) => {
         </div>
 
         <div>
-          <label htmlFor="uvod">Uvod</label>
+          <label htmlFor="uvod">Uvod novosti</label>
           <Controller
             name="uvod"
-            defaultValue={stranica?.uvod || ""}
+            defaultValue={novost?.uvod || ""}
             control={control}
             render={({ field }) => (
-              <SimpleMDE placeholder="Uvod" id="uvod" {...field} />
+              <SimpleMDE placeholder="Uvod novosti" id="uvod" {...field} />
             )}
           />
           <ErrorMessage>{errors.uvod?.message}</ErrorMessage>
         </div>
 
         <div>
-          <label htmlFor="tekst">Tekst</label>
+          <label htmlFor="tekst">Tekst novosti</label>
           <Controller
             name="tekst"
-            defaultValue={stranica?.tekst || ""}
+            defaultValue={novost?.tekst || ""}
             control={control}
             render={({ field }) => (
               <SimpleMDE placeholder="Tekst" id="tekst" {...field} />
@@ -99,18 +98,29 @@ const StranicaForma = ({ stranica }: { stranica?: Stranica }) => {
         </div>
 
         <div>
-          <label htmlFor="status">Status stranice</label>
-          <select {...register("status")}>
+          <label htmlFor="link">Spoljašnji Link</label>
+          <input
+            type="text"
+            defaultValue={novost?.link || ""}
+            placeholder="Link"
+            {...register("link")}
+          />
+          <ErrorMessage>{errors.link?.message}</ErrorMessage>
+        </div>
+
+        <div>
+          <label htmlFor="status">Status novosti</label>
+          <select {...register("status")} id="status">
             <option value="Objavljeno">Objavljena</option>
             <option value="Nacrt">Nacrt</option>
           </select>
           <ErrorMessage>{errors.status?.message}</ErrorMessage>
         </div>
 
-        <button className="btn">{stranica ? "Izmeni" : "Dodaj"}</button>
+        <button className="btn">{novost ? "Izmeni" : "Dodaj"}</button>
       </form>
     </div>
   )
 }
 
-export default StranicaForma
+export default TekstForma
