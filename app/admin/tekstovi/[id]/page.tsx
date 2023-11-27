@@ -3,7 +3,7 @@ import dynamic from "next/dynamic"
 import { notFound } from "next/navigation"
 
 interface Props {
-  params: { slug: string }
+  params: { id: string }
 }
 
 const TekstForma = dynamic(
@@ -16,7 +16,7 @@ const TekstForma = dynamic(
 const UrediTekst = async ({ params }: Props) => {
   const tekst = await prisma.tekst.findUnique({
     where: {
-      slug: params.slug,
+      id: params.id,
     },
   })
 

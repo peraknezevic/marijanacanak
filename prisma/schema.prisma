@@ -67,10 +67,13 @@ model Knjiga {
   naziv            String
   slug             String  @unique
   zanr             String?
+  zaIzdavaca       String?
   izdavac          String?
   prevod           String?
   godina           Int?
   prelom           String?
+  urednik          String?
+  lektura          String?
   dizajnNaslovnice String?
   stampa           String?
   obim             String?
@@ -79,16 +82,28 @@ model Knjiga {
 }
 
 model Tekst {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  naslov      String   @unique
-  slug        String   @unique
-  uvod        String?
-  tekst       String?
-  patreonLink String?
-  spoljniLink String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  status      Status   @default(Objavljeno)
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  naslov             String   @unique
+  slug               String   @unique
+  uvod               String?
+  tekst              String?
+  patreonLink        String?
+  nazivSpoljnogLinka String?
+  spoljniLink        String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  status             Status   @default(Objavljeno)
+}
+
+model Stranica {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  naslov    String   @unique
+  slug      String   @unique
+  uvod      String?
+  tekst     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  status    Status   @default(Objavljeno)
 }
 
 enum Status {

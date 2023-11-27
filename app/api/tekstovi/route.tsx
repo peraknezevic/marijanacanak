@@ -29,6 +29,7 @@ export async function POST(request: Request) {
       uvod: body.uvod,
       tekst: body.tekst,
       patreonLink: body.patreonLink,
+      nazivSpoljnogLinka: body.spoljniLink,
       spoljniLink: body.spoljniLink,
       status: body.status,
     },

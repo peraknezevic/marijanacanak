@@ -4,10 +4,31 @@
 
 @layer base {
   a {
-    @apply cursor-pointer;
+    @apply cursor-pointer hover:text-[#C29842];
   }
-  a:hover {
-    @apply opacity-70;
+  body {
+    @apply max-w-7xl mx-auto;
+  }
+  header {
+    @apply flex flex-col lg:flex-row justify-between items-center px-4 lg:px-16;
+  }
+  .logo {
+    @apply text-6xl font-bold my-8 text-[#C29842];
+  }
+  .main-nav {
+    @apply flex text-lg uppercase justify-start gap-6 items-baseline;
+  }
+  .main-nav a {
+    @apply no-underline font-bold hover:text-red-800 tracking-wider;
+  }
+  main {
+    @apply h-full;
+  }
+  h1 {
+    @apply text-center py-16 text-6xl font-bold text-zinc-400;
+  }
+  h2 {
+    @apply text-3xl font-bold mb-8;
   }
   nav a {
     @apply font-medium underline underline-offset-4;
@@ -19,15 +40,66 @@
     @apply list-none;
   }
   .btn {
-    @apply inline-block my-4 px-2 py-1 uppercase border text-zinc-100 bg-zinc-800;
+    @apply inline-block my-4 py-1 px-2 text-zinc-100 bg-zinc-800;
   }
-  #admin h1 {
-    @apply text-2xl;
+  a.btn {
+    @apply text-zinc-100 no-underline;
+  }
+  .knjiga-naslov {
+    @apply uppercase;
+  }
+  .knjiga {
+    @apply flex mb-24 gap-16 max-w-3xl mx-auto text-center;
+  }
+  .knjiga div {
+    @apply w-1/2;
+  }
+  .knjiga-slika {
+    @apply flex flex-col gap-8;
+  }
+  .knjiga-slika img {
+    @apply shadow-2xl mt-24 border-2 border-zinc-400;
+  }
+  .knjiga-info {
+    @apply px-6 py-10 items-center text-xl leading-8;
+  }
+  .knjiga-info span {
+    @apply font-bold block text-lg;
+  }
+  .knjiga-info p {
+    @apply mb-4 text-center;
+  }
+  .admin {
+    @apply bg-zinc-100 max-w-3xl mx-auto my-16 min-h-max;
+  }
+  .admin-nav {
+    @apply bg-zinc-200 text-xl py-4 px-4;
+  }
+  .admin-nav ul {
+    @apply flex gap-4;
+  }
+  .admin-page {
+    @apply p-8 flex flex-col gap-8;
+  }
+  .spisak {
+    @apply flex flex-col gap-4;
+  }
+  .spisak li {
+    @apply w-full flex  justify-between items-center font-medium text-lg;
+  }
+  .spisak li a {
+    @apply w-full h-full px-4 py-2 border block hover:bg-[#F9EED8]  bg-white;
   }
   form {
-    @apply bg-zinc-100 px-8 py-8 mx-auto flex max-w-2xl flex-col space-y-4;
+    @apply bg-zinc-100 px-6 py-8 mx-auto gap-4 flex max-w-2xl flex-col space-y-4;
+  }
+  form > div {
+    @apply flex flex-col gap-2;
   }
   input {
     @apply border border-zinc-400 px-2 py-2 text-lg;
+  }
+  :required {
+    @apply border border-red-800 bg-red-100 text-red-900;
   }
 }

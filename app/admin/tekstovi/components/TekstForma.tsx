@@ -14,6 +14,8 @@ import "easymde/dist/easymde.min.css"
 type TekstPodaci = z.infer<typeof tekstSchema>
 
 const TekstForma = ({ tekst }: { tekst?: Tekst }) => {
+  const [error, setError] = useState("")
+  const [slugSuggestion, setSlugSuggestion] = useState(tekst?.slug || "")
   const router = useRouter()
 
   const {
@@ -24,17 +26,6 @@ const TekstForma = ({ tekst }: { tekst?: Tekst }) => {
   } = useForm<TekstPodaci>({
     resolver: zodResolver(tekstSchema),
   })
-
-  const [error, setError] = useState("")
-  const [slugSuggestion, setSlugSuggestion] = useState("")
-
-  const makeSlug = (text: string) => {
-    return text
-      .replaceAll(" ", "-")
-      .replaceAll("'", "")
-      .replaceAll('"', "")
-      .toLowerCase()
-  }
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -55,63 +46,111 @@ const TekstForma = ({ tekst }: { tekst?: Tekst }) => {
         </div>
       )}
       <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          defaultValue={tekst?.naslov}
-          placeholder="Naslov teksta"
-          {...register("naslov", {
-            onChange: (e) => setSlugSuggestion(makeSlug(e.target.value)),
-          })}
-        />
-        <ErrorMessage>{errors.naslov?.message}</ErrorMessage>
+        <div>
+          <label htmlFor="naslov">Naslov teksta</label>
+          <input
+            type="text"
+            id="naslov"
+            defaultValue={tekst?.naslov}
+            placeholder="Naslov teksta"
+            {...register("naslov")}
+          />
+          <ErrorMessage>{errors.naslov?.message}</ErrorMessage>
+        </div>
 
-        <input
-          type="text"
-          defaultValue={tekst?.slug || slugSuggestion}
-          placeholder="URL slug"
-          {...register("slug")}
-        />
-        <ErrorMessage>{errors.slug?.message}</ErrorMessage>
+        <div>
+          <label htmlFor="slug">
+            URL Slug (npr. naslov-teksta, bez č, ć, ž, š, đ)
+          </label>
+          <input
+            type="text"
+            id="slug"
+            defaultValue={tekst?.slug}
+            placeholder="URL slug"
+            {...register("slug")}
+          />
+          <ErrorMessage>{errors.slug?.message}</ErrorMessage>
+        </div>
 
-        <Controller
-          name="uvod"
-          defaultValue={tekst?.uvod || ""}
-          control={control}
-          render={({ field }) => (
-            <SimpleMDE placeholder="Uvod / Tizer za Patreon" {...field} />
-          )}
-        />
-        <ErrorMessage>{errors.uvod?.message}</ErrorMessage>
+        <div>
+          <label htmlFor="uvod">Uvod teksta ili tizer za Patreon</label>
+          <Controller
+            name="uvod"
+            defaultValue={tekst?.uvod || ""}
+            control={control}
+            render={({ field }) => (
+              <SimpleMDE
+                placeholder="Uvod / Tizer za Patreon"
+                id="uvod"
+                {...field}
+              />
+            )}
+          />
+          <ErrorMessage>{errors.uvod?.message}</ErrorMessage>
+        </div>
 
-        <Controller
-          name="tekst"
-          defaultValue={tekst?.tekst || ""}
-          control={control}
-          render={({ field }) => <SimpleMDE placeholder="Tekst" {...field} />}
-        />
-        <ErrorMessage>{errors.tekst?.message}</ErrorMessage>
+        <div>
+          <label htmlFor="tekst">Tekst</label>
+          <Controller
+            name="tekst"
+            defaultValue={tekst?.tekst || ""}
+            control={control}
+            render={({ field }) => (
+              <SimpleMDE placeholder="Tekst" id="tekst" {...field} />
+            )}
+          />
+          <ErrorMessage>{errors.tekst?.message}</ErrorMessage>
+        </div>
 
-        <input
-          type="text"
-          defaultValue={tekst?.patreonLink || ""}
-          placeholder="Patreon Link"
-          {...register("patreonLink")}
-        />
-        <ErrorMessage>{errors.patreonLink?.message}</ErrorMessage>
+        <div>
+          <label htmlFor="patreonLink">Patreon Link</label>
+          <input
+            type="text"
+            defaultValue={tekst?.patreonLink || ""}
+            placeholder="Patreon Link"
+            {...register("patreonLink")}
+          />
+          <ErrorMessage>{errors.patreonLink?.message}</ErrorMessage>
+        </div>
 
-        <input
-          type="tekst"
-          defaultValue={tekst?.spoljniLink || ""}
-          placeholder="Link ka tekstu na drugom sajtu"
-          {...register("spoljniLink")}
-        />
-        <ErrorMessage>{errors.spoljniLink?.message}</ErrorMessage>
+        <div>
+          <strong>Ako je tekst na drugom sajtu:</strong>
+        </div>
 
-        <select {...register("status")}>
-          <option value="Objavljeno">Objavljeno</option>
-          <option value="Nacrt">Nacrt</option>
-        </select>
-        <ErrorMessage>{errors.status?.message}</ErrorMessage>
+        <div>
+          <label htmlFor="nazivSpoljnogLinka">
+            Naziv sajta na kom je tekst
+          </label>
+          <input
+            type="tekst"
+            id="nazivSpoljnogLinka"
+            defaultValue={tekst?.nazivSpoljnogLinka || ""}
+            placeholder="Naziv sajta na kom je tekst"
+            {...register("nazivSpoljnogLinka")}
+          />
+          <ErrorMessage>{errors.nazivSpoljnogLinka?.message}</ErrorMessage>
+        </div>
+
+        <div>
+          <label htmlFor="spoljniLink">Link ka tekstu na drugom sajtu</label>
+          <input
+            type="tekst"
+            id="spoljniLink"
+            defaultValue={tekst?.spoljniLink || ""}
+            placeholder="Link ka tekstu na drugom sajtu"
+            {...register("spoljniLink")}
+          />
+          <ErrorMessage>{errors.spoljniLink?.message}</ErrorMessage>
+        </div>
+
+        <div>
+          <label htmlFor="spoljniLink">Status teksta</label>
+          <select {...register("status")}>
+            <option value="Objavljeno">Objavljen</option>
+            <option value="Nacrt">Nacrt</option>
+          </select>
+          <ErrorMessage>{errors.status?.message}</ErrorMessage>
+        </div>
 
         <button className="btn">Dodaj</button>
       </form>

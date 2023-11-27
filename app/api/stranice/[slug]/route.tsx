@@ -1,19 +1,19 @@
-import { tekstSchema } from "@/app/validationSchemas"
+import { stranicaSchema } from "@/app/validationSchemas"
 import prisma from "@/prisma/client"
 
 export async function GET(
   request: Request,
   { params }: { params: { slug: string } }
 ) {
-  const tekst = await prisma.tekst.findUnique({
+  const stranica = await prisma.stranica.findUnique({
     where: { slug: params.slug },
   })
-  if (!tekst)
+  if (!stranica)
     return Response.json(
-      { error: "Ovaj tekst nije pronadjen" },
+      { error: "Ova stranica nije pronadjena" },
       { status: 404 }
     )
-  return Response.json(tekst)
+  return Response.json(stranica)
 }
 
 export async function PATCH(
@@ -22,57 +22,54 @@ export async function PATCH(
 ) {
   const body = await request.json()
 
-  const validation = tekstSchema.safeParse(body)
+  const validation = stranicaSchema.safeParse(body)
 
   if (!validation.success)
     return Response.json(validation.error.errors, { status: 400 })
 
-  const tekst = await prisma.tekst.findUnique({
+  const stranica = await prisma.stranica.findUnique({
     where: {
       slug: params.slug,
     },
   })
 
-  if (!tekst)
+  if (!stranica)
     return Response.json(
-      { error: "Ovaj tekst nije pronadjen." },
+      { error: "Ova stranica nije pronadjena." },
       { status: 400 }
     )
 
-  const tekstPromena = await prisma.tekst.update({
+  const updateStranice = await prisma.stranica.update({
     where: { slug: params.slug },
     data: {
       naslov: body.naslov,
       slug: body.slug,
       uvod: body.uvod,
       tekst: body.tekst,
-      patreonLink: body.patreonLink,
-      nazivSpoljnogLinka: body.nazivSpoljnogLinka,
-      spoljniLink: body.spoljniLink,
       status: body.status,
     },
   })
 
-  return Response.json(tekstPromena)
+  return Response.json(updateStranice)
 }
 
 export async function DELETE(
   request: Request,
   { params }: { params: { slug: string } }
 ) {
-  const tekst = await prisma.tekst.findUnique({
+  const stranica = await prisma.stranica.findUnique({
     where: {
       slug: params.slug,
     },
   })
 
-  if (!tekst)
+  if (!stranica)
     return Response.json(
-      { error: "Ovaj tekst nije pronadjen." },
+      { error: "Ova stranica nije pronadjena." },
       { status: 404 }
     )
 
-  await prisma.tekst.delete({
+  await prisma.stranica.delete({
     where: {
       slug: params.slug,
     },

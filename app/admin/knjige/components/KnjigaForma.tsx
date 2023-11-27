@@ -24,19 +24,10 @@ const KnjigaForma = ({ knjiga }: { knjiga?: Knjiga }) => {
   })
 
   const [error, setError] = useState("")
-  const [slugSuggestion, setSlugSuggestion] = useState("")
-
-  const makeSlug = (text: string) => {
-    return text
-      .replaceAll(" ", "-")
-      .replaceAll("'", "")
-      .replaceAll('"', "")
-      .toLowerCase()
-  }
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      if (knjiga) await axios.patch("/api/knjige/" + knjiga.slug, data)
+      if (knjiga) await axios.patch("/api/knjige/" + knjiga.id, data)
       else await axios.post("/api/knjige/", data)
       router.push("/admin/knjige")
       router.refresh()
@@ -52,117 +43,190 @@ const KnjigaForma = ({ knjiga }: { knjiga?: Knjiga }) => {
           <span>{error}</span>
         </div>
       )}
-      <form
-        className="mx-auto flex max-w-2xl flex-col space-y-4"
-        onSubmit={onSubmit}
-      >
-        <input
-          type="text"
-          defaultValue={knjiga?.naziv}
-          placeholder="Naziv knjige"
-          {...register("naziv", {
-            onChange: (e) => setSlugSuggestion(makeSlug(e.target.value)),
-          })}
-        />
-        <ErrorMessage>{errors.naziv?.message}</ErrorMessage>
+      <form onSubmit={onSubmit}>
+        <div>
+          <label htmlFor="naziv">Naslov knjige </label>
+          <input
+            type="text"
+            id="naziv"
+            defaultValue={knjiga?.naziv}
+            placeholder="Naslov knjige"
+            {...register("naziv")}
+          />
+          <ErrorMessage>{errors.naziv?.message}</ErrorMessage>
+        </div>
 
-        <input
-          type="text"
-          defaultValue={knjiga?.slug || slugSuggestion}
-          placeholder="Slug"
-          {...register("slug")}
-        />
-        <ErrorMessage>{errors.slug?.message}</ErrorMessage>
+        <div>
+          <label htmlFor="slug">
+            URL Slug (npr. naslov-knjige, bez č, ć, ž, š, đ)
+          </label>
+          <input
+            type="text"
+            id="slug"
+            defaultValue={knjiga?.slug || ""}
+            placeholder="URL Slug"
+            {...register("slug")}
+          />
+          <ErrorMessage>{errors.slug?.message}</ErrorMessage>
+        </div>
 
-        <input
-          type="text"
-          defaultValue={knjiga?.zanr || ""}
-          placeholder="Žanr"
-          {...register("zanr")}
-        />
-        <ErrorMessage>{errors.zanr?.message}</ErrorMessage>
+        <div>
+          <label htmlFor="zanr">Žanr</label>
+          <input
+            type="text"
+            id="zanr"
+            defaultValue={knjiga?.zanr || ""}
+            placeholder="Žanr"
+            {...register("zanr")}
+          />
+          <ErrorMessage>{errors.zanr?.message}</ErrorMessage>
+        </div>
 
-        <input
-          type="text"
-          defaultValue={knjiga?.izdavac || ""}
-          placeholder="Izdavač"
-          {...register("izdavac")}
-        />
-        <ErrorMessage>{errors.izdavac?.message}</ErrorMessage>
+        <div>
+          <label htmlFor="zaIzdavaca">Za izdavača</label>
+          <input
+            type="text"
+            id="zaIzdavaca"
+            defaultValue={knjiga?.zaIzdavaca || ""}
+            placeholder="Za izdavača"
+            {...register("zaIzdavaca")}
+          />
+          <ErrorMessage>{errors.zaIzdavaca?.message}</ErrorMessage>
+        </div>
 
-        <input
-          type="text"
-          defaultValue={knjiga?.prevod || ""}
-          placeholder="Prevod"
-          {...register("prevod")}
-        />
-        <ErrorMessage>{errors.prevod?.message}</ErrorMessage>
+        <div>
+          <label htmlFor="izdavac">Izdavač</label>
+          <input
+            type="text"
+            id="izdavac"
+            defaultValue={knjiga?.izdavac || ""}
+            placeholder="Izdavač"
+            {...register("izdavac")}
+          />
+          <ErrorMessage>{errors.izdavac?.message}</ErrorMessage>
+        </div>
 
-        <input
-          type="number"
-          defaultValue={knjiga?.godina || ""}
-          placeholder="Godina izdanja"
-          {...register("godina", {
-            valueAsNumber: true,
-          })}
-        />
-        <ErrorMessage>{errors.godina?.message}</ErrorMessage>
+        <div>
+          <label htmlFor="godina">Godina izdanja (broj, bez tačke)</label>
+          <input
+            type="number"
+            id="godina"
+            defaultValue={knjiga?.godina || ""}
+            placeholder="Godina izdanja"
+            {...register("godina", {
+              valueAsNumber: true,
+            })}
+          />
+          <ErrorMessage>{errors.godina?.message}</ErrorMessage>
+        </div>
 
-        <input
-          type="text"
-          defaultValue={knjiga?.prevod || ""}
-          placeholder="Prevod"
-          {...register("prevod")}
-        />
-        <ErrorMessage>{errors.prevod?.message}</ErrorMessage>
+        <div>
+          <label htmlFor="urednik">Urednik</label>
+          <input
+            type="text"
+            id="urednik"
+            defaultValue={knjiga?.urednik || ""}
+            placeholder="Urednik"
+            {...register("urednik")}
+          />
+          <ErrorMessage>{errors.urednik?.message}</ErrorMessage>
+        </div>
 
-        <input
-          type="text"
-          defaultValue={knjiga?.prelom || ""}
-          placeholder="Prelom"
-          {...register("prelom")}
-        />
-        <ErrorMessage>{errors.prelom?.message}</ErrorMessage>
+        <div>
+          <label htmlFor="prevod">Prevod</label>
+          <input
+            type="text"
+            id="prevod"
+            defaultValue={knjiga?.prevod || ""}
+            placeholder="Prevod"
+            {...register("prevod")}
+          />
+          <ErrorMessage>{errors.prevod?.message}</ErrorMessage>
+        </div>
 
-        <input
-          type="text"
-          defaultValue={knjiga?.dizajnNaslovnice || ""}
-          placeholder="Dizajn naslovnice"
-          {...register("dizajnNaslovnice")}
-        />
-        <ErrorMessage>{errors.dizajnNaslovnice?.message}</ErrorMessage>
+        <div>
+          <label htmlFor="lektura">Lektura</label>
+          <input
+            type="text"
+            id="lektura"
+            defaultValue={knjiga?.lektura || ""}
+            placeholder="Lektura i korektura"
+            {...register("lektura")}
+          />
+          <ErrorMessage>{errors.lektura?.message}</ErrorMessage>
+        </div>
 
-        <input
-          type="text"
-          defaultValue={knjiga?.stampa || ""}
-          placeholder="Štampa"
-          {...register("stampa")}
-        />
-        <ErrorMessage>{errors.stampa?.message}</ErrorMessage>
+        <div>
+          <label htmlFor="prelom">Prelom</label>
+          <input
+            type="text"
+            id="prelom"
+            defaultValue={knjiga?.prelom || ""}
+            placeholder="Prelom"
+            {...register("prelom")}
+          />
+          <ErrorMessage>{errors.prelom?.message}</ErrorMessage>
+        </div>
 
-        <input
-          type="text"
-          defaultValue={knjiga?.obim || ""}
-          placeholder="Obim"
-          {...register("obim")}
-        />
-        <ErrorMessage>{errors.obim?.message}</ErrorMessage>
+        <div>
+          <label htmlFor="dizajnNaslovnice">Ilustracija</label>
+          <input
+            type="text"
+            id="dizajnNaslovnice"
+            defaultValue={knjiga?.dizajnNaslovnice || ""}
+            placeholder="Ilustracija"
+            {...register("dizajnNaslovnice")}
+          />
+          <ErrorMessage>{errors.dizajnNaslovnice?.message}</ErrorMessage>
+        </div>
 
-        <input
-          type="text"
-          defaultValue={knjiga?.isbn || ""}
-          placeholder="ISBN"
-          {...register("isbn")}
-        />
-        <ErrorMessage>{errors.isbn?.message}</ErrorMessage>
+        <div>
+          <label htmlFor="stampa">Štampa</label>
+          <input
+            type="text"
+            id="stampa"
+            defaultValue={knjiga?.stampa || ""}
+            placeholder="Štampa"
+            {...register("stampa")}
+          />
+          <ErrorMessage>{errors.stampa?.message}</ErrorMessage>
+        </div>
 
-        <input
-          type="text"
-          defaultValue={knjiga?.kupovina || ""}
-          placeholder="Link na kupovinu"
-          {...register("kupovina")}
-        />
-        <ErrorMessage>{errors.kupovina?.message}</ErrorMessage>
+        <div>
+          <label htmlFor="obim">Obim</label>
+          <input
+            type="text"
+            id="obim"
+            defaultValue={knjiga?.obim || ""}
+            placeholder="Obim"
+            {...register("obim")}
+          />
+          <ErrorMessage>{errors.obim?.message}</ErrorMessage>
+        </div>
+
+        <div>
+          <label htmlFor="isbn">ISBN</label>
+          <input
+            type="text"
+            id="isbn"
+            defaultValue={knjiga?.isbn || ""}
+            placeholder="ISBN"
+            {...register("isbn")}
+          />
+          <ErrorMessage>{errors.isbn?.message}</ErrorMessage>
+        </div>
+
+        <div>
+          <label htmlFor="kupovina">Link na kupovinu</label>
+          <input
+            type="text"
+            id="kupovina"
+            defaultValue={knjiga?.kupovina || ""}
+            placeholder="Link na kupovinu"
+            {...register("kupovina")}
+          />
+          <ErrorMessage>{errors.kupovina?.message}</ErrorMessage>
+        </div>
 
         <button className="btn">Dodaj</button>
       </form>

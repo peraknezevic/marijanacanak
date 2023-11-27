@@ -3,10 +3,10 @@ import prisma from "@/prisma/client"
 
 export async function GET(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: { id: string } }
 ) {
   const knjiga = await prisma.knjiga.findUnique({
-    where: { slug: params.slug },
+    where: { id: params.id },
   })
   if (!knjiga)
     return Response.json(
@@ -18,7 +18,7 @@ export async function GET(
 
 export async function PATCH(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: { id: string } }
 ) {
   const body = await request.json()
 
@@ -29,7 +29,7 @@ export async function PATCH(
 
   const knjiga = await prisma.knjiga.findUnique({
     where: {
-      slug: params.slug,
+      id: params.id,
     },
   })
 
@@ -40,13 +40,16 @@ export async function PATCH(
     )
 
   const knjigaPromena = await prisma.knjiga.update({
-    where: { slug: params.slug },
+    where: { id: params.id },
     data: {
       naziv: body.naziv,
       slug: body.slug,
       zanr: body.zanr,
       izdavac: body.izdavac,
+      zaIzdavaca: body.zaIzdavaca,
+      lektura: body.lektura,
       prevod: body.prevod,
+      urednik: body.urednik,
       godina: body.godina,
       prelom: body.prelom,
       dizajnNaslovnice: body.dizajnNaslovnice,
@@ -62,11 +65,11 @@ export async function PATCH(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: { id: string } }
 ) {
   const knjiga = await prisma.knjiga.findUnique({
     where: {
-      slug: params.slug,
+      id: params.id,
     },
   })
 
@@ -78,7 +81,7 @@ export async function DELETE(
 
   await prisma.knjiga.delete({
     where: {
-      slug: params.slug,
+      id: params.id,
     },
   })
 

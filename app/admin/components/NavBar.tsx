@@ -3,20 +3,20 @@ import React from "react"
 
 const NavBar = () => {
   return (
-    <nav className="bg-zinc-100 text-xl">
-      <ul className="flex gap-4">
-        <li>Uredi:</li>
+    <nav className="admin-nav">
+      <ul>
+        <li>Admin</li>
         <li>
           <Link href="/admin/knjige">Knjige</Link>
         </li>
         <li>
-          <Link href="/admin/tekstovi">Tekstove</Link>
+          <Link href="/admin/tekstovi">Tekstovi</Link>
         </li>
         <li>
-          <Link href="/stranice">Stranice</Link>
+          <Link href="/admin/stranice">Stranice</Link>
         </li>
         <li>
-          <Link href="/press">Press</Link>
+          <Link href="/admin/press">Press</Link>
         </li>
       </ul>
     </nav>

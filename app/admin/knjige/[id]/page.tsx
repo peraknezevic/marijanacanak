@@ -3,7 +3,7 @@ import dynamic from "next/dynamic"
 import { notFound } from "next/navigation"
 
 interface Props {
-  params: { slug: string }
+  params: { id: string }
 }
 
 const KnjigaForma = dynamic(
@@ -16,7 +16,7 @@ const KnjigaForma = dynamic(
 const UrediKnjigu = async ({ params }: Props) => {
   const knjiga = await prisma.knjiga.findUnique({
     where: {
-      slug: params.slug,
+      id: params.id,
     },
   })
 

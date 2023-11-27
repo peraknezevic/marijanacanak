@@ -6,9 +6,9 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   return (
-    <div>
+    <div className="admin">
       <NavBar />
-      <main id="admin">{children}</main>
+      <main>{children}</main>
     </div>
   )
 }

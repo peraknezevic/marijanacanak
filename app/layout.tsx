@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { Sofia_Sans } from "next/font/google"
 import "./globals.css"
-import Header from "./components/Header"
+import Header from "../components/Header"
 
 const sofia = Sofia_Sans({ subsets: ["latin"] })
 
@@ -17,9 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${sofia.className} max-w-2xl mx-auto`}>
+      <body className={sofia.className}>
         <Header />
-        <main className="prose">{children}</main>
+        <main>{children}</main>
       </body>
     </html>
   )

@@ -4,11 +4,11 @@ import Link from "next/link"
 const Header = () => {
   return (
     <header>
-      <div className="text-6xl font-bold my-8">
+      <div className="logo">
         <Link href="/">Marijana Čanak</Link>
       </div>
       <nav>
-        <ul className="flex text-xl uppercase justify-start gap-6">
+        <ul className="main-nav">
           <li>
             <Link href="/knjige">Knjige</Link>
           </li>
