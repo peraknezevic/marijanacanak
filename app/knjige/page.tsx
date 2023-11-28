@@ -3,7 +3,11 @@ import prisma from "@/prisma/client"
 import React from "react"
 
 const Knjige = async () => {
-  const knjige = await prisma.knjiga.findMany()
+  const knjige = await prisma.knjiga.findMany({
+    orderBy: {
+      godina: "desc",
+    },
+  })
 
   return (
     <>

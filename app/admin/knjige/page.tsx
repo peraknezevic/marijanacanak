@@ -3,7 +3,11 @@ import Link from "next/link"
 import React from "react"
 
 const Knjige = async () => {
-  const knjige = await prisma.knjiga.findMany()
+  const knjige = await prisma.knjiga.findMany({
+    orderBy: {
+      godina: "desc",
+    },
+  })
   return (
     <div className="admin-page">
       <Link href={`/admin/knjige/nova`} className="btn">
