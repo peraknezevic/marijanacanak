@@ -3,10 +3,10 @@ import prisma from "@/prisma/client"
 
 export async function GET(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: { id: string } }
 ) {
   const tekst = await prisma.tekst.findUnique({
-    where: { slug: params.slug },
+    where: { id: params.id },
   })
   if (!tekst)
     return Response.json(
@@ -18,7 +18,7 @@ export async function GET(
 
 export async function PATCH(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: { id: string } }
 ) {
   const body = await request.json()
 
@@ -29,7 +29,7 @@ export async function PATCH(
 
   const tekst = await prisma.tekst.findUnique({
     where: {
-      slug: params.slug,
+      id: params.id,
     },
   })
 
@@ -40,7 +40,7 @@ export async function PATCH(
     )
 
   const tekstPromena = await prisma.tekst.update({
-    where: { slug: params.slug },
+    where: { id: params.id },
     data: {
       naslov: body.naslov,
       slug: body.slug,
@@ -58,11 +58,11 @@ export async function PATCH(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: { id: string } }
 ) {
   const tekst = await prisma.tekst.findUnique({
     where: {
-      slug: params.slug,
+      id: params.id,
     },
   })
 
@@ -74,7 +74,7 @@ export async function DELETE(
 
   await prisma.tekst.delete({
     where: {
-      slug: params.slug,
+      id: params.id,
     },
   })
 

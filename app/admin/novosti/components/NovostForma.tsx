@@ -10,6 +10,7 @@ import ErrorMessage from "../../components/ErrorMessage"
 import { zodResolver } from "@hookform/resolvers/zod"
 import SimpleMDE from "react-simplemde-editor"
 import "easymde/dist/easymde.min.css"
+import DeleteButton from "../../components/DeleteButton"
 
 type NovostPodaci = z.infer<typeof novostSchema>
 
@@ -116,8 +117,10 @@ const TekstForma = ({ novost }: { novost?: Novost }) => {
           </select>
           <ErrorMessage>{errors.status?.message}</ErrorMessage>
         </div>
-
-        <button className="btn">{novost ? "Izmeni" : "Dodaj"}</button>
+        <div className="form-actions">
+          <button className="btn">{novost ? "Izmeni" : "Dodaj"}</button>
+          {novost && <DeleteButton id={novost.id} cat="novosti" />}
+        </div>
       </form>
     </div>
   )

@@ -45,6 +45,9 @@
   a.btn {
     @apply text-zinc-100 no-underline;
   }
+  .btn-red {
+    @apply bg-red-800;
+  }
   .knjiga-naslov {
     @apply uppercase;
   }
@@ -113,5 +116,8 @@
   }
   :required {
     @apply border border-red-800 bg-red-100 text-red-900;
+  }
+  .form-actions {
+    @apply flex flex-row justify-between;
   }
 }

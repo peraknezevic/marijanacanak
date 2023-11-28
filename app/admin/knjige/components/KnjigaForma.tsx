@@ -10,6 +10,7 @@ import ErrorMessage from "../../components/ErrorMessage"
 import { zodResolver } from "@hookform/resolvers/zod"
 import SimpleMDE from "react-simplemde-editor"
 import "easymde/dist/easymde.min.css"
+import DeleteButton from "../../components/DeleteButton"
 
 type KnjigaPodaci = z.infer<typeof knjigeSchema>
 
@@ -243,7 +244,10 @@ const KnjigaForma = ({ knjiga }: { knjiga?: Knjiga }) => {
           <ErrorMessage>{errors.kupovina?.message}</ErrorMessage>
         </div>
 
-        <button className="btn">{knjiga ? "Izmeni" : "Dodaj"}</button>
+        <div className="form-actions">
+          <button className="btn">{knjiga ? "Izmeni" : "Dodaj"}</button>
+          {knjiga && <DeleteButton id={knjiga.id} cat="knjige" />}
+        </div>
       </form>
     </div>
   )

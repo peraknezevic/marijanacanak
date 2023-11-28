@@ -10,6 +10,7 @@ import ErrorMessage from "../../components/ErrorMessage"
 import { zodResolver } from "@hookform/resolvers/zod"
 import SimpleMDE from "react-simplemde-editor"
 import "easymde/dist/easymde.min.css"
+import DeleteButton from "../../components/DeleteButton"
 
 type PressPodaci = z.infer<typeof pressSchema>
 
@@ -90,7 +91,10 @@ const PressForma = ({ press }: { press?: Press }) => {
           <ErrorMessage>{errors.status?.message}</ErrorMessage>
         </div>
 
-        <button className="btn">{press ? "Izmeni" : "Dodaj"}</button>
+        <div className="form-actions">
+          <button className="btn">{press ? "Izmeni" : "Dodaj"}</button>
+          {press && <DeleteButton id={press.id} cat="press" />}
+        </div>
       </form>
     </div>
   )

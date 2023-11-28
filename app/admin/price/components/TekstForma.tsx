@@ -10,6 +10,7 @@ import ErrorMessage from "../../components/ErrorMessage"
 import { zodResolver } from "@hookform/resolvers/zod"
 import SimpleMDE from "react-simplemde-editor"
 import "easymde/dist/easymde.min.css"
+import DeleteButton from "../../components/DeleteButton"
 
 type TekstPodaci = z.infer<typeof tekstSchema>
 
@@ -155,7 +156,10 @@ const TekstForma = ({ tekst }: { tekst?: Tekst }) => {
           <ErrorMessage>{errors.status?.message}</ErrorMessage>
         </div>
 
-        <button className="btn">{tekst ? "Izmeni" : "Dodaj"}</button>
+        <div className="form-actions">
+          <button className="btn">{tekst ? "Izmeni" : "Dodaj"}</button>
+          {tekst && <DeleteButton id={tekst.id} cat="tekstovi" />}
+        </div>
       </form>
     </div>
   )

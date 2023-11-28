@@ -3,10 +3,10 @@ import prisma from "@/prisma/client"
 
 export async function GET(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: { id: string } }
 ) {
   const novost = await prisma.novost.findUnique({
-    where: { slug: params.slug },
+    where: { id: params.id },
   })
   if (!novost)
     return Response.json(
@@ -18,7 +18,7 @@ export async function GET(
 
 export async function PATCH(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: { id: string } }
 ) {
   const body = await request.json()
 
@@ -29,7 +29,7 @@ export async function PATCH(
 
   const novost = await prisma.novost.findUnique({
     where: {
-      slug: params.slug,
+      id: params.id,
     },
   })
 
@@ -40,7 +40,7 @@ export async function PATCH(
     )
 
   const uredjenaNovost = await prisma.novost.update({
-    where: { slug: params.slug },
+    where: { id: params.id },
     data: {
       naslov: body.naslov,
       slug: body.slug,
@@ -56,11 +56,11 @@ export async function PATCH(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: { id: string } }
 ) {
   const novost = await prisma.novost.findUnique({
     where: {
-      slug: params.slug,
+      id: params.id,
     },
   })
 
@@ -72,7 +72,7 @@ export async function DELETE(
 
   await prisma.novost.delete({
     where: {
-      slug: params.slug,
+      id: params.id,
     },
   })
 

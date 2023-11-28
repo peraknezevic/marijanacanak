@@ -62,7 +62,7 @@ const KnjigaStranica = ({ knjiga }: { knjiga: Knjiga }) => {
           )}
           {knjiga.godina && (
             <p>
-              <span>Godina izdanja:</span> {knjiga.godina}
+              <span>Godina izdanja:</span> {knjiga.godina}.
             </p>
           )}
           {knjiga.zaIzdavaca && (

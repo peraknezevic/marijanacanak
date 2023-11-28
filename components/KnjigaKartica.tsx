@@ -33,7 +33,7 @@ const KnjigaKartica = ({ knjiga }: { knjiga: Knjiga }) => {
           )}
           {knjiga.godina && (
             <p>
-              <span>Godina izdanja:</span> {knjiga.godina}
+              <span>Godina izdanja:</span> {knjiga.godina}.
             </p>
           )}
           <Link className="btn text-lg" href={`knjige/${knjiga.slug}`}>
