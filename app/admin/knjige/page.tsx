@@ -13,7 +13,10 @@ const Knjige = async () => {
         <li>Knjige:</li>
         {knjige.map((knjiga) => (
           <li key={knjiga.id}>
-            <Link href={`/admin/knjige/${knjiga.id}`}>{knjiga.naziv}</Link>
+            <Link href={`/admin/knjige/${knjiga.id}`}>
+              {knjiga.naziv}
+              <span>{knjiga.slug}</span>
+            </Link>
           </li>
         ))}
       </ul>

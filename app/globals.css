@@ -88,7 +88,10 @@
     @apply w-full flex  justify-between items-center font-medium text-lg;
   }
   .spisak li a {
-    @apply w-full h-full px-4 py-2 border block hover:bg-[#F9EED8]  bg-white;
+    @apply w-full h-full px-4 py-2 border block hover:bg-[#F9EED8] bg-white;
+  }
+  .spisak li a span {
+    @apply text-xs block uppercase;
   }
   form {
     @apply bg-zinc-100 px-6 py-8 mx-auto gap-4 flex max-w-2xl flex-col space-y-4;

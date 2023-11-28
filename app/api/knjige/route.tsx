@@ -42,5 +42,6 @@ export async function POST(request: Request) {
       kupovina: body.kupovina,
     },
   })
+
   return Response.json(novaKnjiga, { status: 201 })
 }
