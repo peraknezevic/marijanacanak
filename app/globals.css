@@ -40,7 +40,7 @@
     @apply list-none;
   }
   .btn {
-    @apply inline-block my-4 py-1 px-2 text-zinc-100 bg-zinc-800;
+    @apply inline-block my-4 py-1 px-4 text-slate-100 font-medium bg-slate-800 uppercase tracking-wide;
   }
   a.btn {
     @apply text-zinc-100 no-underline;
@@ -49,16 +49,19 @@
     @apply uppercase;
   }
   .knjiga {
-    @apply flex mb-24 gap-16 max-w-3xl mx-auto text-center;
+    @apply flex flex-col mt-8 mb-32 gap-16 max-w-3xl mx-auto;
   }
-  .knjiga div {
+  .knjiga-header {
+    @apply flex gap-16;
+  }
+  .knjiga-header div {
     @apply w-1/2;
   }
   .knjiga-slika {
     @apply flex flex-col gap-8;
   }
   .knjiga-slika img {
-    @apply shadow-2xl mt-24 border-2 border-zinc-400;
+    @apply shadow-2xl border-2 border-zinc-400;
   }
   .knjiga-info {
     @apply px-6 py-10 items-center text-xl leading-8;
@@ -67,7 +70,13 @@
     @apply font-bold block text-lg;
   }
   .knjiga-info p {
-    @apply mb-4 text-center;
+    @apply mb-4 text-left;
+  }
+  .knjiga-opis p {
+    @apply text-left text-xl mb-4;
+  }
+  .knjiga-vise p {
+    @apply text-lg mb-4;
   }
   .admin {
     @apply bg-zinc-100 max-w-3xl mx-auto my-16 min-h-max;
