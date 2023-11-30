@@ -29,7 +29,7 @@ const TekstForma = ({ novost }: { novost?: Novost }) => {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      if (novost) await axios.patch("/api/novosti/" + novost.slug, data)
+      if (novost) await axios.patch("/api/novosti/" + novost.id, data)
       else await axios.post("/api/novosti/", data)
       router.push("/admin/novosti")
       router.refresh()

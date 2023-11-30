@@ -13,7 +13,7 @@ const Novosti = async () => {
         <li>Novosti:</li>
         {novosti.map((novost) => (
           <li key={novost.id}>
-            <Link href={`/admin/novosti/${novost.slug}`}>{novost.naslov}</Link>
+            <Link href={`/admin/novosti/${novost.id}`}>{novost.naslov}</Link>
           </li>
         ))}
       </ul>
