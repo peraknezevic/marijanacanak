@@ -6,7 +6,16 @@ const Home = async () => {
   const biografija = await prisma.stranica.findUnique({
     where: { slug: "biografija" },
   })
-  const price = await prisma.tekst.findMany({ take: 7 })
+  const price = await prisma.tekst.findMany({ take: 5 })
+  const knjige = await prisma.knjiga.findMany({
+    take: 5,
+    orderBy: { godina: "desc" },
+  })
+  const novosti = await prisma.novost.findMany({
+    take: 5,
+    orderBy: { createdAt: "desc" },
+  })
+
   return (
     <div className="grid grid-cols-2 grid-rows-2 max-w-5xl mx-auto my-16 gap-16 text-lg">
       <div>
@@ -48,6 +57,22 @@ const Home = async () => {
             <p>knjige Marijane Čanak, fotografija: Maja Tomić</p>
           </figcaption>
         </figure>
+      </div>
+      <div>
+        <h2>Knjige</h2>
+        {knjige.map((item) => (
+          <p key="item.id" className="mb-1">
+            <Link href={`/knjige/${item.slug}`} className="underline">
+              {item.naziv}
+            </Link>
+            , ({item.izdavac})
+          </p>
+        ))}
+        <p className="text-right">
+          <Link href="/knjige" className="btn btn-sm ">
+            ostale knjige
+          </Link>
+        </p>
       </div>
       <div>
         <h2>Objavljene priče</h2>
