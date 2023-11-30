@@ -6,6 +6,7 @@ const Home = async () => {
   const biografija = await prisma.stranica.findUnique({
     where: { slug: "biografija" },
   })
+  const price = await prisma.tekst.findMany({ take: 7 })
   return (
     <div className="grid grid-cols-2 grid-rows-2 max-w-5xl mx-auto my-16 gap-16 text-lg">
       <div>
@@ -47,6 +48,24 @@ const Home = async () => {
             <p>knjige Marijane Čanak, fotografija: Maja Tomić</p>
           </figcaption>
         </figure>
+      </div>
+      <div>
+        <h2>Objavljene priče</h2>
+        {price.map((item) => (
+          <p key="item.id" className="mb-1">
+            <Link
+              href={item.spoljniLink || item.patreonLink || ""}
+              className="underline"
+            >
+              {item.naslov}
+            </Link>
+          </p>
+        ))}
+        <p className="text-right">
+          <Link href="/price" className="btn btn-sm ">
+            ostale priče
+          </Link>
+        </p>
       </div>
     </div>
   )

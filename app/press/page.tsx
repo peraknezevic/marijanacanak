@@ -4,7 +4,11 @@ import React from "react"
 import ReactMarkdown from "react-markdown"
 
 const Press = async () => {
-  const press = await prisma.press.findMany()
+  const press = await prisma.press.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  })
   return (
     <>
       <h1>Press</h1>
