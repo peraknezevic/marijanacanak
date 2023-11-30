@@ -4,7 +4,7 @@ import React from "react"
 
 const TekstKarta = ({ tekst }: { tekst: Tekst }) => {
   return (
-    <li className="list-none">
+    <li>
       <h2>
         <Link href={`/price/${tekst.slug}`}>{tekst.naslov}</Link>
       </h2>
