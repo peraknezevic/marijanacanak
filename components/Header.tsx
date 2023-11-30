@@ -1,16 +1,26 @@
 import React from "react"
 import Link from "next/link"
 import { FaGoodreads } from "react-icons/fa"
-import { Cutive_Mono, Kaushan_Script } from "next/font/google"
+import {
+  Bodoni_Moda,
+  Cutive_Mono,
+  Kaushan_Script,
+  Courier_Prime,
+} from "next/font/google"
 
 const cutivo = Cutive_Mono({ weight: ["400"], subsets: ["latin"] })
 const kaushan = Kaushan_Script({ weight: ["400"], subsets: ["latin"] })
+const bodoni = Bodoni_Moda({ weight: ["500"], subsets: ["latin"] })
+const courier = Courier_Prime({ weight: ["700"], subsets: ["latin"] })
 
 const Header = () => {
   return (
     <header>
       <div className="logo">
-        <Link href="/" className={`${kaushan.className} text-slate-500`}>
+        <Link
+          href="/"
+          className={`${bodoni.className} text-slate-500 uppercase`}
+        >
           Marijana Čanak
         </Link>
       </div>
