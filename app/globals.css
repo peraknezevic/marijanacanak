@@ -12,6 +12,9 @@
   header {
     @apply flex flex-col lg:flex-row justify-between items-center px-4 lg:px-16;
   }
+  figcaption p {
+    @apply text-right text-sm;
+  }
   .logo {
     @apply text-5xl font-bold my-8 text-slate-500;
   }
