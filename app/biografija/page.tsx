@@ -1,10 +1,21 @@
+import prisma from "@/prisma/client"
 import React from "react"
+import ReactMarkdown from "react-markdown"
 
-const Biografija = () => {
+const Biografija = async () => {
+  const biografija = await prisma.stranica.findUnique({
+    where: {
+      slug: "biografija",
+    },
+  })
   return (
-    <div>
+    <article>
       <h1>Biografija</h1>
-    </div>
+      <div className="prose lg:prose-xl mx-auto">
+        <ReactMarkdown>{biografija?.uvod}</ReactMarkdown>
+        <ReactMarkdown>{biografija?.tekst}</ReactMarkdown>
+      </div>
+    </article>
   )
 }
 

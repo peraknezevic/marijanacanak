@@ -1,10 +1,25 @@
+import prisma from "@/prisma/client"
+import Link from "next/link"
 import React from "react"
+import ReactMarkdown from "react-markdown"
 
-const Press = () => {
+const Press = async () => {
+  const press = await prisma.press.findMany()
   return (
-    <div>
+    <>
       <h1>Press</h1>
-    </div>
+      <ul>
+        {press.map((item) => (
+          <li key={item.id} className="prose lg:prose-xl mx-auto mb-24">
+            <h3>
+              <Link href={item.link}>{item.naslov}</Link>
+            </h3>
+            <ReactMarkdown className="text-left">{item.opis}</ReactMarkdown>
+            <hr />
+          </li>
+        ))}
+      </ul>
+    </>
   )
 }
 

@@ -29,7 +29,7 @@ const TekstForma = ({ tekst }: { tekst?: Tekst }) => {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      if (tekst) await axios.patch("/api/tekstovi/" + tekst.slug, data)
+      if (tekst) await axios.patch("/api/tekstovi/" + tekst.id, data)
       else await axios.post("/api/tekstovi/", data)
       router.push("/admin/price")
       router.refresh()

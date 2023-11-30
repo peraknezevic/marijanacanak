@@ -42,8 +42,11 @@
   .btn {
     @apply inline-block my-4 py-1 px-4 text-slate-100 font-medium bg-slate-800 uppercase tracking-wide;
   }
+  .btn-sm {
+    @apply text-sm font-bold;
+  }
   a.btn {
-    @apply text-zinc-100 no-underline;
+    @apply text-zinc-100 no-underline hover:opacity-75;
   }
   .btn-red {
     @apply bg-red-800;
