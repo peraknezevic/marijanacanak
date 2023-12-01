@@ -1,5 +1,6 @@
 import { novostSchema } from "@/app/validationSchemas"
 import prisma from "@/prisma/client"
+import { revalidatePath } from "next/cache"
 
 export async function GET(request: Request) {
   const novosti = await prisma.novost.findMany()
@@ -32,5 +33,9 @@ export async function POST(request: Request) {
       status: body.status,
     },
   })
+
+  revalidatePath("/novosti")
+  revalidatePath("/")
+
   return Response.json(novaObjava, { status: 201 })
 }

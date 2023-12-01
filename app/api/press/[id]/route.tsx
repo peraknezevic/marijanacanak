@@ -1,5 +1,6 @@
 import { pressSchema } from "@/app/validationSchemas"
 import prisma from "@/prisma/client"
+import { revalidatePath } from "next/cache"
 
 export async function GET(
   request: Request,
@@ -49,6 +50,8 @@ export async function PATCH(
     },
   })
 
+  revalidatePath("/press")
+
   return Response.json(updatePress)
 }
 
@@ -73,6 +76,8 @@ export async function DELETE(
       id: params.id,
     },
   })
+
+  revalidatePath("/press")
 
   return Response.json({})
 }

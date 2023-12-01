@@ -1,5 +1,6 @@
 import { novostSchema } from "@/app/validationSchemas"
 import prisma from "@/prisma/client"
+import { revalidatePath } from "next/cache"
 
 export async function GET(
   request: Request,
@@ -51,6 +52,10 @@ export async function PATCH(
     },
   })
 
+  revalidatePath("/novosti")
+  revalidatePath("/")
+  revalidatePath(`/novosti/${uredjenaNovost.slug}`)
+
   return Response.json(uredjenaNovost)
 }
 
@@ -75,6 +80,9 @@ export async function DELETE(
       id: params.id,
     },
   })
+
+  revalidatePath("/novosti")
+  revalidatePath("/")
 
   return Response.json({})
 }

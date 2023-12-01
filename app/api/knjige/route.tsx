@@ -1,5 +1,6 @@
 import { knjigeSchema } from "@/app/validationSchemas"
 import prisma from "@/prisma/client"
+import { revalidatePath } from "next/cache"
 
 export async function GET(request: Request) {
   const knjiga = await prisma.knjiga.findMany()
@@ -42,6 +43,8 @@ export async function POST(request: Request) {
       kupovina: body.kupovina,
     },
   })
+
+  revalidatePath("/knjige")
 
   return Response.json(novaKnjiga, { status: 201 })
 }

@@ -1,5 +1,6 @@
 import { stranicaSchema } from "@/app/validationSchemas"
 import prisma from "@/prisma/client"
+import { revalidatePath } from "next/cache"
 
 export async function GET(
   request: Request,
@@ -49,6 +50,8 @@ export async function PATCH(
       status: body.status,
     },
   })
+
+  revalidatePath(`/${updateStranice.slug}`)
 
   return Response.json(updateStranice)
 }

@@ -1,5 +1,6 @@
 import { knjigeSchema } from "@/app/validationSchemas"
 import prisma from "@/prisma/client"
+import { revalidatePath } from "next/cache"
 
 export async function GET(
   request: Request,
@@ -61,6 +62,9 @@ export async function PATCH(
     },
   })
 
+  revalidatePath("/knjige")
+  revalidatePath(`/knjige/${knjigaPromena.slug}`)
+
   return Response.json(knjigaPromena)
 }
 
@@ -85,6 +89,8 @@ export async function DELETE(
       id: params.id,
     },
   })
+
+  revalidatePath("/knjige")
 
   return Response.json({})
 }

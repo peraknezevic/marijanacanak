@@ -8,7 +8,7 @@ const Home = async () => {
   })
   const price = await prisma.tekst.findMany({ take: 5 })
   const knjige = await prisma.knjiga.findMany({
-    take: 5,
+    take: 6,
     orderBy: { godina: "desc" },
   })
   const novosti = await prisma.novost.findMany({
@@ -64,8 +64,8 @@ const Home = async () => {
           <p key="item.id" className="mb-1">
             <Link href={`/knjige/${item.slug}`} className="underline">
               {item.naziv}
-            </Link>
-            , ({item.izdavac})
+            </Link>{" "}
+            ({item.izdavac})
           </p>
         ))}
         <p className="text-right">

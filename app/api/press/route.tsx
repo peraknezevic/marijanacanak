@@ -1,5 +1,6 @@
 import { pressSchema } from "@/app/validationSchemas"
 import prisma from "@/prisma/client"
+import { revalidatePath } from "next/cache"
 
 export async function GET(request: Request) {
   const press = await prisma.press.findMany()
@@ -30,5 +31,8 @@ export async function POST(request: Request) {
       status: body.status,
     },
   })
+
+  revalidatePath("/press")
+
   return Response.json(noviPress, { status: 201 })
 }

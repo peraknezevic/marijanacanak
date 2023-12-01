@@ -1,5 +1,6 @@
 import { tekstSchema } from "@/app/validationSchemas"
 import prisma from "@/prisma/client"
+import { revalidatePath } from "next/cache"
 
 export async function GET(
   request: Request,
@@ -53,6 +54,9 @@ export async function PATCH(
     },
   })
 
+  revalidatePath("/price")
+  revalidatePath(`/price/${tekstPromena.slug}`)
+
   return Response.json(tekstPromena)
 }
 
@@ -77,6 +81,8 @@ export async function DELETE(
       id: params.id,
     },
   })
+
+  revalidatePath("/price")
 
   return Response.json({})
 }
