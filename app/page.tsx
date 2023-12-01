@@ -74,8 +74,27 @@ const Home = async () => {
           </Link>
         </p>
       </div>
+
+      {novosti.length !== 0 && (
+        <div>
+          <h2>Novosti</h2>
+          {novosti.map((item) => (
+            <p key="item.id" className="mb-1">
+              <Link href={`novosti/${item.slug}`} className="underline">
+                {item.naslov}
+              </Link>
+            </p>
+          ))}
+          <p className="text-right">
+            <Link href="/novosti" className="btn btn-sm ">
+              ostale novosti
+            </Link>
+          </p>
+        </div>
+      )}
+
       <div>
-        <h2>Objavljene priče</h2>
+        <h2>Priče</h2>
         {price.map((item) => (
           <p key="item.id" className="mb-1">
             <Link

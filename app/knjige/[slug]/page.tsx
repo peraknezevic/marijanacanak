@@ -1,4 +1,4 @@
-import KnjigaStranica from "@/components/KnjigaStranica"
+import KnjigaStranica from "@/app/knjige/components/KnjigaStranica"
 import prisma from "@/prisma/client"
 import { notFound } from "next/navigation"
 import React from "react"

@@ -1,4 +1,4 @@
-import KnjigaKartica from "@/components/KnjigaKartica"
+import KnjigaKartica from "@/app/knjige/components/KnjigaKartica"
 import prisma from "@/prisma/client"
 import React from "react"
 

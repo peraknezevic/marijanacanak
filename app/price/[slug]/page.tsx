@@ -1,7 +1,6 @@
 import prisma from "@/prisma/client"
 import { notFound } from "next/navigation"
 import ReactMarkdown from "react-markdown"
-import { text } from "stream/consumers"
 
 const Tekst = async ({ params }: { params: { slug: string } }) => {
   const tekst = await prisma.tekst.findUnique({

@@ -6,6 +6,9 @@ const Novosti = async () => {
   return (
     <div>
       <h1>Novosti</h1>
+      {novosti.length === 0 && (
+        <p className="text-center">Trenutno nema novih objava</p>
+      )}
       <ul>
         {novosti.map((item) => (
           <li key={item.id} className="prose lg:prose-xl mx-auto mb-24">

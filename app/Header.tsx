@@ -1,17 +1,13 @@
 import React from "react"
 import Link from "next/link"
 import { FaGoodreads } from "react-icons/fa"
-import {
-  Bodoni_Moda,
-  Cutive_Mono,
-  Kaushan_Script,
-  Courier_Prime,
-} from "next/font/google"
+import { Bodoni_Moda } from "next/font/google"
 
-const cutivo = Cutive_Mono({ weight: ["400"], subsets: ["latin"] })
-const kaushan = Kaushan_Script({ weight: ["400"], subsets: ["latin"] })
-const bodoni = Bodoni_Moda({ weight: ["500"], subsets: ["latin"] })
-const courier = Courier_Prime({ weight: ["700"], subsets: ["latin"] })
+const bodoni = Bodoni_Moda({
+  weight: ["500"],
+  subsets: ["latin"],
+  variable: "--custom-font-bodoni",
+})
 
 const Header = () => {
   return (

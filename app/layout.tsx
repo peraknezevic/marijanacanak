@@ -1,10 +1,13 @@
 import type { Metadata } from "next"
-import { Sofia_Sans, Source_Sans_3 } from "next/font/google"
+import { Source_Sans_3 } from "next/font/google"
 import "./globals.css"
-import Header from "../components/Header"
+import Header from "./Header"
+import Footer from "./Footer"
 
-const sofia = Sofia_Sans({ subsets: ["latin"] })
-const source = Source_Sans_3({ subsets: ["latin"] })
+const source = Source_Sans_3({
+  subsets: ["latin"],
+  variable: "--custom-font-source",
+})
 
 export const metadata: Metadata = {
   title: "Marijana Čanak",
@@ -21,6 +24,7 @@ export default function RootLayout({
       <body className={source.className}>
         <Header />
         <main>{children}</main>
+        <Footer />
       </body>
     </html>
   )

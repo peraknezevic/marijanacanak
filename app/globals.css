@@ -25,7 +25,7 @@
     @apply no-underline font-bold tracking-wider;
   }
   main {
-    @apply h-full;
+    @apply h-full min-h-screen;
   }
   h1 {
     @apply text-center py-16 text-6xl font-bold text-slate-500;
@@ -41,6 +41,9 @@
   }
   nav li {
     @apply list-none;
+  }
+  footer {
+    @apply text-center mx-auto my-16;
   }
   .btn {
     @apply inline-block my-4 py-1 px-4 text-slate-100 font-medium bg-slate-800 uppercase tracking-wide;
@@ -124,4 +127,11 @@
   .form-actions {
     @apply flex flex-row justify-between;
   }
+}
+
+body {
+  font-family: var(--custom-font-source);
+}
+.logo {
+  font-family: var(--custom-font-bodoni);
 }

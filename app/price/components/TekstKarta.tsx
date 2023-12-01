@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown"
 
 const TekstKarta = ({ tekst }: { tekst: Tekst }) => {
   return (
-    <li className="prose lg:prose-xl mx-auto text-center mb-32">
+    <li className="prose lg:prose-xl mx-auto text-left mb-32">
       <h2>
         {(tekst.spoljniLink && (
           <Link href={tekst.spoljniLink}>{tekst.naslov}</Link>
