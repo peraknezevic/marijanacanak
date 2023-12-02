@@ -7,7 +7,11 @@ const Tekstovi = async () => {
     where: {
       status: "Objavljeno",
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   })
+  console.log(tekstovi)
   return (
     <div>
       <h1>Priče</h1>
