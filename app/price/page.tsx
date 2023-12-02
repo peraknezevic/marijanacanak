@@ -11,7 +11,6 @@ const Tekstovi = async () => {
       createdAt: "desc",
     },
   })
-  console.log(tekstovi)
   return (
     <div>
       <h1>Priče</h1>
