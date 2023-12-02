@@ -2,7 +2,11 @@ import prisma from "@/prisma/client"
 import ReactMarkdown from "react-markdown"
 
 const Novosti = async () => {
-  const novosti = await prisma.novost.findMany()
+  const novosti = await prisma.novost.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  })
   return (
     <div>
       <h1>Novosti</h1>
