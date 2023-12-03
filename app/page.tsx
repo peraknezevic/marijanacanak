@@ -6,7 +6,10 @@ const Home = async () => {
   const biografija = await prisma.stranica.findUnique({
     where: { slug: "biografija" },
   })
-  const price = await prisma.tekst.findMany({ take: 5 })
+  const price = await prisma.tekst.findMany({
+    take: 5,
+    orderBy: { createdAt: "desc" },
+  })
   const knjige = await prisma.knjiga.findMany({
     take: 6,
     orderBy: { godina: "desc" },
