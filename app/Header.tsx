@@ -4,7 +4,7 @@ import { FaGoodreads } from "react-icons/fa"
 import { Bodoni_Moda } from "next/font/google"
 
 const bodoni = Bodoni_Moda({
-  weight: ["700"],
+  weight: ["500"],
   subsets: ["latin"],
   variable: "--custom-font-bodoni",
 })
