@@ -21,7 +21,7 @@ const Home = async () => {
 
   return (
     <div className="home">
-      <div className="order-2 xl:order-1">
+      <div className="order-2 lg:order-1">
         {biografija?.uvod}
         <p className="text-right">
           <Link href="/biografija" className="btn btn-sm">
@@ -29,7 +29,7 @@ const Home = async () => {
           </Link>
         </p>
       </div>
-      <div className="order-1 xl:order-2">
+      <div className="order-1 lg:order-2">
         <figure>
           <Link href="/biografija">
             <Image

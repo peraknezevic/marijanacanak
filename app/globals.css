@@ -10,7 +10,7 @@
     @apply text-slate-900 cursor-pointer hover:text-slate-700;
   }
   header {
-    @apply flex flex-col lg:flex-row justify-between items-center lg:px-16;
+    @apply flex flex-col lg:flex-row justify-between items-center lg:px-8 xl:px-16 xl:gap-8;
   }
   figcaption p {
     @apply text-right text-sm;
@@ -19,7 +19,7 @@
     @apply text-3xl xl:text-5xl font-bold my-8 xl:my-8 text-slate-500;
   }
   .main-nav {
-    @apply flex flex-wrap xl:flex-nowrap text-lg uppercase justify-start gap-4 xl:gap-6 items-baseline;
+    @apply flex flex-wrap xl:flex-nowrap text-lg uppercase justify-start gap-4 items-baseline;
   }
   .main-nav a {
     @apply no-underline font-bold tracking-wider;
@@ -58,28 +58,28 @@
     @apply bg-red-800;
   }
   .home {
-    @apply grid xl:grid-cols-2 xl:grid-rows-2 max-w-5xl mx-auto my-8 xl:my-16 gap-8 xl:gap-16 text-lg;
+    @apply grid lg:grid-cols-2 lg:grid-rows-2 max-w-5xl mx-auto my-8 xl:my-16 gap-8 xl:gap-16 text-lg;
   }
   .knjiga-naslov {
     @apply uppercase;
   }
   .knjiga {
-    @apply flex flex-col mt-4 xl:mt-8 mb-16 xl:mb-32 gap-2 xl:gap-16 max-w-3xl mx-auto;
+    @apply flex flex-col mt-4 xl:mt-8 mb-16 lg:mb-32 gap-2 lg:gap-16 max-w-3xl mx-auto;
   }
   .knjiga-header {
-    @apply flex flex-col xl:flex-row gap-8 xl:gap-16;
+    @apply flex flex-col md:flex-row gap-8 xl:gap-16;
   }
   .knjiga-header div {
-    @apply xl:w-1/2;
+    @apply lg:w-1/2;
   }
   .knjiga-slika {
-    @apply flex flex-col gap-4 xl:gap-8;
+    @apply flex flex-col gap-4 lg:gap-8;
   }
   .knjiga-slika img {
-    @apply shadow-2xl border-2 border-zinc-400;
+    @apply shadow-2xl border-2 border-zinc-400 mx-auto;
   }
   .knjiga-info {
-    @apply xl:px-6 py-4 xl:py-10 items-center text-xl leading-8;
+    @apply lg:px-6 py-4 lg:py-10 items-center text-xl leading-8;
   }
   .knjiga-info span {
     @apply font-bold block text-lg;

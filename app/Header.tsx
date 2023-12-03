@@ -41,8 +41,11 @@ const Header = () => {
             <Link href="/kontakt">Kontakt</Link>
           </li>
           <li>
-            <a href="https://www.goodreads.com/author/show/8286470.Marijana_anak">
-              <FaGoodreads />
+            <a
+              href="https://www.goodreads.com/author/show/8286470.Marijana_anak"
+              title="Marijana on GoodReads"
+            >
+              <FaGoodreads className="-mb-1" />
             </a>
           </li>
         </ul>
