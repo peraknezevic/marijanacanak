@@ -1,5 +1,6 @@
 import KnjigaKartica from "@/app/knjige/components/KnjigaKartica"
 import prisma from "@/prisma/client"
+import { Metadata } from "next"
 import React from "react"
 
 const Knjige = async () => {
@@ -19,6 +20,16 @@ const Knjige = async () => {
       </ul>
     </>
   )
+}
+
+export const metadata: Metadata = {
+  title: "Knjige Marijane Čanak",
+  description: "Knjige autorke Marijane Čanak",
+  openGraph: {
+    title: "Marijana Čanak",
+    description: "Knjige autorke Marijane Čanak",
+    images: "/slike/marijana-canak-knjige.jpg",
+  },
 }
 
 export default Knjige

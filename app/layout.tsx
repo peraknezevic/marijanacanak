@@ -12,6 +12,18 @@ const source = Source_Sans_3({
 export const metadata: Metadata = {
   title: "Marijana Čanak",
   description: "Zvanična prezentacija autorke Marijane Čanak",
+  keywords: [
+    "Marijana Čanak",
+    "Marijana Čanak književnica",
+    "Marijana Čanak autorka",
+    "Marijana Čanak knjige",
+    "Marijana Čanak priče",
+  ],
+  openGraph: {
+    title: "Marijana Čanak",
+    description: "Zvanična prezentacija autorke Marijane Čanak",
+    images: "/slike/marijana-canak.jpg",
+  },
 }
 
 export default function RootLayout({

@@ -1,4 +1,5 @@
 import prisma from "@/prisma/client"
+import { Metadata } from "next"
 import Image from "next/image"
 import React from "react"
 import ReactMarkdown from "react-markdown"
@@ -29,6 +30,21 @@ const Biografija = async () => {
       </article>
     </>
   )
+}
+
+export const metadata: Metadata = {
+  title: "Biografija književnice Marijane Čanak",
+  description: "Biografija književnice Marijane Čanak",
+  keywords: [
+    "Marijana Čanak",
+    "Marijana Čanak biografija",
+    "Marijana Čanak autorka biografija",
+  ],
+  openGraph: {
+    title: "Biografija književnice Marijane Čanak",
+    description: "Biografija književnice Marijane Čanak",
+    images: "/slike/marijana-canak.jpg",
+  },
 }
 
 export default Biografija

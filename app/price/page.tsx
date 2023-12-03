@@ -1,6 +1,7 @@
 import prisma from "@/prisma/client"
 import React from "react"
 import TekstKarta from "./components/TekstKarta"
+import { Metadata } from "next"
 
 const Tekstovi = async () => {
   const tekstovi = await prisma.tekst.findMany({
@@ -21,6 +22,17 @@ const Tekstovi = async () => {
       </ul>
     </div>
   )
+}
+
+export const metadata: Metadata = {
+  title: "Priče Marijane Čanak",
+  description: "Priče Marijane Čanak",
+  keywords: ["Marijana Čanak", "Marijana Čanak priče"],
+  openGraph: {
+    title: "Priče Marijane Čanak",
+    description: "Priče Marijane Čanak",
+    images: "/slike/marijana-canak.jpg",
+  },
 }
 
 export default Tekstovi
