@@ -10,9 +10,9 @@ const Biografija = async () => {
     },
   })
   return (
-    <article>
+    <>
       <h1>Biografija</h1>
-      <div className="prose lg:prose-xl mx-auto">
+      <article className="prose lg:prose-xl mx-auto">
         <figure>
           <Image
             src="/slike/marijana-canak.jpg"
@@ -26,8 +26,8 @@ const Biografija = async () => {
         </figure>
         <ReactMarkdown>{biografija?.uvod}</ReactMarkdown>
         <ReactMarkdown>{biografija?.tekst}</ReactMarkdown>
-      </div>
-    </article>
+      </article>
+    </>
   )
 }
 

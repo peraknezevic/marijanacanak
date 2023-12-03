@@ -4,22 +4,22 @@
 
 @layer base {
   body {
-    @apply max-w-7xl mx-auto text-slate-900;
+    @apply max-w-7xl px-6 xl:mx-auto text-slate-900;
   }
   a {
     @apply text-slate-900 cursor-pointer hover:text-slate-700;
   }
   header {
-    @apply flex flex-col lg:flex-row justify-between items-center px-4 lg:px-16;
+    @apply flex flex-col lg:flex-row justify-between items-center lg:px-16;
   }
   figcaption p {
     @apply text-right text-sm;
   }
   .logo {
-    @apply text-5xl font-bold my-8 text-slate-500;
+    @apply text-3xl xl:text-5xl font-bold my-8 xl:my-8 text-slate-500;
   }
   .main-nav {
-    @apply flex text-lg uppercase justify-start gap-6 items-baseline;
+    @apply flex flex-wrap xl:flex-nowrap text-lg uppercase justify-start gap-4 xl:gap-6 items-baseline;
   }
   .main-nav a {
     @apply no-underline font-bold tracking-wider;
@@ -28,7 +28,7 @@
     @apply h-full min-h-screen;
   }
   h1 {
-    @apply text-center py-16 text-6xl font-bold text-slate-500;
+    @apply text-center py-8 xl:py-16 text-4xl xl:text-6xl font-bold text-slate-500;
   }
   h2 {
     @apply text-3xl font-bold mb-8;
@@ -43,7 +43,7 @@
     @apply list-none;
   }
   footer {
-    @apply text-center mx-auto my-16;
+    @apply text-center mx-auto my-8 xl:my-16;
   }
   .btn {
     @apply inline-block my-4 py-1 px-4 text-slate-100 font-medium bg-slate-800 uppercase tracking-wide;
@@ -57,32 +57,35 @@
   .btn-red {
     @apply bg-red-800;
   }
+  .home {
+    @apply grid xl:grid-cols-2 xl:grid-rows-2 max-w-5xl mx-auto my-8 xl:my-16 gap-8 xl:gap-16 text-lg;
+  }
   .knjiga-naslov {
     @apply uppercase;
   }
   .knjiga {
-    @apply flex flex-col mt-8 mb-32 gap-16 max-w-3xl mx-auto;
+    @apply flex flex-col mt-4 xl:mt-8 mb-16 xl:mb-32 gap-2 xl:gap-16 max-w-3xl mx-auto;
   }
   .knjiga-header {
-    @apply flex gap-16;
+    @apply flex flex-col xl:flex-row gap-8 xl:gap-16;
   }
   .knjiga-header div {
-    @apply w-1/2;
+    @apply xl:w-1/2;
   }
   .knjiga-slika {
-    @apply flex flex-col gap-8;
+    @apply flex flex-col gap-4 xl:gap-8;
   }
   .knjiga-slika img {
     @apply shadow-2xl border-2 border-zinc-400;
   }
   .knjiga-info {
-    @apply px-6 py-10 items-center text-xl leading-8;
+    @apply xl:px-6 py-4 xl:py-10 items-center text-xl leading-8;
   }
   .knjiga-info span {
     @apply font-bold block text-lg;
   }
   .knjiga-info p {
-    @apply mb-4 text-left;
+    @apply mb-2 xl:mb-4 text-left;
   }
   .knjiga-opis p {
     @apply text-left text-xl mb-4;

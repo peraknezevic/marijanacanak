@@ -17,16 +17,16 @@ const Home = async () => {
   })
 
   return (
-    <div className="grid grid-cols-2 grid-rows-2 max-w-5xl mx-auto my-16 gap-16 text-lg">
-      <div>
+    <div className="home">
+      <div className="order-2 xl:order-1">
         {biografija?.uvod}
         <p className="text-right">
-          <Link href="/biografija" className="btn btn-sm ">
+          <Link href="/biografija" className="btn btn-sm">
             Kompletna biografija
           </Link>
         </p>
       </div>
-      <div>
+      <div className="order-1 xl:order-2">
         <figure>
           <Link href="/biografija">
             <Image
@@ -42,7 +42,7 @@ const Home = async () => {
           </figcaption>
         </figure>
       </div>
-      <div>
+      <div className="order-3">
         <figure>
           <Link href="/knjige">
             <Image
@@ -58,7 +58,7 @@ const Home = async () => {
           </figcaption>
         </figure>
       </div>
-      <div>
+      <div className="order-4">
         <h2>Knjige</h2>
         {knjige.map((item) => (
           <p key="item.id" className="mb-1">
@@ -76,7 +76,7 @@ const Home = async () => {
       </div>
 
       {novosti.length !== 0 && (
-        <div>
+        <div className="order-5">
           <h2>Novosti</h2>
           {novosti.map((item) => (
             <p key="item.id" className="mb-1">
@@ -93,7 +93,7 @@ const Home = async () => {
         </div>
       )}
 
-      <div>
+      <div className="order-6">
         <h2>Priče</h2>
         {price.map((item) => (
           <p key="item.id" className="mb-1">

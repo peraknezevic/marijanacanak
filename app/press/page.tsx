@@ -14,7 +14,7 @@ const Press = async () => {
       <h1>Press</h1>
       <ul>
         {press.map((item) => (
-          <li key={item.id} className="prose lg:prose-xl mx-auto mb-24">
+          <li key={item.id} className="prose lg:prose-xl mx-auto mb-8 xl:mb-24">
             <h3>
               <Link href={item.link}>{item.naslov}</Link>
             </h3>
