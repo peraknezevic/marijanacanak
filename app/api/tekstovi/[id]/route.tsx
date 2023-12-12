@@ -1,3 +1,4 @@
+"use server"
 import { tekstSchema } from "@/app/validationSchemas"
 import prisma from "@/prisma/client"
 import { revalidatePath } from "next/cache"

@@ -1,3 +1,4 @@
+"use server"
 import { stranicaSchema } from "@/app/validationSchemas"
 import prisma from "@/prisma/client"
 
