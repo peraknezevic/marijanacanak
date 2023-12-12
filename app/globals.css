@@ -10,20 +10,24 @@
     @apply text-slate-900 cursor-pointer hover:text-slate-700;
   }
   header {
-    @apply flex flex-col lg:flex-row justify-between items-center lg:px-8 xl:px-16 xl:gap-8;
+    @apply flex flex-auto flex-col flex-wrap lg:flex-row justify-between items-center lg:px-8 xl:px-16 xl:gap-8;
   }
   figcaption p {
     @apply text-right text-sm;
   }
   .logo {
-    @apply text-3xl xl:text-5xl font-bold my-8 xl:my-8 text-slate-500;
+    @apply text-3xl xl:text-4xl font-normal my-8 xl:my-8 text-slate-500;
   }
   .main-nav {
-    @apply flex flex-wrap xl:flex-nowrap text-lg uppercase justify-start gap-3 items-baseline;
+    @apply flex flex-wrap xl:flex-nowrap text-lg uppercase justify-start gap-4 items-baseline;
   }
   .main-nav a {
     @apply no-underline font-bold tracking-wider;
   }
+  .patreon-header {
+    @apply grow text-center mt-8 lg:my-4 xl:my-0;
+  }
+
   main {
     @apply h-full min-h-screen;
   }
@@ -43,10 +47,16 @@
     @apply list-none;
   }
   footer {
-    @apply text-center mx-auto my-8 xl:my-16;
+    @apply flex flex-col gap-8 text-center mx-auto my-8 xl:my-16;
   }
   .btn {
-    @apply inline-block my-4 py-1 px-4 text-slate-100 font-medium bg-slate-800 uppercase tracking-wide;
+    @apply inline-block my-4 py-1 px-4 text-slate-100 font-medium bg-slate-800 uppercase tracking-wide cursor-pointer;
+  }
+  .btn-patreon {
+    @apply inline-block my-4 py-1 px-4 text-slate-100 font-medium bg-patreon uppercase tracking-wide hover:opacity-75 cursor-pointer;
+  }
+  a.btn-patreon {
+    @apply text-slate-100 hover:text-slate-100;
   }
   .btn-sm {
     @apply text-sm font-bold;

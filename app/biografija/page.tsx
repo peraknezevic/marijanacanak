@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Biografija književnice Marijane Čanak",
     description: "Biografija književnice Marijane Čanak",
-    images: "/slike/marijana-canak.jpg",
+    images: "https://www.marijanacanak.com/slike/marijana-canak.jpg",
   },
 }
 

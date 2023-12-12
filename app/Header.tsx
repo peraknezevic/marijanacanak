@@ -1,6 +1,11 @@
 import React from "react"
 import Link from "next/link"
-import { FaGoodreads, FaInstagramSquare, FaPatreon } from "react-icons/fa"
+import {
+  FaFacebookSquare,
+  FaGoodreads,
+  FaInstagramSquare,
+  FaPatreon,
+} from "react-icons/fa"
 import { Bodoni_Moda } from "next/font/google"
 
 const bodoni = Bodoni_Moda({
@@ -59,6 +64,14 @@ const Header = () => {
           </li>
           <li>
             <a
+              href="https://www.facebook.com/scribowomana"
+              title="Marijana na Facebooku"
+            >
+              <FaFacebookSquare className="-mb-1" />
+            </a>
+          </li>
+          <li>
+            <a
               href="https://www.goodreads.com/author/show/8286470.Marijana_anak"
               title="Marijana na GoodReads"
             >
@@ -67,6 +80,16 @@ const Header = () => {
           </li>
         </ul>
       </nav>
+      <div className="patreon-header">
+        <p>
+          <a
+            className=" btn-patreon"
+            href="https://www.patreon.com/MarijanaCanak"
+          >
+            Podrži moje pisanje, pretplati se na nove priče na Patreon-u
+          </a>
+        </p>
+      </div>
     </header>
   )
 }

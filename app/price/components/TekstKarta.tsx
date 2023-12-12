@@ -8,15 +8,15 @@ const TekstKarta = ({ tekst }: { tekst: Tekst }) => {
     <li className="prose lg:prose-xl mx-auto text-left mb-32">
       <h2>
         {(tekst.spoljniLink && (
-          <Link href={tekst.spoljniLink}>{tekst.naslov}</Link>
+          <a href={tekst.spoljniLink}>{tekst.naslov}</a>
         )) ||
           (tekst.patreonLink && (
-            <Link href={tekst.patreonLink}>{tekst.naslov}</Link>
+            <a href={tekst.patreonLink}>{tekst.naslov}</a>
           )) || <Link href={`/price/${tekst.slug}`}>{tekst.naslov}</Link>}
       </h2>
       {tekst.uvod && <ReactMarkdown>{tekst.uvod}</ReactMarkdown>}
       {tekst.patreonLink && (
-        <a href={tekst.patreonLink} className="btn btn-sm">
+        <a href={tekst.patreonLink} className="btn btn-sm bg-patreon">
           Pročitajte na Patreonu
         </a>
       )}
