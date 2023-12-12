@@ -64,7 +64,7 @@ const Header = () => {
           </li>
           <li>
             <a
-              href="https://www.facebook.com/scribowomana"
+              href="https://www.facebook.com/scribowoman"
               title="Marijana na Facebooku"
             >
               <FaFacebookSquare className="-mb-1" />
