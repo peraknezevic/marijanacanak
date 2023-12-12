@@ -48,7 +48,7 @@ const Header = () => {
 
           <li>
             <a
-              href="httpshttps://www.patreon.com/MarijanaCanak"
+              href="https://www.patreon.com/MarijanaCanak"
               title="Marijana na Patreonu"
             >
               <FaPatreon className="-mb-1" />

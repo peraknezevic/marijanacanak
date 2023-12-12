@@ -34,7 +34,7 @@ export const stranicaSchema = z.object({
   naslov: z.string().min(3).max(150),
   slug: z.string().min(3).max(150),
   uvod: z.string().min(3).max(2000).optional().or(z.literal("")),
-  tekst: z.string().min(50).optional().or(z.literal("")),
+  tekst: z.string().min(10).optional().or(z.literal("")),
   status: z.enum(["Objavljeno", "Nacrt"]),
 })
 

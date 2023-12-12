@@ -67,9 +67,14 @@
   .btn-red {
     @apply bg-red-800;
   }
+
+  .dobrodosli {
+    @apply text-4xl text-left my-8 mx-16;
+  }
   .home {
     @apply grid lg:grid-cols-2 lg:grid-rows-2 max-w-5xl mx-auto my-8 xl:my-16 gap-8 xl:gap-16 text-lg;
   }
+
   .knjiga-naslov {
     @apply uppercase;
   }
