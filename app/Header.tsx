@@ -17,13 +17,16 @@ const bodoni = Bodoni_Moda({
 const Header = () => {
   return (
     <header>
-      <div className="logo">
-        <Link
-          href="/"
-          className={`${bodoni.className} text-slate-500 uppercase`}
-        >
-          Marijana Čanak
-        </Link>
+      <div className="logo-block">
+        <div className="logo">
+          <Link
+            href="/"
+            className={`${bodoni.className} text-slate-500 uppercase`}
+          >
+            Marijana Čanak
+          </Link>
+        </div>
+        <div className="tagline">Strast za otkrivanjem priče</div>
       </div>
       <nav>
         <ul className="main-nav">

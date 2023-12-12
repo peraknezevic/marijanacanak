@@ -10,13 +10,19 @@
     @apply text-slate-900 cursor-pointer hover:text-slate-700;
   }
   header {
-    @apply flex flex-auto flex-col flex-wrap lg:flex-row justify-between items-center lg:px-8 xl:px-16 xl:gap-8;
+    @apply flex flex-auto flex-col flex-wrap lg:flex-row justify-between items-center lg:px-2 xl:px-16 xl:gap-8;
   }
   figcaption p {
     @apply text-right text-sm;
   }
+  .logo-block {
+    @apply my-8 text-slate-500;
+  }
   .logo {
-    @apply text-3xl xl:text-4xl font-normal my-8 xl:my-8 text-slate-500;
+    @apply text-3xl xl:text-4xl font-normal;
+  }
+  .tagline {
+    @apply text-base text-center lg:text-right italic;
   }
   .main-nav {
     @apply flex flex-wrap xl:flex-nowrap text-lg uppercase justify-start gap-4 items-baseline;
