@@ -19,7 +19,7 @@
     @apply text-3xl xl:text-5xl font-bold my-8 xl:my-8 text-slate-500;
   }
   .main-nav {
-    @apply flex flex-wrap xl:flex-nowrap text-lg uppercase justify-start gap-4 items-baseline;
+    @apply flex flex-wrap xl:flex-nowrap text-lg uppercase justify-start gap-3 items-baseline;
   }
   .main-nav a {
     @apply no-underline font-bold tracking-wider;
