@@ -46,6 +46,7 @@ export async function POST(request: Request) {
   })
 
   revalidatePath("/knjige")
+  revalidatePath("/")
 
   return Response.json(novaKnjiga, { status: 201 })
 }

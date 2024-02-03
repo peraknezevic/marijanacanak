@@ -64,6 +64,7 @@ export async function PATCH(
   })
 
   revalidatePath("/knjige")
+  revalidatePath("/")
   revalidatePath(`/knjige/${knjigaPromena.slug}`)
 
   return Response.json(knjigaPromena)
@@ -92,6 +93,7 @@ export async function DELETE(
   })
 
   revalidatePath("/knjige")
+  revalidatePath("/")
 
   return Response.json({})
 }

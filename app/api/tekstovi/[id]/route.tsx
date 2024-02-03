@@ -56,7 +56,8 @@ export async function PATCH(
   })
 
   revalidatePath("/price")
-  revalidatePath(`/price/${tekstPromena.slug}`)
+  revalidatePath("/price")
+  revalidatePath("/")
 
   return Response.json(tekstPromena)
 }

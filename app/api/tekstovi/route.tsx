@@ -38,6 +38,7 @@ export async function POST(request: Request) {
   })
 
   revalidatePath("/price")
+  revalidatePath("/")
 
   return Response.json(noviTekst, { status: 201 })
 }
