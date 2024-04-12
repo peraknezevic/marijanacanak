@@ -1,7 +1,8 @@
 "use server"
-import { tekstSchema } from "@/app/validationSchemas"
+
 import prisma from "@/prisma/client"
 import { revalidatePath } from "next/cache"
+import { tekstSchema } from "@/app/validationSchemas"
 
 export async function GET(
   request: Request,
@@ -55,7 +56,6 @@ export async function PATCH(
     },
   })
 
-  revalidatePath("/price")
   revalidatePath("/price")
   revalidatePath("/")
 
