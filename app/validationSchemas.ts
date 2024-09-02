@@ -23,7 +23,7 @@ export const tekstSchema = z.object({
   naslov: z.string().min(3).max(150),
   slug: z.string().min(3).max(150),
   uvod: z.string().min(3).max(2000).optional().or(z.literal("")),
-  tekst: z.string().min(50).optional().or(z.literal("")),
+  tekst: z.string().min(10).optional().or(z.literal("")),
   patreonLink: z.string().min(3).max(200).optional().or(z.literal("")),
   nazivSpoljnogLinka: z.string().min(3).max(150).optional().or(z.literal("")),
   spoljniLink: z.string().min(10).max(150).optional().or(z.literal("")),
@@ -34,7 +34,7 @@ export const stranicaSchema = z.object({
   naslov: z.string().min(3).max(150),
   slug: z.string().min(3).max(150),
   uvod: z.string().min(3).max(2000).optional().or(z.literal("")),
-  tekst: z.string().min(10).optional().or(z.literal("")),
+  tekst: z.string().min(5).optional().or(z.literal("")),
   status: z.enum(["Objavljeno", "Nacrt"]),
 })
 
@@ -49,7 +49,7 @@ export const novostSchema = z.object({
   naslov: z.string().min(3).max(150),
   slug: z.string().min(3).max(150),
   uvod: z.string().min(3).max(2000).optional().or(z.literal("")),
-  tekst: z.string().min(50).optional().or(z.literal("")),
+  tekst: z.string().min(5).optional().or(z.literal("")),
   link: z.string().min(10).max(150).optional().or(z.literal("")),
   status: z.enum(["Objavljeno", "Nacrt"]),
 })
