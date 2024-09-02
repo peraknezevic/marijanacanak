@@ -1,6 +1,4 @@
-import React from "react"
-
-const Admin = () => {
+const Admin = async () => {
   return <div className="admin-page">Dobrodošli u admin sekciju</div>
 }
 

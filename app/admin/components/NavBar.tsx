@@ -1,7 +1,6 @@
 import Link from "next/link"
-import React from "react"
 
-const NavBar = () => {
+const NavBar = ({ username }: { username: string | null | undefined }) => {
   return (
     <nav className="admin-nav">
       <ul>
@@ -21,6 +20,7 @@ const NavBar = () => {
         <li>
           <Link href="/admin/press">Press</Link>
         </li>
+        {username && <li>Ulogovani ste kao {username}</li>}
       </ul>
     </nav>
   )
