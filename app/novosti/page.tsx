@@ -1,5 +1,6 @@
 import H1 from "@/components/h1"
-import LinkBtnSm from "@/components/link-btn-sm"
+import H2 from "@/components/h2"
+import LinkBtn from "@/components/link-btn"
 import NewsArticle from "@/components/article-news"
 import ReactMarkdown from "react-markdown"
 import { getNews } from "@/lib/data"
@@ -16,13 +17,11 @@ const Novosti = async () => {
       <div>
         {news.map((item) => (
           <NewsArticle key={item.id}>
-            <h2>{item.naslov}</h2>
+            <H2 title={item.naslov} slug={`novosti/${item.slug}`} />
             <ReactMarkdown className="text-left">{item.uvod}</ReactMarkdown>
             <ReactMarkdown className="text-left">{item.tekst}</ReactMarkdown>
             {item.link && (
-              <p>
-                <LinkBtnSm href={item.link} title="Više informacija" />
-              </p>
+              <LinkBtn href={item.link} title="Više informacija" type="small" />
             )}
             <hr />
           </NewsArticle>

@@ -38,6 +38,9 @@ export const getStories = async () =>
     },
   })
 
+export const getStoryBySlug = async (slug: string) =>
+  await prisma.tekst.findUnique({ where: { slug } })
+
 export const getLatestNews = async (num: number) =>
   await prisma.novost.findMany({
     take: num,
@@ -49,6 +52,11 @@ export const getNews = async () =>
     orderBy: {
       createdAt: "desc",
     },
+  })
+
+export const getNewsItem = async (slug: string) =>
+  await prisma.novost.findUnique({
+    where: { slug },
   })
 
 export const getPress = async () =>

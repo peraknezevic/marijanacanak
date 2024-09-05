@@ -5,7 +5,7 @@ import {
   getLatestStories,
 } from "@/lib/data"
 
-import Image from "next/image"
+import Image from "@/components/image"
 import Link from "next/link"
 import LinkBtn from "@/components/link-btn"
 
@@ -31,7 +31,7 @@ const Home = async () => {
         <figure>
           <Link href="/biografija">
             <Image
-              src="/slike/marijana-canak.jpg"
+              src="https://ik.imagekit.io/tkrwfvazw/marijanacanak/slike/homepage/marijana-canak.jpg"
               alt="Marijana Čanak"
               width={1600}
               height={1100}
@@ -47,7 +47,7 @@ const Home = async () => {
         <figure>
           <Link href="/knjige">
             <Image
-              src="/slike/marijana-canak-knjige.jpg"
+              src="https://ik.imagekit.io/tkrwfvazw/marijanacanak/slike/homepage/marijana-canak-knjige.jpg"
               alt="Knjige Marijane Čanak"
               width={1600}
               height={1100}
@@ -62,7 +62,7 @@ const Home = async () => {
       <div className="order-4">
         <h2>Knjige</h2>
         {books.map((book) => (
-          <p key="book.id" className="mb-1">
+          <p key={book.id} className="mb-1">
             <Link href={`/knjige/${book.slug}`} className="underline">
               {book.naziv}
             </Link>{" "}
@@ -78,7 +78,7 @@ const Home = async () => {
         <div className="order-5">
           <h2>Novosti</h2>
           {news.map((item) => (
-            <p key="item.id" className="mb-1">
+            <p key={item.id} className="mb-1">
               <Link href={`novosti/${item.slug}`} className="underline">
                 {item.naslov}
               </Link>
@@ -93,7 +93,7 @@ const Home = async () => {
       <div className="order-6">
         <h2>Priče</h2>
         {stories.map((story) => (
-          <p key="story.id" className="mb-1">
+          <p key={story.id} className="mb-1">
             <Link
               href={story.spoljniLink || story.patreonLink || ""}
               className="underline"
