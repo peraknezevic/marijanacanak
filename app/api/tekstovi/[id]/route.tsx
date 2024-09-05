@@ -2,7 +2,7 @@
 
 import prisma from "@/prisma/client"
 import { revalidatePath } from "next/cache"
-import { tekstSchema } from "@/app/validationSchemas"
+import { tekstSchema } from "@/utils/validationSchemas"
 
 export async function GET(
   request: Request,

@@ -1,16 +1,19 @@
 "use client"
-import { pressSchema } from "@/app/validationSchemas"
+
+import "easymde/dist/easymde.min.css"
+
+import { Controller, useForm } from "react-hook-form"
+
+import DeleteButton from "../../components/DeleteButton"
+import ErrorMessage from "../../components/ErrorMessage"
 import { Press } from "@prisma/client"
+import SimpleMDE from "react-simplemde-editor"
+import axios from "axios"
+import { pressSchema } from "@/utils/validationSchemas"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { z } from "zod"
-import { Controller, useForm } from "react-hook-form"
-import { useRouter } from "next/navigation"
-import axios from "axios"
-import ErrorMessage from "../../components/ErrorMessage"
 import { zodResolver } from "@hookform/resolvers/zod"
-import SimpleMDE from "react-simplemde-editor"
-import "easymde/dist/easymde.min.css"
-import DeleteButton from "../../components/DeleteButton"
 
 type PressPodaci = z.infer<typeof pressSchema>
 

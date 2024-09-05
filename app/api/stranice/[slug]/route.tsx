@@ -1,7 +1,8 @@
 "use server"
-import { stranicaSchema } from "@/app/validationSchemas"
+
 import prisma from "@/prisma/client"
 import { revalidatePath } from "next/cache"
+import { stranicaSchema } from "@/utils/validationSchemas"
 
 export async function GET(
   request: Request,

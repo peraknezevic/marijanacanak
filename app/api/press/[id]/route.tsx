@@ -1,5 +1,6 @@
 "use server"
-import { pressSchema } from "@/app/validationSchemas"
+
+import { pressSchema } from "@/utils/validationSchemas"
 import prisma from "@/prisma/client"
 import { revalidatePath } from "next/cache"
 

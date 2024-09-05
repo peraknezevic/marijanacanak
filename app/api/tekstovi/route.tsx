@@ -1,7 +1,8 @@
 "use server"
-import { tekstSchema } from "@/app/validationSchemas"
+
 import prisma from "@/prisma/client"
 import { revalidatePath } from "next/cache"
+import { tekstSchema } from "@/utils/validationSchemas"
 
 export async function GET(request: Request) {
   const tekst = await prisma.tekst.findMany()

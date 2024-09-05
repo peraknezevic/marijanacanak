@@ -1,5 +1,6 @@
-import NavBar from "./components/NavBar"
+import AdminNavBar from "../../components/admin-navbar"
 import { auth } from "@/auth"
+import { redirect } from "next/navigation"
 
 export default async function DashboardLayout({
   children,
@@ -7,10 +8,15 @@ export default async function DashboardLayout({
   children: React.ReactNode
 }) {
   const session = await auth()
-  const username = session?.user?.name
+  const user = session?.user
+
+  if (!user) redirect("/api/auth/signin?callbackUrl=/admin")
+
   return (
     <div className="admin">
-      <NavBar username={username} />
+      <AdminNavBar />
+      {user?.role === "admin" && <p>You are admin</p>}
+      {user?.role !== "admin" && <p>You are not admin</p>}
       <main>{children}</main>
     </div>
   )

@@ -1,16 +1,19 @@
 "use client"
-import { tekstSchema } from "@/app/validationSchemas"
+
+import "easymde/dist/easymde.min.css"
+
+import { Controller, useForm } from "react-hook-form"
+
+import DeleteButton from "../../components/DeleteButton"
+import ErrorMessage from "../../components/ErrorMessage"
+import SimpleMDE from "react-simplemde-editor"
 import { Tekst } from "@prisma/client"
+import axios from "axios"
+import { tekstSchema } from "@/utils/validationSchemas"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { z } from "zod"
-import { Controller, useForm } from "react-hook-form"
-import { useRouter } from "next/navigation"
-import axios from "axios"
-import ErrorMessage from "../../components/ErrorMessage"
 import { zodResolver } from "@hookform/resolvers/zod"
-import SimpleMDE from "react-simplemde-editor"
-import "easymde/dist/easymde.min.css"
-import DeleteButton from "../../components/DeleteButton"
 
 type TekstPodaci = z.infer<typeof tekstSchema>
 

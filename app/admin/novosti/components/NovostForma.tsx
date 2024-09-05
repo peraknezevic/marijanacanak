@@ -1,16 +1,22 @@
 "use client"
-import { novostSchema } from "@/app/validationSchemas"
+
+import "easymde/dist/easymde.min.css"
+
+import { Controller, useForm } from "react-hook-form"
+
+import DeleteButton from "../../components/DeleteButton"
+import ErrorMessage from "../../components/ErrorMessage"
+import FormBlock from "@/components/form-block"
+import FormButtons from "@/components/form-buttons"
+import FormWrapper from "@/components/form-wrapper"
 import { Novost } from "@prisma/client"
+import SimpleMDE from "react-simplemde-editor"
+import axios from "axios"
+import { novostSchema } from "@/utils/validationSchemas"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { z } from "zod"
-import { Controller, useForm } from "react-hook-form"
-import { useRouter } from "next/navigation"
-import axios from "axios"
-import ErrorMessage from "../../components/ErrorMessage"
 import { zodResolver } from "@hookform/resolvers/zod"
-import SimpleMDE from "react-simplemde-editor"
-import "easymde/dist/easymde.min.css"
-import DeleteButton from "../../components/DeleteButton"
 
 type NovostPodaci = z.infer<typeof novostSchema>
 
@@ -45,8 +51,8 @@ const TekstForma = ({ novost }: { novost?: Novost }) => {
           <span>{error}</span>
         </div>
       )}
-      <form onSubmit={onSubmit}>
-        <div>
+      <FormWrapper onSubmit={onSubmit}>
+        <FormBlock>
           <label htmlFor="naslov">Naslov novosti</label>
           <input
             type="text"
@@ -56,9 +62,9 @@ const TekstForma = ({ novost }: { novost?: Novost }) => {
             {...register("naslov")}
           />
           <ErrorMessage>{errors.naslov?.message}</ErrorMessage>
-        </div>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="slug">
             URL Slug (npr. naslov-novosti, bez č, ć, ž, š, đ)
           </label>
@@ -70,9 +76,9 @@ const TekstForma = ({ novost }: { novost?: Novost }) => {
             {...register("slug")}
           />
           <ErrorMessage>{errors.slug?.message}</ErrorMessage>
-        </div>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="uvod">Uvod novosti</label>
           <Controller
             name="uvod"
@@ -83,9 +89,9 @@ const TekstForma = ({ novost }: { novost?: Novost }) => {
             )}
           />
           <ErrorMessage>{errors.uvod?.message}</ErrorMessage>
-        </div>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="tekst">Tekst novosti</label>
           <Controller
             name="tekst"
@@ -96,9 +102,9 @@ const TekstForma = ({ novost }: { novost?: Novost }) => {
             )}
           />
           <ErrorMessage>{errors.tekst?.message}</ErrorMessage>
-        </div>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="link">Spoljašnji Link</label>
           <input
             type="text"
@@ -107,21 +113,21 @@ const TekstForma = ({ novost }: { novost?: Novost }) => {
             {...register("link")}
           />
           <ErrorMessage>{errors.link?.message}</ErrorMessage>
-        </div>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="status">Status novosti</label>
           <select {...register("status")} id="status">
             <option value="Objavljeno">Objavljena</option>
             <option value="Nacrt">Nacrt</option>
           </select>
           <ErrorMessage>{errors.status?.message}</ErrorMessage>
-        </div>
-        <div className="form-actions">
+        </FormBlock>
+        <FormButtons>
           <button className="btn">{novost ? "Izmeni" : "Dodaj"}</button>
           {novost && <DeleteButton id={novost.id} cat="novosti" />}
-        </div>
-      </form>
+        </FormButtons>
+      </FormWrapper>
     </div>
   )
 }

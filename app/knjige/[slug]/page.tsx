@@ -1,16 +1,13 @@
-import KnjigaStranica from "@/app/knjige/components/KnjigaStranica"
-import prisma from "@/prisma/client"
+import BookPage from "@/components/book-page"
+import { getBookBySlug } from "@/lib/data"
 import { notFound } from "next/navigation"
-import React from "react"
 
 const Knjiga = async ({ params }: { params: { slug: string } }) => {
-  const knjiga = await prisma.knjiga.findUnique({
-    where: { slug: params.slug },
-  })
+  const book = await getBookBySlug(params.slug)
 
-  if (!knjiga) return notFound()
+  if (!book) return notFound()
 
-  return <KnjigaStranica knjiga={knjiga} />
+  return <BookPage book={book} />
 }
 
 export default Knjiga

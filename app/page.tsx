@@ -1,35 +1,30 @@
-import prisma from "@/prisma/client"
+import {
+  getBio,
+  getLatestBooks,
+  getLatestNews,
+  getLatestStories,
+} from "@/lib/data"
+
 import Image from "next/image"
 import Link from "next/link"
+import LinkBtn from "@/components/link-btn"
 
 const Home = async () => {
-  const biografija = await prisma.stranica.findUnique({
-    where: { slug: "biografija" },
-  })
-  const dobrodosli = await prisma.stranica.findUnique({
-    where: { slug: "dobro-dosli" },
-  })
-  const price = await prisma.tekst.findMany({
-    take: 5,
-    orderBy: { createdAt: "desc" },
-  })
-  const knjige = await prisma.knjiga.findMany({
-    take: 6,
-    orderBy: { godina: "desc" },
-  })
-  const novosti = await prisma.novost.findMany({
-    take: 5,
-    orderBy: { createdAt: "desc" },
-  })
+  const bio = await getBio()
+  const stories = await getLatestStories(5)
+  const books = await getLatestBooks(6)
+  const news = await getLatestNews(5)
 
   return (
-    <div className="home">
+    <div className="grid lg:grid-cols-2 lg:grid-rows-2 max-w-5xl mx-auto my-8 xl:my-16 gap-8 xl:gap-16 text-lg">
       <div className="order-2 lg:order-1">
-        {biografija?.uvod}
+        {bio?.uvod}
         <p className="text-right">
-          <Link href="/biografija" className="btn btn-sm">
-            Kompletna biografija
-          </Link>
+          <LinkBtn
+            href="/biografija"
+            title="Kompletna biografija"
+            type="small"
+          />
         </p>
       </div>
       <div className="order-1 lg:order-2">
@@ -66,25 +61,23 @@ const Home = async () => {
       </div>
       <div className="order-4">
         <h2>Knjige</h2>
-        {knjige.map((item) => (
-          <p key="item.id" className="mb-1">
-            <Link href={`/knjige/${item.slug}`} className="underline">
-              {item.naziv}
+        {books.map((book) => (
+          <p key="book.id" className="mb-1">
+            <Link href={`/knjige/${book.slug}`} className="underline">
+              {book.naziv}
             </Link>{" "}
-            ({item.izdavac})
+            ({book.izdavac})
           </p>
         ))}
         <p className="text-right">
-          <Link href="/knjige" className="btn btn-sm ">
-            ostale knjige
-          </Link>
+          <LinkBtn href="/knjige" title="ostale knjige" type="small" />
         </p>
       </div>
 
-      {novosti.length !== 0 && (
+      {news.length !== 0 && (
         <div className="order-5">
           <h2>Novosti</h2>
-          {novosti.map((item) => (
+          {news.map((item) => (
             <p key="item.id" className="mb-1">
               <Link href={`novosti/${item.slug}`} className="underline">
                 {item.naslov}
@@ -92,29 +85,25 @@ const Home = async () => {
             </p>
           ))}
           <p className="text-right">
-            <Link href="/novosti" className="btn btn-sm ">
-              ostale novosti
-            </Link>
+            <LinkBtn href="/novosti" title="ostale novosti" type="small" />
           </p>
         </div>
       )}
 
       <div className="order-6">
         <h2>Priče</h2>
-        {price.map((item) => (
-          <p key="item.id" className="mb-1">
+        {stories.map((story) => (
+          <p key="story.id" className="mb-1">
             <Link
-              href={item.spoljniLink || item.patreonLink || ""}
+              href={story.spoljniLink || story.patreonLink || ""}
               className="underline"
             >
-              {item.naslov}
+              {story.naslov}
             </Link>
           </p>
         ))}
         <p className="text-right">
-          <Link href="/price" className="btn btn-sm ">
-            ostale priče
-          </Link>
+          <LinkBtn href="/price" title="ostale priče" type="small" />
         </p>
       </div>
     </div>
