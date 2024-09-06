@@ -1,0 +1,29 @@
+import { Knjiga, Novost, Press, Stranica, Tekst } from "@prisma/client"
+
+import Button from "./button"
+
+const AdminList = ({
+  list,
+  href,
+  title,
+}: {
+  list: Array<Novost | Tekst | Knjiga | Stranica | Press>
+  href: string
+  title: string
+}) => {
+  return (
+    <ul className="flex flex-col gap-1">
+      {list.map((item) => (
+        <li key={item.id}>
+          <Button
+            href={`/admin/${href}/${item.id}`}
+            title={item.naslov || item.naziv}
+            type="list"
+          />
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+export default AdminList

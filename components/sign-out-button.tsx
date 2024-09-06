@@ -9,7 +9,7 @@ const SignOutButton = () => {
         await signOut()
       }}
     >
-      <Button text="Odjavi se" />
+      <Button title="Odjavi se" type="small" submit />
     </form>
   )
 }

@@ -5,9 +5,9 @@ import {
   getLatestStories,
 } from "@/lib/data"
 
+import Button from "@/components/button"
 import Image from "@/components/image"
 import Link from "next/link"
-import LinkBtn from "@/components/link-btn"
 
 const Home = async () => {
   const bio = await getBio()
@@ -20,7 +20,7 @@ const Home = async () => {
       <div className="order-2 lg:order-1">
         {bio?.uvod}
         <p className="text-right">
-          <LinkBtn
+          <Button
             href="/biografija"
             title="Kompletna biografija"
             type="small"
@@ -70,7 +70,7 @@ const Home = async () => {
           </p>
         ))}
         <p className="text-right">
-          <LinkBtn href="/knjige" title="ostale knjige" type="small" />
+          <Button href="/knjige" title="ostale knjige" type="small" />
         </p>
       </div>
 
@@ -85,7 +85,7 @@ const Home = async () => {
             </p>
           ))}
           <p className="text-right">
-            <LinkBtn href="/novosti" title="ostale novosti" type="small" />
+            <Button href="/novosti" title="ostale novosti" type="small" />
           </p>
         </div>
       )}
@@ -103,7 +103,7 @@ const Home = async () => {
           </p>
         ))}
         <p className="text-right">
-          <LinkBtn href="/price" title="ostale priče" type="small" />
+          <Button href="/price" title="ostale priče" type="small" />
         </p>
       </div>
     </div>

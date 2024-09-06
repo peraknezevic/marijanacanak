@@ -11,6 +11,7 @@ import FormButtons from "@/components/form-buttons"
 import FormWrapper from "@/components/form-wrapper"
 import { Novost } from "@prisma/client"
 import SimpleMDE from "react-simplemde-editor"
+import Upload from "@/components/upload"
 import axios from "axios"
 import { novostSchema } from "@/utils/validationSchemas"
 import { useRouter } from "next/navigation"
@@ -103,6 +104,8 @@ const TekstForma = ({ novost }: { novost?: Novost }) => {
           />
           <ErrorMessage>{errors.tekst?.message}</ErrorMessage>
         </FormBlock>
+
+        <Upload />
 
         <FormBlock>
           <label htmlFor="link">Spoljašnji Link</label>

@@ -10,41 +10,12 @@
     @apply text-right text-sm;
   }
 
-  /* h1 {
-    @apply text-center py-8 xl:py-16 text-4xl xl:text-6xl font-bold text-slate-500;
-  } */
   h2 {
     @apply text-3xl font-bold mb-8;
   }
-  /* article {
-    @apply py-8;
-  } */
 
   .btn-red {
     @apply bg-red-800;
-  }
-
-  /* .dobrodosli {
-    @apply text-4xl text-left my-8 mx-16;
-  } */
-
-  .admin {
-    @apply bg-zinc-100 max-w-3xl mx-auto my-16 min-h-max;
-  }
-  .admin-page {
-    @apply p-8 flex flex-col gap-8;
-  }
-  .spisak {
-    @apply flex flex-col gap-4;
-  }
-  .spisak li {
-    @apply w-full flex  justify-between items-center font-medium text-lg;
-  }
-  .spisak li a {
-    @apply w-full h-full px-4 py-2 border block hover:bg-[#F9EED8] bg-white;
-  }
-  .spisak li a span {
-    @apply text-xs block uppercase;
   }
   input,
   textarea {

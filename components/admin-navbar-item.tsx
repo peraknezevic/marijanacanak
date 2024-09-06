@@ -1,5 +1,6 @@
 "use client"
 
+import Button from "./button"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -7,12 +8,12 @@ const AdminNavBarItem = ({ href, title }: { href: string; title: string }) => {
   const pathname = usePathname()
   return (
     <li>
-      <Link
-        className={`link ${pathname === href ? "font-extrabold" : ""}`}
+      <Button
         href={href}
-      >
-        {title}
-      </Link>
+        title={title}
+        type="small"
+        active={pathname === href}
+      />
     </li>
   )
 }

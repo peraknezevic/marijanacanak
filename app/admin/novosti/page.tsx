@@ -1,25 +1,21 @@
-import prisma from "@/prisma/client"
+import AdminList from "@/components/admin-list"
+import AdminPage from "@/components/admin-page"
+import Button from "@/components/button"
 import Link from "next/link"
-import React from "react"
+import { getNews } from "@/lib/data"
 
 const Novosti = async () => {
-  const novosti = await prisma.novost.findMany({
-    orderBy: { createdAt: "desc" },
-  })
+  const news = await getNews()
+
   return (
-    <div className="admin-page">
-      <Link href={`/admin/novosti/nova`} className="btn">
-        Dodaj novost
-      </Link>
-      <ul className="spisak">
-        <li>Novosti:</li>
-        {novosti.map((novost) => (
-          <li key={novost.id}>
-            <Link href={`/admin/novosti/${novost.id}`}>{novost.naslov}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <AdminPage>
+      <Button
+        href={`/admin/novosti/nova`}
+        title="Dodaj novost"
+        type="regular"
+      />
+      <AdminList list={news} href="novosti" title="Novosti" />
+    </AdminPage>
   )
 }
 

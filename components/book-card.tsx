@@ -2,7 +2,7 @@ import BookInfoItem from "./book-info-item"
 import Image from "next/image"
 import { Knjiga } from "@prisma/client"
 import Link from "next/link"
-import LinkBtn from "./link-btn"
+import LinkBtn from "./button"
 import ReactMarkdown from "react-markdown"
 
 const BookCard = ({ book }: { book: Knjiga }) => {

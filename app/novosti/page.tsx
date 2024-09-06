@@ -1,6 +1,6 @@
 import H1 from "@/components/h1"
 import H2 from "@/components/h2"
-import LinkBtn from "@/components/link-btn"
+import LinkBtn from "@/components/button"
 import NewsArticle from "@/components/article-news"
 import ReactMarkdown from "react-markdown"
 import { getNews } from "@/lib/data"
