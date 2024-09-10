@@ -1,30 +1,15 @@
-import prisma from "@/prisma/client"
-import Link from "next/link"
-import React from "react"
+import { getBooks, getNews } from "@/lib/data"
+
+import AdminList from "@/components/admin-list"
+import Button from "@/components/button"
 
 const Knjige = async () => {
-  const knjige = await prisma.knjiga.findMany({
-    orderBy: {
-      godina: "desc",
-    },
-  })
+  const books = await getBooks()
   return (
-    <div className="admin-page">
-      <Link href={`/admin/knjige/nova`} className="btn">
-        Dodaj novu knjigu
-      </Link>
-      <ul className="spisak">
-        <li>Knjige:</li>
-        {knjige.map((knjiga) => (
-          <li key={knjiga.id}>
-            <Link href={`/admin/knjige/${knjiga.id}`}>
-              {knjiga.naziv}
-              <span>{knjiga.slug}</span>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <Button href={`/admin/knjige/nova`} title="Dodaj knjigu" type="regular" />
+      <AdminList list={books} href="knjige" />
+    </>
   )
 }
 

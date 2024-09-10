@@ -1,10 +1,8 @@
 import AdminList from "@/components/admin-list"
-import AdminPage from "@/components/admin-page"
 import Button from "@/components/button"
-import H2 from "@/components/h2"
 import { getNews } from "@/lib/data"
 
-const Admin = async () => {
+const Novosti = async () => {
   const news = await getNews()
   return (
     <>
@@ -13,9 +11,9 @@ const Admin = async () => {
         title="Dodaj novost"
         type="regular"
       />
-      <AdminList list={news} href="novosti" title="Novosti" />
+      <AdminList list={news} href="novosti" />
     </>
   )
 }
 
-export default Admin
+export default Novosti
