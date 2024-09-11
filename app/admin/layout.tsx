@@ -14,7 +14,7 @@ export default async function DashboardLayout({
   if (!user) redirect("/api/auth/signin?callbackUrl=/admin")
 
   return (
-    <div className="max-w-3xl mx-auto my-16 min-h-full">
+    <div className="max-w-4xl mx-auto my-16 min-h-full">
       <AdminNavBar />
       <AdminPage>{children}</AdminPage>
     </div>

@@ -2,13 +2,16 @@ import AdminNavBarItem from "./admin-navbar-item"
 import H1 from "./h1"
 import SignOutButton from "@/components/sign-out-button"
 import { auth } from "@/auth"
+import { redirect } from "next/navigation"
 
 const AdminNavBar = async () => {
   const session = await auth()
 
+  if (!session) redirect("/api/auth/signin?callbackUrl=/admin")
+
   return (
     <>
-      <H1 title="Admin Panel" />
+      <H1 title="Admin Dashboard" />
       <nav className="bg-zinc-200 px-4">
         <ul className="flex justify-around">
           {session?.user?.role === "admin" && (

@@ -15,7 +15,7 @@ const AdminList = ({
         <li key={item.id}>
           <Button
             href={`/admin/${href}/${item.id}`}
-            title={item.naslov || item.naziv}
+            title={item.naslov}
             type="list"
           />
         </li>

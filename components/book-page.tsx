@@ -1,9 +1,9 @@
 import { Knjiga as Book } from "@prisma/client"
 import BookDetailsItem from "./book-details-item"
 import BookInfoItem from "./book-info-item"
+import Button from "./button"
 import Image from "next/image"
 import Link from "next/link"
-import LinkExternalBtn from "./link-external-btn"
 import ReactMarkdown from "react-markdown"
 
 const BookPage = ({ book }: { book: Book }) => {
@@ -16,11 +16,11 @@ const BookPage = ({ book }: { book: Book }) => {
             src={`/slike/knjige/${book.slug}.jpg`}
             width={400}
             height={500}
-            alt={book.naziv}
+            alt={book.naslov}
           />
         </div>
         <div className="lg:px-6 py-4 lg:py-10 items-center text-xl leading-8 lg:w-1/2">
-          <h2 className="uppercase">{book.naziv}</h2>
+          <h2 className="uppercase">{book.naslov}</h2>
 
           {book.izdavac && <BookInfoItem title="Izdavač" info={book.izdavac} />}
           {book.zanr && <BookInfoItem title="Žanr" info={book.zanr} />}
@@ -29,7 +29,12 @@ const BookPage = ({ book }: { book: Book }) => {
           )}
           {book.kupovina && (
             <BookInfoItem>
-              <LinkExternalBtn href={book.kupovina} title="naruči knjigu" />
+              <Button
+                href={book.kupovina}
+                title="Naruči knjigu"
+                external
+                type="regular"
+              />
             </BookInfoItem>
           )}
         </div>

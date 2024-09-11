@@ -27,3 +27,7 @@ export type State = {
 export const creteBook = async (prevState: State, formData: FormData) => {
   const validatedFields = knjigeSchema.safeParse(formData)
 }
+
+export const createNews = async (prevState: State, formData: FormData) => {
+  const validatedFields = knjigeSchema.safeParse(formData)
+}

@@ -9,7 +9,7 @@ const SignInButton = () => {
         await signIn()
       }}
     >
-      <Button text="Prijavi se" />
+      <Button title="Prijavi se" type="small" submit />
     </form>
   )
 }

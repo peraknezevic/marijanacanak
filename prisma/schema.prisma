@@ -43,7 +43,7 @@ model User {
   email         String?   @unique
   emailVerified DateTime? @map("email_verified")
   image         String?
-  role          String
+  role          String    @default("Member")
   accounts      Account[]
   sessions      Session[]
 
@@ -62,9 +62,8 @@ model VerificationToken {
 
 model Knjiga {
   id               String  @id @default(auto()) @map("_id") @db.ObjectId
-  naziv            String
+  naslov           String  @map("naziv")
   slug             String  @unique
-  koriceUrl        String?
   sazetak          String?
   zanr             String?
   zaIzdavaca       String?

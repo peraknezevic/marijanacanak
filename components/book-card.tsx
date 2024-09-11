@@ -1,7 +1,6 @@
 "use client"
 
 import BookInfoItem from "./book-info-item"
-import { IKImage } from "imagekitio-next"
 import Image from "next/image"
 import { Knjiga } from "@prisma/client"
 import Link from "next/link"
@@ -21,12 +20,12 @@ const BookCard = ({ book }: { book: Knjiga }) => {
             quality={80}
             width={400}
             height={500}
-            alt={book.naziv}
+            alt={book.naslov}
           />
         </div>
         <div className="lg:px-6 py-4 lg:py-10 items-center text-xl leading-8">
           <h2 className="uppercase">
-            <Link href={`knjige/${book.slug}`}>{book.naziv}</Link>
+            <Link href={`knjige/${book.slug}`}>{book.naslov}</Link>
           </h2>
 
           {book.izdavac && <BookInfoItem title="Izdavač" info={book.izdavac} />}
