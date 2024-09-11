@@ -1,6 +1,6 @@
 "use server"
 
-import { knjigeSchema } from "@/utils/validationSchemas"
+import { knjigeSchema } from "@/lib/validationSchemas"
 import prisma from "@/prisma/client"
 import { revalidatePath } from "next/cache"
 

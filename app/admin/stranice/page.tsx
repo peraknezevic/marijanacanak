@@ -1,29 +1,23 @@
-import prisma from "@/prisma/client"
-import Link from "next/link"
-import React from "react"
+import AdminList from "@/components/admin-list"
+import AdminPage from "@/components/admin-page"
+import Button from "@/components/button"
+import { getPages } from "@/lib/data"
 
-const Stranice = async () => {
-  const stranice = await prisma.stranica.findMany()
+const Page = async () => {
+  const pages = await getPages()
 
   return (
-    <div className="admin-page">
-      <Link href={`/admin/stranice/nova`} className="btn">
-        Dodaj novu stranicu
-      </Link>
-      <ul className="spisak">
-        <li>Stranice:</li>
-        {stranice.map((stranica) => (
-          <li key={stranica.id}>
-            <Link href={`/admin/stranice/${stranica.id}`}>
-              {stranica.naslov}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <AdminPage>
+      <Button
+        href="/admin/stranice/nova"
+        title="Dodaj novu stranicu"
+        type="regular"
+      />
+      <AdminList list={pages} href="stranice" />
+    </AdminPage>
   )
 }
 
 export const dynamic = "force-dynamic"
 
-export default Stranice
+export default Page

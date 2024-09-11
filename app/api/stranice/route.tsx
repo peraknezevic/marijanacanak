@@ -1,7 +1,7 @@
 "use server"
 
 import prisma from "@/prisma/client"
-import { stranicaSchema } from "@/utils/validationSchemas"
+import { stranicaSchema } from "@/lib/validationSchemas"
 
 export async function GET(request: Request) {
   const stranica = await prisma.stranica.findMany()

@@ -8,7 +8,9 @@ type Button = {
   external?: boolean
   submit?: boolean
   active?: boolean
-  props?: any
+  button?: boolean
+  rest?: any
+  onClick?: () => void
 }
 
 const Button = ({
@@ -18,7 +20,9 @@ const Button = ({
   external = false,
   submit = false,
   active = false,
-  props,
+  button = false,
+  onClick,
+  rest,
 }: Button) => {
   let classList
   const baseClasses =
@@ -50,15 +54,23 @@ const Button = ({
 
   if (external) {
     return (
-      <a href={href} className={classList}>
+      <a href={href} className={classList} {...rest}>
         {title}
       </a>
     )
   }
 
+  if (button) {
+    return (
+      <button type="button" className={classList} onClick={onClick} {...rest}>
+        {title}
+      </button>
+    )
+  }
+
   if (submit) {
     return (
-      <button type="submit" className={classList} {...props}>
+      <button type="submit" className={classList} onClick={onClick} {...rest}>
         {title}
       </button>
     )
@@ -66,7 +78,11 @@ const Button = ({
 
   if (href && external === false)
     return (
-      <Link href={href} className={twMerge(classList, active && "opacity-50")}>
+      <Link
+        href={href}
+        className={twMerge(classList, active && "opacity-50")}
+        {...rest}
+      >
         {title}
       </Link>
     )

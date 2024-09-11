@@ -19,16 +19,16 @@ export const getLatestBooks = async (num: number) => {
   })
 }
 
-export const getBio = async () =>
-  await prisma.stranica.findUnique({ where: { slug: "biografija" } })
+export const getPages = async () =>
+  await prisma.stranica.findMany({ orderBy: { createdAt: "desc" } })
 
-export const getLatestStories = async (num: number) =>
-  await prisma.tekst.findMany({
-    take: num,
-    orderBy: { createdAt: "desc" },
-  })
+export const getPageBySlug = async (slug: string) =>
+  await prisma.stranica.findUnique({ where: { slug } })
 
 export const getStories = async () =>
+  await prisma.tekst.findMany({ orderBy: { createdAt: "desc" } })
+
+export const getPublishedStories = async () =>
   await prisma.tekst.findMany({
     where: {
       status: "Objavljeno",
@@ -36,6 +36,15 @@ export const getStories = async () =>
     orderBy: {
       createdAt: "desc",
     },
+  })
+
+export const getLatestPublishedStories = async (num: number) =>
+  await prisma.tekst.findMany({
+    where: {
+      status: "Objavljeno",
+    },
+    take: num,
+    orderBy: { createdAt: "desc" },
   })
 
 export const getStoryBySlug = async (slug: string) =>

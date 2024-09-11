@@ -1,18 +1,23 @@
-import { getBooks, getNews } from "@/lib/data"
-
 import AdminList from "@/components/admin-list"
+import AdminPage from "@/components/admin-page"
 import Button from "@/components/button"
+import { getBooks } from "@/lib/data"
 
-const Knjige = async () => {
+const Page = async () => {
   const books = await getBooks()
+
   return (
-    <>
-      <Button href={`/admin/knjige/nova`} title="Dodaj knjigu" type="regular" />
+    <AdminPage>
+      <Button
+        href="admin/knjige/nova"
+        title="Dodaj novu knjigu"
+        type="regular"
+      />
       <AdminList list={books} href="knjige" />
-    </>
+    </AdminPage>
   )
 }
 
 export const dynamic = "force-dynamic"
 
-export default Knjige
+export default Page

@@ -4,11 +4,11 @@ import Image from "next/image"
 import { Metadata } from "next"
 import React from "react"
 import ReactMarkdown from "react-markdown"
-import { getBio } from "@/lib/data"
+import { getPageBySlug } from "@/lib/data"
 import { notFound } from "next/navigation"
 
 const Biografija = async () => {
-  const bio = await getBio()
+  const bio = await getPageBySlug("biografija")
 
   if (!bio) return notFound()
 

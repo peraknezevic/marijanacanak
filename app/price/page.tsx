@@ -1,10 +1,10 @@
 import H1 from "@/components/h1"
 import { Metadata } from "next"
 import StoryCard from "@/components/story-card"
-import { getStories } from "@/lib/data"
+import { getPublishedStories } from "@/lib/data"
 
 const Tekstovi = async () => {
-  const stories = await getStories()
+  const stories = await getPublishedStories()
 
   return (
     <div>

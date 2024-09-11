@@ -1,8 +1,8 @@
 import {
-  getBio,
   getLatestBooks,
   getLatestNews,
-  getLatestStories,
+  getLatestPublishedStories,
+  getPageBySlug,
 } from "@/lib/data"
 
 import Button from "@/components/button"
@@ -10,8 +10,8 @@ import Image from "@/components/image"
 import Link from "next/link"
 
 const Home = async () => {
-  const bio = await getBio()
-  const stories = await getLatestStories(5)
+  const bio = await getPageBySlug("biografija")
+  const stories = await getLatestPublishedStories(5)
   const books = await getLatestBooks(6)
   const news = await getLatestNews(5)
 

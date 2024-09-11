@@ -1,18 +1,24 @@
+"use client"
+
 import BookInfoItem from "./book-info-item"
+import { IKImage } from "imagekitio-next"
 import Image from "next/image"
 import { Knjiga } from "@prisma/client"
 import Link from "next/link"
 import LinkBtn from "./button"
 import ReactMarkdown from "react-markdown"
+import { imageKitLoader } from "@/lib/utils"
 
 const BookCard = ({ book }: { book: Knjiga }) => {
   return (
-    <li className="flex flex-col mt-4 xl:mt-8 mb-16 lg:mb-32 gap-2 lg:gap-16 max-w-3xl mx-auto">
-      <div className="flex flex-col md:flex-row gap-8 xl:gap-16">
-        <div className="flex flex-col gap-4 lg:gap-8">
+    <li className="flex flex-col mt-4 xl:mt-8 mb-16 lg:mb-32 gap-16 max-w-3xl mx-auto">
+      <div className="flex flex-col md:flex-row gap-16">
+        <div className="flex flex-col gap-4 lg:gap-8 md:w-[50%]">
           <Image
-            className="shadow-2xl border-2 border-zinc-400 mx-auto"
-            src={`/slike/knjige/${book.slug}.jpg`}
+            className="shadow-2xl border-2 border-zinc-400 mx-auto md:mx-0"
+            src={`/marijanacanak/slike/knjige/${book.slug}.jpg`}
+            loader={imageKitLoader}
+            quality={80}
             width={400}
             height={500}
             alt={book.naziv}

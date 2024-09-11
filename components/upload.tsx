@@ -2,6 +2,8 @@
 
 import { IKUpload, ImageKitProvider } from "imagekitio-next"
 
+import Button from "./button"
+import { useCopyToClipboard } from "usehooks-ts"
 import { useState } from "react"
 
 const urlEndpoint = process.env.NEXT_PUBLIC_URL_ENDPOINT
@@ -34,10 +36,23 @@ const onProgress = (progress: any) => {
 
 const Upload = () => {
   const [imageUrl, setImageUrl] = useState("")
+  const [copiedText, copy] = useCopyToClipboard()
+  const handleCopy = (text: string) => () => {
+    copy(text)
+      .then(() => {
+        console.log("Copied!", { text })
+      })
+      .catch((error) => {
+        console.error("Failed to copy!", error)
+      })
+      .finally(() => {
+        setImageUrl("")
+      })
+  }
   const onSuccess = (res: any) => {
     console.log("Success", res)
 
-    setImageUrl(res.url)
+    setImageUrl(res.name)
   }
   return (
     <>
@@ -51,10 +66,17 @@ const Upload = () => {
           onError={onError}
           onSuccess={onSuccess}
           onProgress={onProgress}
-          folder={"/marijanacanak/slike/novosti"}
+          folder={"/marijanacanak/slike/vesti"}
         />
+        {imageUrl && (
+          <Button
+            onClick={handleCopy(imageUrl)}
+            type="small"
+            title="kopiraj sliku"
+            button
+          />
+        )}
       </ImageKitProvider>
-      {imageUrl && <p>{imageUrl}</p>}
     </>
   )
 }

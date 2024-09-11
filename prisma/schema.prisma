@@ -64,6 +64,7 @@ model Knjiga {
   id               String  @id @default(auto()) @map("_id") @db.ObjectId
   naziv            String
   slug             String  @unique
+  koriceUrl        String?
   sazetak          String?
   zanr             String?
   zaIzdavaca       String?
