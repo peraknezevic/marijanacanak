@@ -9,7 +9,8 @@ const Footer = () => {
         <p>
           &copy; 2023 Marijana Čanak |{" "}
           <Link href="/politika-privatnosti">Politika privatnosti</Link> |
-          Dizajn sajta: <a href="https://peraknezevic.com">Pera Knežević</a>
+          Dizajn sajta: <a href="https://peraknezevic.com">Pera Knežević</a> |
+          v2.0
         </p>
       </div>
     </footer>
