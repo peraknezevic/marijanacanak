@@ -17,7 +17,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 
 type KnjigaPodaci = z.infer<typeof knjigeSchema>
 
-const KnjigaForma = ({ knjiga }: { knjiga?: Knjiga }) => {
+const FormBook = ({ book }: { book?: Knjiga }) => {
   const router = useRouter()
 
   const {
@@ -33,7 +33,7 @@ const KnjigaForma = ({ knjiga }: { knjiga?: Knjiga }) => {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      if (knjiga) await axios.patch("/api/knjige/" + knjiga.id, data)
+      if (book) await axios.patch("/api/knjige/" + book.id, data)
       else await axios.post("/api/knjige/", data)
       router.push("/admin/knjige")
       router.refresh()
@@ -55,7 +55,7 @@ const KnjigaForma = ({ knjiga }: { knjiga?: Knjiga }) => {
           <input
             type="text"
             id="naziv"
-            defaultValue={knjiga?.naziv}
+            defaultValue={book?.naslov}
             placeholder="Naslov knjige"
             {...register("naziv")}
           />
@@ -69,7 +69,7 @@ const KnjigaForma = ({ knjiga }: { knjiga?: Knjiga }) => {
           <input
             type="text"
             id="slug"
-            defaultValue={knjiga?.slug || ""}
+            defaultValue={book?.slug || ""}
             placeholder="URL Slug"
             {...register("slug")}
           />
@@ -80,7 +80,7 @@ const KnjigaForma = ({ knjiga }: { knjiga?: Knjiga }) => {
           <label htmlFor="sazetak">Sažetak</label>
           <Controller
             name="sazetak"
-            defaultValue={knjiga?.sazetak || ""}
+            defaultValue={book?.sazetak || ""}
             control={control}
             render={({ field }) => (
               <SimpleMDE placeholder="Sazetak" id="sazetak" {...field} />
@@ -94,7 +94,7 @@ const KnjigaForma = ({ knjiga }: { knjiga?: Knjiga }) => {
           <input
             type="text"
             id="zanr"
-            defaultValue={knjiga?.zanr || ""}
+            defaultValue={book?.zanr || ""}
             placeholder="Žanr"
             {...register("zanr")}
           />
@@ -106,7 +106,7 @@ const KnjigaForma = ({ knjiga }: { knjiga?: Knjiga }) => {
           <input
             type="text"
             id="zaIzdavaca"
-            defaultValue={knjiga?.zaIzdavaca || ""}
+            defaultValue={book?.zaIzdavaca || ""}
             placeholder="Za izdavača"
             {...register("zaIzdavaca")}
           />
@@ -118,7 +118,7 @@ const KnjigaForma = ({ knjiga }: { knjiga?: Knjiga }) => {
           <input
             type="text"
             id="izdavac"
-            defaultValue={knjiga?.izdavac || ""}
+            defaultValue={book?.izdavac || ""}
             placeholder="Izdavač"
             {...register("izdavac")}
           />
@@ -130,7 +130,7 @@ const KnjigaForma = ({ knjiga }: { knjiga?: Knjiga }) => {
           <input
             type="number"
             id="godina"
-            defaultValue={knjiga?.godina || ""}
+            defaultValue={book?.godina || ""}
             placeholder="Godina izdanja"
             {...register("godina", {
               valueAsNumber: true,
@@ -144,7 +144,7 @@ const KnjigaForma = ({ knjiga }: { knjiga?: Knjiga }) => {
           <input
             type="text"
             id="urednik"
-            defaultValue={knjiga?.urednik || ""}
+            defaultValue={book?.urednik || ""}
             placeholder="Urednik"
             {...register("urednik")}
           />
@@ -156,7 +156,7 @@ const KnjigaForma = ({ knjiga }: { knjiga?: Knjiga }) => {
           <input
             type="text"
             id="prevod"
-            defaultValue={knjiga?.prevod || ""}
+            defaultValue={book?.prevod || ""}
             placeholder="Prevod"
             {...register("prevod")}
           />
@@ -168,7 +168,7 @@ const KnjigaForma = ({ knjiga }: { knjiga?: Knjiga }) => {
           <input
             type="text"
             id="lektura"
-            defaultValue={knjiga?.lektura || ""}
+            defaultValue={book?.lektura || ""}
             placeholder="Lektura i korektura"
             {...register("lektura")}
           />
@@ -180,7 +180,7 @@ const KnjigaForma = ({ knjiga }: { knjiga?: Knjiga }) => {
           <input
             type="text"
             id="prelom"
-            defaultValue={knjiga?.prelom || ""}
+            defaultValue={book?.prelom || ""}
             placeholder="Prelom"
             {...register("prelom")}
           />
@@ -192,7 +192,7 @@ const KnjigaForma = ({ knjiga }: { knjiga?: Knjiga }) => {
           <input
             type="text"
             id="dizajnNaslovnice"
-            defaultValue={knjiga?.dizajnNaslovnice || ""}
+            defaultValue={book?.dizajnNaslovnice || ""}
             placeholder="Ilustracija"
             {...register("dizajnNaslovnice")}
           />
@@ -204,7 +204,7 @@ const KnjigaForma = ({ knjiga }: { knjiga?: Knjiga }) => {
           <input
             type="text"
             id="stampa"
-            defaultValue={knjiga?.stampa || ""}
+            defaultValue={book?.stampa || ""}
             placeholder="Štampa"
             {...register("stampa")}
           />
@@ -216,7 +216,7 @@ const KnjigaForma = ({ knjiga }: { knjiga?: Knjiga }) => {
           <input
             type="text"
             id="obim"
-            defaultValue={knjiga?.obim || ""}
+            defaultValue={book?.obim || ""}
             placeholder="Obim"
             {...register("obim")}
           />
@@ -228,7 +228,7 @@ const KnjigaForma = ({ knjiga }: { knjiga?: Knjiga }) => {
           <input
             type="text"
             id="isbn"
-            defaultValue={knjiga?.isbn || ""}
+            defaultValue={book?.isbn || ""}
             placeholder="ISBN"
             {...register("isbn")}
           />
@@ -240,7 +240,7 @@ const KnjigaForma = ({ knjiga }: { knjiga?: Knjiga }) => {
           <input
             type="text"
             id="kupovina"
-            defaultValue={knjiga?.kupovina || ""}
+            defaultValue={book?.kupovina || ""}
             placeholder="Link na kupovinu"
             {...register("kupovina")}
           />
@@ -248,12 +248,12 @@ const KnjigaForma = ({ knjiga }: { knjiga?: Knjiga }) => {
         </div>
 
         <div className="form-actions">
-          <button className="btn">{knjiga ? "Izmeni" : "Dodaj"}</button>
-          {knjiga && <DeleteButton id={knjiga.id} cat="knjige" />}
+          <button className="btn">{book ? "Izmeni" : "Dodaj"}</button>
+          {knjiga && <DeleteButton id={book.id} cat="knjige" />}
         </div>
       </form>
     </div>
   )
 }
 
-export default KnjigaForma
+export default FormBook

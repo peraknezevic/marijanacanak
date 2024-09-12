@@ -1,6 +1,6 @@
 import {
   getLatestBooks,
-  getLatestNews,
+  getLatestPublishedNews,
   getLatestPublishedStories,
   getPageBySlug,
 } from "@/lib/data"
@@ -13,7 +13,7 @@ const Home = async () => {
   const bio = await getPageBySlug("biografija")
   const stories = await getLatestPublishedStories(5)
   const books = await getLatestBooks(6)
-  const news = await getLatestNews(5)
+  const news = await getLatestPublishedNews(5)
 
   return (
     <div className="grid lg:grid-cols-2 lg:grid-rows-2 max-w-5xl mx-auto my-8 xl:my-16 gap-8 xl:gap-16 text-lg">
@@ -64,7 +64,7 @@ const Home = async () => {
         {books.map((book) => (
           <p key={book.id} className="mb-1">
             <Link href={`/knjige/${book.slug}`} className="underline">
-              {book.naziv}
+              {book.naslov}
             </Link>{" "}
             ({book.izdavac})
           </p>

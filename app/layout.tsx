@@ -1,14 +1,13 @@
 import "./globals.css"
 
-import { Analytics } from "@vercel/analytics/react"
 import Footer from "@/components/footer"
 import Header from "@/components/header"
 import type { Metadata } from "next"
 import { Source_Sans_3 } from "next/font/google"
 
 const source = Source_Sans_3({
-  subsets: ["latin"],
-  variable: "--custom-font-source",
+  variable: "--font-source",
+  subsets: ["latin", "latin-ext", "cyrillic"],
   display: "swap",
   adjustFontFallback: false,
 })
@@ -36,14 +35,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="sr">
       <body
         className={`${source.className} max-w-7xl px-6 xl:mx-auto text-slate-900`}
       >
         <Header />
         <main className="h-full min-h-screen">{children}</main>
         <Footer />
-        <Analytics />
       </body>
     </html>
   )

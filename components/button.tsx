@@ -4,9 +4,10 @@ import { twMerge } from "tailwind-merge"
 type Button = {
   href?: string
   title: string
-  type: "regular" | "small" | "patreon" | "patreon-small" | "list"
+  type: "regular" | "delete" | "small" | "patreon" | "patreon-small" | "list"
   external?: boolean
   submit?: boolean
+  disabled?: boolean
   active?: boolean
   button?: boolean
   rest?: any
@@ -19,18 +20,22 @@ const Button = ({
   type,
   external = false,
   submit = false,
-  active = false,
+  disabled = false,
   button = false,
+  active = false,
   onClick,
   rest,
 }: Button) => {
   let classList
   const baseClasses =
-    "inline-block my-4 py-1 px-4 text-slate-100 tracking-wide no-underline cursor-pointer hover:opacity-75 hover:text-slate-100"
+    "font-sans inline-block my-4 py-1 px-4 text-slate-100 tracking-wide no-underline cursor-pointer hover:opacity-75 hover:text-slate-100"
 
   switch (type) {
     case "regular":
       classList = twMerge(baseClasses, "bg-slate-800 font-medium uppercase")
+      break
+    case "delete":
+      classList = twMerge(baseClasses, "bg-red-600 font-medium uppercase")
       break
     case "small":
       classList = twMerge(
@@ -70,7 +75,12 @@ const Button = ({
 
   if (submit) {
     return (
-      <button type="submit" className={classList} onClick={onClick} {...rest}>
+      <button
+        type="submit"
+        className={twMerge(classList, disabled && "opacity-50")}
+        disabled={disabled}
+        onClick={onClick}
+      >
         {title}
       </button>
     )

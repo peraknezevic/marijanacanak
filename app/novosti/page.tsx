@@ -3,10 +3,10 @@ import H2 from "@/components/h2"
 import LinkBtn from "@/components/button"
 import NewsArticle from "@/components/article-news"
 import ReactMarkdown from "react-markdown"
-import { getNews } from "@/lib/data"
+import { getPublishedNews } from "@/lib/data"
 
 const Novosti = async () => {
-  const news = await getNews()
+  const news = await getPublishedNews()
 
   return (
     <div>

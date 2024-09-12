@@ -1,14 +1,11 @@
 import dynamic from "next/dynamic"
 
-const PressForma = dynamic(
-  () => import("@/app/admin/press/components/PressForma"),
-  {
-    ssr: false,
-  }
-)
+const FormPress = dynamic(() => import("@/components/forms/form-press"), {
+  ssr: false,
+})
 
-const NoviPress = () => {
-  return <PressForma />
+const CreatePressPage = () => {
+  return <FormPress />
 }
 
-export default NoviPress
+export default CreatePressPage

@@ -17,7 +17,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 
 type TekstPodaci = z.infer<typeof tekstSchema>
 
-const TekstForma = ({ tekst }: { tekst?: Tekst }) => {
+const FormStory = ({ tekst }: { tekst?: Tekst }) => {
   const [error, setError] = useState("")
   const router = useRouter()
 
@@ -168,4 +168,4 @@ const TekstForma = ({ tekst }: { tekst?: Tekst }) => {
   )
 }
 
-export default TekstForma
+export default FormStory

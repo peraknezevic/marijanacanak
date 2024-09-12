@@ -1,28 +1,17 @@
-import prisma from "@/prisma/client"
 import dynamic from "next/dynamic"
+import { getNewsById } from "@/lib/data"
 import { notFound } from "next/navigation"
 
-interface Props {
-  params: { id: string }
+const FormNews = dynamic(() => import("@/components/forms/form-news"), {
+  ssr: false,
+})
+
+const EditNewsPage = async ({ params }: { params: { id: string } }) => {
+  const newsItem = await getNewsById(params.id)
+
+  if (!newsItem) notFound()
+
+  return <FormNews newsItem={newsItem} />
 }
 
-const NovostForma = dynamic(
-  () => import("@/app/admin/novosti/components/NovostForma"),
-  {
-    ssr: false,
-  }
-)
-
-const UrediNovost = async ({ params }: Props) => {
-  const novost = await prisma.novost.findUnique({
-    where: {
-      id: params.id,
-    },
-  })
-
-  if (!novost) notFound()
-
-  return <NovostForma novost={novost} />
-}
-
-export default UrediNovost
+export default EditNewsPage

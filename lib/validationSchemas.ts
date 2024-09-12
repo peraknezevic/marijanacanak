@@ -41,7 +41,7 @@ export const stranicaSchema = z.object({
 export const pressSchema = z.object({
   naslov: z.string().min(3).max(150),
   opis: z.string().min(3).max(1500),
-  link: z.string().min(3).max(150).optional().or(z.literal("")),
+  link: z.string().min(3).max(150),
   status: z.enum(["Objavljeno", "Nacrt"]),
 })
 
@@ -49,7 +49,7 @@ export const novostSchema = z.object({
   naslov: z.string().min(3).max(150),
   slug: z.string().min(3).max(150),
   uvod: z.string().min(3).max(2000).optional().or(z.literal("")),
-  tekst: z.string().min(50).optional().or(z.literal("")),
+  tekst: z.string().min(5).optional().or(z.literal("")),
   link: z.string().min(10).max(150).optional().or(z.literal("")),
-  status: z.enum(["Objavljeno", "Nacrt"]),
+  status: z.enum(["Objavljeno", "Nacrt"]).default("Objavljeno"),
 })

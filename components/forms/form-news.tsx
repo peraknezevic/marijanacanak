@@ -3,66 +3,64 @@
 import "easymde/dist/easymde.min.css"
 
 import { Controller, useForm } from "react-hook-form"
+import { createNews, deleteNews, updateNews } from "@/lib/actions"
 
-import DeleteButton from "../../components/DeleteButton"
-import ErrorMessage from "../../components/ErrorMessage"
+import Button from "@/components/button"
 import FormBlock from "@/components/form-block"
 import FormButtons from "@/components/form-buttons"
+import FormError from "@/components/form-error"
 import FormWrapper from "@/components/form-wrapper"
 import { Novost } from "@prisma/client"
 import SimpleMDE from "react-simplemde-editor"
 import Upload from "@/components/upload"
-import axios from "axios"
 import { novostSchema } from "@/lib/validationSchemas"
-import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 
-type NovostPodaci = z.infer<typeof novostSchema>
+type News = z.infer<typeof novostSchema>
 
-const TekstForma = ({ novost }: { novost?: Novost }) => {
+const FormNews = ({ newsItem }: { newsItem?: Novost }) => {
   const [error, setError] = useState("")
-  const router = useRouter()
 
   const {
     register,
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<NovostPodaci>({
+  } = useForm<News>({
     resolver: zodResolver(novostSchema),
   })
 
-  const onSubmit = handleSubmit(async (data) => {
+  const onSubmit = handleSubmit(async (news) => {
     try {
-      if (novost) await axios.patch("/api/novosti/" + novost.id, data)
-      else await axios.post("/api/novosti/", data)
-      router.push("/admin/novosti")
-      router.refresh()
+      if (newsItem) await updateNews(newsItem.id, news)
+      else await createNews(news)
     } catch (error) {
-      setError("Unexpected error accured")
+      if (error instanceof z.ZodError) {
+        setError("Validation failed")
+        console.log(error.issues)
+      }
+      if (error instanceof Error) {
+        setError(error.message)
+      }
     }
   })
 
   return (
-    <div>
-      {error && (
-        <div className="alert alert-error">
-          <span>{error}</span>
-        </div>
-      )}
+    <>
+      {error && <FormError>{error}</FormError>}
       <FormWrapper onSubmit={onSubmit}>
         <FormBlock>
           <label htmlFor="naslov">Naslov novosti</label>
           <input
             type="text"
             id="naslov"
-            defaultValue={novost?.naslov}
-            placeholder="Naslov priče"
+            defaultValue={newsItem?.naslov}
+            placeholder="Naslov novosti"
             {...register("naslov")}
           />
-          <ErrorMessage>{errors.naslov?.message}</ErrorMessage>
+          <FormError>{errors.naslov?.message}</FormError>
         </FormBlock>
 
         <FormBlock>
@@ -72,37 +70,37 @@ const TekstForma = ({ novost }: { novost?: Novost }) => {
           <input
             type="text"
             id="slug"
-            defaultValue={novost?.slug}
+            defaultValue={newsItem?.slug}
             placeholder="URL slug"
             {...register("slug")}
           />
-          <ErrorMessage>{errors.slug?.message}</ErrorMessage>
+          <FormError>{errors.slug?.message}</FormError>
         </FormBlock>
 
         <FormBlock>
           <label htmlFor="uvod">Uvod novosti</label>
           <Controller
             name="uvod"
-            defaultValue={novost?.uvod || ""}
+            defaultValue={newsItem?.uvod || ""}
             control={control}
             render={({ field }) => (
               <SimpleMDE placeholder="Uvod novosti" id="uvod" {...field} />
             )}
           />
-          <ErrorMessage>{errors.uvod?.message}</ErrorMessage>
+          <FormError>{errors.uvod?.message}</FormError>
         </FormBlock>
 
         <FormBlock>
           <label htmlFor="tekst">Tekst novosti</label>
           <Controller
             name="tekst"
-            defaultValue={novost?.tekst || ""}
+            defaultValue={newsItem?.tekst || ""}
             control={control}
             render={({ field }) => (
               <SimpleMDE placeholder="Tekst" id="tekst" {...field} />
             )}
           />
-          <ErrorMessage>{errors.tekst?.message}</ErrorMessage>
+          <FormError>{errors.tekst?.message}</FormError>
         </FormBlock>
 
         <Upload />
@@ -111,11 +109,11 @@ const TekstForma = ({ novost }: { novost?: Novost }) => {
           <label htmlFor="link">Spoljašnji Link</label>
           <input
             type="text"
-            defaultValue={novost?.link || ""}
+            defaultValue={newsItem?.link || ""}
             placeholder="Link"
             {...register("link")}
           />
-          <ErrorMessage>{errors.link?.message}</ErrorMessage>
+          <FormError>{errors.link?.message}</FormError>
         </FormBlock>
 
         <FormBlock>
@@ -124,15 +122,24 @@ const TekstForma = ({ novost }: { novost?: Novost }) => {
             <option value="Objavljeno">Objavljena</option>
             <option value="Nacrt">Nacrt</option>
           </select>
-          <ErrorMessage>{errors.status?.message}</ErrorMessage>
+          <FormError>{errors.status?.message}</FormError>
         </FormBlock>
         <FormButtons>
-          <button className="btn">{novost ? "Izmeni" : "Dodaj"}</button>
-          {novost && <DeleteButton id={novost.id} cat="novosti" />}
+          <Button type="regular" title={newsItem ? "Izmeni" : "Dodaj"} submit />
+          {newsItem && (
+            <Button
+              type="delete"
+              title="Izbriši"
+              onClick={async () => {
+                await deleteNews(newsItem.id)
+              }}
+              button
+            />
+          )}
         </FormButtons>
       </FormWrapper>
-    </div>
+    </>
   )
 }
 
-export default TekstForma
+export default FormNews

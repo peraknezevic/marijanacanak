@@ -1,11 +1,11 @@
 import H1 from "@/components/h1"
 import NewsArticle from "@/components/article-news"
 import ReactMarkdown from "react-markdown"
-import { getNewsItem } from "@/lib/data"
+import { getNewsBySlug } from "@/lib/data"
 import { notFound } from "next/navigation"
 
 const Novost = async ({ params }: { params: { slug: string } }) => {
-  const newsItem = await getNewsItem(params.slug)
+  const newsItem = await getNewsBySlug(params.slug)
 
   if (!newsItem) notFound()
 

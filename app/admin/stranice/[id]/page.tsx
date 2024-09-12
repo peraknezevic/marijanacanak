@@ -1,28 +1,17 @@
-import prisma from "@/prisma/client"
 import dynamic from "next/dynamic"
+import { getPageById } from "@/lib/data"
 import { notFound } from "next/navigation"
 
-interface Props {
-  params: { id: string }
+const FormPage = dynamic(() => import("@/components/forms/form-page"), {
+  ssr: false,
+})
+
+const EditPage = async ({ params }: { params: { id: string } }) => {
+  const page = getPageById(params.id)
+
+  if (!page) notFound()
+
+  return <FormPage page={page} />
 }
 
-const StranicaForma = dynamic(
-  () => import("@/app/admin/stranice/components/StranicaForma"),
-  {
-    ssr: false,
-  }
-)
-
-const UrediTekst = async ({ params }: Props) => {
-  const stranica = await prisma.stranica.findUnique({
-    where: {
-      id: params.id,
-    },
-  })
-
-  if (!stranica) notFound()
-
-  return <StranicaForma stranica={stranica} />
-}
-
-export default UrediTekst
+export default EditPage

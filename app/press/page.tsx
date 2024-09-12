@@ -3,10 +3,10 @@ import H2 from "@/components/h2"
 import Link from "next/link"
 import NewsArticle from "@/components/article-news"
 import ReactMarkdown from "react-markdown"
-import { getPress } from "@/lib/data"
+import { getPublishedPress } from "@/lib/data"
 
 const Press = async () => {
-  const press = await getPress()
+  const press = await getPublishedPress()
 
   return (
     <>

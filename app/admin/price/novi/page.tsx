@@ -1,14 +1,11 @@
 import dynamic from "next/dynamic"
 
-const TekstForma = dynamic(
-  () => import("@/app/admin/price/components/TekstForma"),
-  {
-    ssr: false,
-  }
-)
+const FormStory = dynamic(() => import("@/components/forms/form-story"), {
+  ssr: false,
+})
 
-const NoviTekst = () => {
-  return <TekstForma />
+const CreateStoryPage = () => {
+  return <FormStory />
 }
 
-export default NoviTekst
+export default CreateStoryPage

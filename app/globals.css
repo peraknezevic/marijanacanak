@@ -14,11 +14,7 @@
     @apply text-3xl font-bold mb-8;
   }
 
-  .btn-red {
-    @apply bg-red-800;
-  }
-  input,
-  textarea {
+  input {
     @apply border border-zinc-400 px-2 py-2 text-lg;
   }
 }

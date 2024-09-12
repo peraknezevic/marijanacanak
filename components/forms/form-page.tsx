@@ -16,7 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 
 type StranicaPodaci = z.infer<typeof stranicaSchema>
 
-const StranicaForma = ({ stranica }: { stranica?: Stranica }) => {
+const FormPage = ({ page }: { page?: Stranica }) => {
   const [error, setError] = useState("")
   const [slugSuggestion, setSlugSuggestion] = useState(stranica?.slug || "")
   const router = useRouter()
@@ -32,7 +32,7 @@ const StranicaForma = ({ stranica }: { stranica?: Stranica }) => {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      if (stranica) await axios.patch("/api/stranice/" + stranica.slug, data)
+      if (page) await axios.patch("/api/stranice/" + page.slug, data)
       else await axios.post("/api/stranice/", data)
       router.push("/admin/stranice")
       router.refresh()
@@ -54,7 +54,7 @@ const StranicaForma = ({ stranica }: { stranica?: Stranica }) => {
           <input
             type="text"
             id="naslov"
-            defaultValue={stranica?.naslov}
+            defaultValue={page?.naslov}
             placeholder="Naslov stranice"
             {...register("naslov")}
           />
@@ -68,7 +68,7 @@ const StranicaForma = ({ stranica }: { stranica?: Stranica }) => {
           <input
             type="text"
             id="slug"
-            defaultValue={stranica?.slug}
+            defaultValue={page?.slug}
             placeholder="URL slug"
             {...register("slug")}
           />
@@ -79,7 +79,7 @@ const StranicaForma = ({ stranica }: { stranica?: Stranica }) => {
           <label htmlFor="uvod">Uvod</label>
           <Controller
             name="uvod"
-            defaultValue={stranica?.uvod || ""}
+            defaultValue={page?.uvod || ""}
             control={control}
             render={({ field }) => (
               <SimpleMDE placeholder="Uvod" id="uvod" {...field} />
@@ -92,7 +92,7 @@ const StranicaForma = ({ stranica }: { stranica?: Stranica }) => {
           <label htmlFor="tekst">Tekst</label>
           <Controller
             name="tekst"
-            defaultValue={stranica?.tekst || ""}
+            defaultValue={page?.tekst || ""}
             control={control}
             render={({ field }) => (
               <SimpleMDE placeholder="Tekst" id="tekst" {...field} />
@@ -110,10 +110,10 @@ const StranicaForma = ({ stranica }: { stranica?: Stranica }) => {
           <ErrorMessage>{errors.status?.message}</ErrorMessage>
         </div>
 
-        <button className="btn">{stranica ? "Izmeni" : "Dodaj"}</button>
+        <button className="btn">{page ? "Izmeni" : "Dodaj"}</button>
       </form>
     </div>
   )
 }
 
-export default StranicaForma
+export default FormPage

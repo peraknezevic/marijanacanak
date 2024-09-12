@@ -1,28 +1,17 @@
-import prisma from "@/prisma/client"
 import dynamic from "next/dynamic"
+import { getStoryById } from "@/lib/data"
 import { notFound } from "next/navigation"
 
-interface Props {
-  params: { id: string }
-}
+const FormStory = dynamic(() => import("@/components/forms/form-story"), {
+  ssr: false,
+})
 
-const TekstForma = dynamic(
-  () => import("@/app/admin/price/components/TekstForma"),
-  {
-    ssr: false,
-  }
-)
-
-const UrediTekst = async ({ params }: Props) => {
-  const tekst = await prisma.tekst.findUnique({
-    where: {
-      id: params.id,
-    },
-  })
+const EditStoryPage = async ({ params }: { params: { id: string } }) => {
+  const tekst = await getStoryById(params.id)
 
   if (!tekst) notFound()
 
-  return <TekstForma tekst={tekst} />
+  return <FormStory tekst={tekst} />
 }
 
-export default UrediTekst
+export default EditStoryPage
