@@ -1,42 +1,38 @@
-import prisma from "@/prisma/client"
-import Image from "next/image"
+import {
+  getLatestBooks,
+  getLatestPublishedNews,
+  getLatestPublishedStories,
+  getPageBySlug,
+} from "@/lib/data"
+
+import Button from "@/components/ui/button"
+import H2 from "@/components/ui/h2"
+import Image from "@/components/frontend/image"
 import Link from "next/link"
 
 const Home = async () => {
-  const biografija = await prisma.stranica.findUnique({
-    where: { slug: "biografija" },
-  })
-  const dobrodosli = await prisma.stranica.findUnique({
-    where: { slug: "dobro-dosli" },
-  })
-  const price = await prisma.tekst.findMany({
-    take: 5,
-    orderBy: { createdAt: "desc" },
-  })
-  const knjige = await prisma.knjiga.findMany({
-    take: 6,
-    orderBy: { godina: "desc" },
-  })
-  const novosti = await prisma.novost.findMany({
-    take: 5,
-    orderBy: { createdAt: "desc" },
-  })
+  const bio = await getPageBySlug("biografija")
+  const stories = await getLatestPublishedStories(5)
+  const books = await getLatestBooks(6)
+  const news = await getLatestPublishedNews(5)
 
   return (
-    <div className="home">
+    <div className="grid lg:grid-cols-2 lg:grid-rows-2 max-w-5xl mx-auto my-8 xl:my-16 gap-8 xl:gap-16 text-lg">
       <div className="order-2 lg:order-1">
-        {biografija?.uvod}
+        {bio?.uvod}
         <p className="text-right">
-          <Link href="/biografija" className="btn btn-sm">
-            Kompletna biografija
-          </Link>
+          <Button
+            href="/biografija"
+            title="Kompletna biografija"
+            type="small"
+          />
         </p>
       </div>
       <div className="order-1 lg:order-2">
         <figure>
           <Link href="/biografija">
             <Image
-              src="/slike/marijana-canak.jpg"
+              src="https://ik.imagekit.io/tkrwfvazw/marijanacanak/slike/homepage/marijana-canak.jpg"
               alt="Marijana Čanak"
               width={1600}
               height={1100}
@@ -44,7 +40,9 @@ const Home = async () => {
             />
           </Link>
           <figcaption>
-            <p>Marijana Čanak, fotografija: Maja Tomić</p>
+            <p className="text-right text-sm">
+              Marijana Čanak, fotografija: Maja Tomić
+            </p>
           </figcaption>
         </figure>
       </div>
@@ -52,7 +50,7 @@ const Home = async () => {
         <figure>
           <Link href="/knjige">
             <Image
-              src="/slike/marijana-canak-knjige.jpg"
+              src="https://ik.imagekit.io/tkrwfvazw/marijanacanak/slike/homepage/marijana-canak-knjige.jpg"
               alt="Knjige Marijane Čanak"
               width={1600}
               height={1100}
@@ -60,61 +58,63 @@ const Home = async () => {
             />
           </Link>
           <figcaption>
-            <p>knjige Marijane Čanak, fotografija: Maja Tomić</p>
+            <p className="text-right text-sm">
+              knjige Marijane Čanak, fotografija: Maja Tomić
+            </p>
           </figcaption>
         </figure>
       </div>
       <div className="order-4">
-        <h2>Knjige</h2>
-        {knjige.map((item) => (
-          <p key="item.id" className="mb-1">
-            <Link href={`/knjige/${item.slug}`} className="underline">
-              {item.naziv}
+        <H2 title="Knjige" />
+        {books.map((book) => (
+          <p key={book.id} className="mb-1">
+            <Link
+              href={`/knjige/${book.slug}`}
+              className="text-slate-900 cursor-pointer hover:text-slate-700 underline"
+            >
+              {book.naslov}
             </Link>{" "}
-            ({item.izdavac})
+            ({book.izdavac})
           </p>
         ))}
         <p className="text-right">
-          <Link href="/knjige" className="btn btn-sm ">
-            ostale knjige
-          </Link>
+          <Button href="/knjige" title="ostale knjige" type="small" />
         </p>
       </div>
 
-      {novosti.length !== 0 && (
+      {news.length !== 0 && (
         <div className="order-5">
-          <h2>Novosti</h2>
-          {novosti.map((item) => (
-            <p key="item.id" className="mb-1">
-              <Link href={`novosti/${item.slug}`} className="underline">
+          <H2 title="Novosti" />
+          {news.map((item) => (
+            <p key={item.id} className="mb-1">
+              <Link
+                href={`novosti/${item.slug}`}
+                className="text-slate-900 cursor-pointer hover:text-slate-700 underline"
+              >
                 {item.naslov}
               </Link>
             </p>
           ))}
           <p className="text-right">
-            <Link href="/novosti" className="btn btn-sm ">
-              ostale novosti
-            </Link>
+            <Button href="/novosti" title="ostale novosti" type="small" />
           </p>
         </div>
       )}
 
       <div className="order-6">
-        <h2>Priče</h2>
-        {price.map((item) => (
-          <p key="item.id" className="mb-1">
+        <H2 title="Priče" />
+        {stories.map((story) => (
+          <p key={story.id} className="mb-1">
             <Link
-              href={item.spoljniLink || item.patreonLink || ""}
-              className="underline"
+              href={story.spoljniLink || story.patreonLink || ""}
+              className="underline text-slate-900 cursor-pointer hover:text-slate-700"
             >
-              {item.naslov}
+              {story.naslov}
             </Link>
           </p>
         ))}
         <p className="text-right">
-          <Link href="/price" className="btn btn-sm ">
-            ostale priče
-          </Link>
+          <Button href="/price" title="ostale priče" type="small" />
         </p>
       </div>
     </div>

@@ -1,28 +1,22 @@
-import prisma from "@/prisma/client"
-import Link from "next/link"
-import React from "react"
+import AdminList from "@/components/admin/admin-list"
+import Button from "@/components/ui/button"
+import { getStories } from "@/lib/data"
 
-const Tekstovi = async () => {
-  const tekstovi = await prisma.tekst.findMany({
-    orderBy: { createdAt: "desc" },
-  })
+const Page = async () => {
+  const stories = await getStories()
+
   return (
-    <div className="admin-page">
-      <Link href={`/admin/price/novi`} className="btn">
-        Dodaj novu priču
-      </Link>
-      <ul className="spisak">
-        <li>Priče:</li>
-        {tekstovi.map((tekst) => (
-          <li key={tekst.id}>
-            <Link href={`/admin/price/${tekst.id}`}>{tekst.naslov}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <Button
+        href="/admin/price/nova"
+        title="Dodaj novu priču"
+        type="regular"
+      />
+      <AdminList list={stories} href="price" />
+    </>
   )
 }
 
 export const dynamic = "force-dynamic"
 
-export default Tekstovi
+export default Page

@@ -1,28 +1,17 @@
-import prisma from "@/prisma/client"
 import dynamic from "next/dynamic"
+import { getPressItemById } from "@/lib/data"
 import { notFound } from "next/navigation"
 
-interface Props {
-  params: { id: string }
+const FormPress = dynamic(() => import("@/components/forms/form-press"), {
+  ssr: false,
+})
+
+const EditPressPage = async ({ params }: { params: { id: string } }) => {
+  const pressItem = await getPressItemById(params.id)
+
+  if (!pressItem) notFound()
+
+  return <FormPress pressItem={pressItem} />
 }
 
-const PressForma = dynamic(
-  () => import("@/app/admin/press/components/PressForma"),
-  {
-    ssr: false,
-  }
-)
-
-const UrediPress = async ({ params }: Props) => {
-  const press = await prisma.press.findUnique({
-    where: {
-      id: params.id,
-    },
-  })
-
-  if (!press) notFound()
-
-  return <PressForma press={press} />
-}
-
-export default UrediPress
+export default EditPressPage

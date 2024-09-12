@@ -1,35 +1,32 @@
-import prisma from "@/prisma/client"
+import H1 from "@/components/ui/h1"
+import H2 from "@/components/ui/h2"
+import LinkBtn from "@/components/ui/button"
+import NewsArticle from "@/components/frontend/article-news"
 import ReactMarkdown from "react-markdown"
+import { getPublishedNews } from "@/lib/data"
 
 const Novosti = async () => {
-  const novosti = await prisma.novost.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-  })
+  const news = await getPublishedNews()
+
   return (
     <div>
-      <h1>Novosti</h1>
-      {novosti.length === 0 && (
+      <H1 title="Novosti" />
+      {news.length === 0 && (
         <p className="text-center">Trenutno nema novih objava</p>
       )}
-      <ul>
-        {novosti.map((item) => (
-          <li key={item.id} className="prose lg:prose-xl mx-auto mb-24">
-            <h2>{item.naslov}</h2>
+      <div>
+        {news.map((item) => (
+          <NewsArticle key={item.id}>
+            <H2 title={item.naslov} slug={`novosti/${item.slug}`} />
             <ReactMarkdown className="text-left">{item.uvod}</ReactMarkdown>
             <ReactMarkdown className="text-left">{item.tekst}</ReactMarkdown>
             {item.link && (
-              <p>
-                <a href={item.link} className="btn btn-sm">
-                  Više informacija
-                </a>
-              </p>
+              <LinkBtn href={item.link} title="Više informacija" type="small" />
             )}
             <hr />
-          </li>
+          </NewsArticle>
         ))}
-      </ul>
+      </div>
     </div>
   )
 }

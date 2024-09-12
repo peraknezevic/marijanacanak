@@ -1,33 +1,22 @@
-import prisma from "@/prisma/client"
-import Link from "next/link"
-import React from "react"
+import AdminList from "@/components/admin/admin-list"
+import Button from "@/components/ui/button"
+import { getBooks } from "@/lib/data"
 
-const Knjige = async () => {
-  const knjige = await prisma.knjiga.findMany({
-    orderBy: {
-      godina: "desc",
-    },
-  })
+const Page = async () => {
+  const books = await getBooks()
+
   return (
-    <div className="admin-page">
-      <Link href={`/admin/knjige/nova`} className="btn">
-        Dodaj novu knjigu
-      </Link>
-      <ul className="spisak">
-        <li>Knjige:</li>
-        {knjige.map((knjiga) => (
-          <li key={knjiga.id}>
-            <Link href={`/admin/knjige/${knjiga.id}`}>
-              {knjiga.naziv}
-              <span>{knjiga.slug}</span>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <Button
+        href="/admin/knjige/nova"
+        title="Dodaj novu knjigu"
+        type="regular"
+      />
+      <AdminList list={books} href="knjige" />
+    </>
   )
 }
 
 export const dynamic = "force-dynamic"
 
-export default Knjige
+export default Page

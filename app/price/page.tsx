@@ -1,25 +1,17 @@
-import prisma from "@/prisma/client"
-import React from "react"
-import TekstKarta from "./components/TekstKarta"
+import H1 from "@/components/ui/h1"
 import { Metadata } from "next"
+import StoryCard from "@/components/frontend/story-card"
+import { getPublishedStories } from "@/lib/data"
 
 const Tekstovi = async () => {
-  const tekstovi = await prisma.tekst.findMany({
-    where: {
-      status: "Objavljeno",
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  })
+  const stories = await getPublishedStories()
+
   return (
     <div>
-      <h1>Priče</h1>
-      <ul>
-        {tekstovi.map((tekst) => (
-          <TekstKarta tekst={tekst} key={tekst.id} />
-        ))}
-      </ul>
+      <H1 title="Priče" />
+      {stories.map((story) => (
+        <StoryCard story={story} key={story.id} />
+      ))}
     </div>
   )
 }

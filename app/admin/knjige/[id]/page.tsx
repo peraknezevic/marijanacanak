@@ -1,28 +1,17 @@
-import prisma from "@/prisma/client"
 import dynamic from "next/dynamic"
+import { getBookById } from "@/lib/data"
 import { notFound } from "next/navigation"
 
-interface Props {
-  params: { id: string }
+const FormBook = dynamic(() => import("@/components/forms/form-book"), {
+  ssr: false,
+})
+
+const EditBookPage = async ({ params }: { params: { id: string } }) => {
+  const book = await getBookById(params.id)
+
+  if (!book) notFound()
+
+  return <FormBook book={book} />
 }
 
-const KnjigaForma = dynamic(
-  () => import("@/app/admin/knjige/components/KnjigaForma"),
-  {
-    ssr: false,
-  }
-)
-
-const UrediKnjigu = async ({ params }: Props) => {
-  const knjiga = await prisma.knjiga.findUnique({
-    where: {
-      id: params.id,
-    },
-  })
-
-  if (!knjiga) notFound()
-
-  return <KnjigaForma knjiga={knjiga} />
-}
-
-export default UrediKnjigu
+export default EditBookPage

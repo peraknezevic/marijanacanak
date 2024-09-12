@@ -1,14 +1,11 @@
 import dynamic from "next/dynamic"
 
-const NovostForma = dynamic(
-  () => import("@/app/admin/novosti/components/NovostForma"),
-  {
-    ssr: false,
-  }
-)
+const FormNews = dynamic(() => import("@/components/forms/form-news"), {
+  ssr: false,
+})
 
-const NovaNovost = () => {
-  return <NovostForma />
+const CreateNewsPage = () => {
+  return <FormNews />
 }
 
-export default NovaNovost
+export default CreateNewsPage

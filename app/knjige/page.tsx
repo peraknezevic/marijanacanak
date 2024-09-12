@@ -1,21 +1,17 @@
-import KnjigaKartica from "@/app/knjige/components/KnjigaKartica"
-import prisma from "@/prisma/client"
+import BookCard from "@/components/frontend/book-card"
+import H1 from "@/components/ui/h1"
 import { Metadata } from "next"
-import React from "react"
+import { getBooks } from "@/lib/data"
 
 const Knjige = async () => {
-  const knjige = await prisma.knjiga.findMany({
-    orderBy: {
-      godina: "desc",
-    },
-  })
+  const books = await getBooks()
 
   return (
     <>
-      <h1>Knjige</h1>
+      <H1 title="Knjige" />
       <ul>
-        {knjige.map((knjiga) => (
-          <KnjigaKartica knjiga={knjiga} key={knjiga.id} />
+        {books.map((book) => (
+          <BookCard book={book} key={book.id} />
         ))}
       </ul>
     </>

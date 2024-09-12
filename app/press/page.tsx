@@ -1,26 +1,25 @@
-import prisma from "@/prisma/client"
+import H1 from "@/components/ui/h1"
+import H2 from "@/components/ui/h2"
 import Link from "next/link"
-import React from "react"
+import NewsArticle from "@/components/frontend/article-news"
 import ReactMarkdown from "react-markdown"
+import { getPublishedPress } from "@/lib/data"
 
 const Press = async () => {
-  const press = await prisma.press.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-  })
+  const press = await getPublishedPress()
+
   return (
     <>
-      <h1>Press</h1>
+      <H1 title="Press" />
       <ul>
         {press.map((item) => (
-          <li key={item.id} className="prose lg:prose-xl mx-auto mb-8 xl:mb-24">
-            <h3>
-              <Link href={item.link}>{item.naslov}</Link>
-            </h3>
+          <NewsArticle key={item.id}>
+            <Link href={item.link}>
+              <H2 title={item.naslov} />
+            </Link>
             <ReactMarkdown className="text-left">{item.opis}</ReactMarkdown>
             <hr />
-          </li>
+          </NewsArticle>
         ))}
       </ul>
     </>

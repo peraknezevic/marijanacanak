@@ -1,14 +1,11 @@
 import dynamic from "next/dynamic"
 
-const KnjigaForma = dynamic(
-  () => import("@/app/admin/knjige/components/KnjigaForma"),
-  {
-    ssr: false,
-  }
-)
+const FormBook = dynamic(() => import("@/components/forms/form-book"), {
+  ssr: false,
+})
 
-const NovaKnjiga = () => {
-  return <KnjigaForma />
+const CreateBookPage = () => {
+  return <FormBook />
 }
 
-export default NovaKnjiga
+export default CreateBookPage

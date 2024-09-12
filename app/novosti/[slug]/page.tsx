@@ -1,18 +1,20 @@
-import prisma from "@/prisma/client"
-import { notFound } from "next/navigation"
+import H1 from "@/components/ui/h1"
+import NewsArticle from "@/components/frontend/article-news"
 import ReactMarkdown from "react-markdown"
+import { getNewsBySlug } from "@/lib/data"
+import { notFound } from "next/navigation"
 
 const Novost = async ({ params }: { params: { slug: string } }) => {
-  const novost = await prisma.novost.findUnique({
-    where: { slug: params.slug },
-  })
-  if (!novost) notFound()
+  const newsItem = await getNewsBySlug(params.slug)
+
+  if (!newsItem) notFound()
+
   return (
-    <article className="prose lg:prose-xl mx-auto my-10">
-      <h1 className="text-emerald-900 text-4xl">{novost.naslov}</h1>
-      {novost.uvod && <ReactMarkdown>{novost.uvod}</ReactMarkdown>}
-      <ReactMarkdown>{novost.tekst}</ReactMarkdown>
-    </article>
+    <NewsArticle>
+      <H1 title={newsItem.naslov} />
+      {newsItem.uvod && <ReactMarkdown>{newsItem.uvod}</ReactMarkdown>}
+      <ReactMarkdown>{newsItem.tekst}</ReactMarkdown>
+    </NewsArticle>
   )
 }
 

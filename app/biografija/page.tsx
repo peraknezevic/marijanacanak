@@ -1,19 +1,21 @@
-import prisma from "@/prisma/client"
-import { Metadata } from "next"
+import Article from "@/components/frontend/article"
+import H1 from "@/components/ui/h1"
 import Image from "next/image"
+import { Metadata } from "next"
 import React from "react"
 import ReactMarkdown from "react-markdown"
+import { getPageBySlug } from "@/lib/data"
+import { notFound } from "next/navigation"
 
 const Biografija = async () => {
-  const biografija = await prisma.stranica.findUnique({
-    where: {
-      slug: "biografija",
-    },
-  })
+  const bio = await getPageBySlug("biografija")
+
+  if (!bio) return notFound()
+
   return (
     <>
-      <h1>Biografija</h1>
-      <article className="prose lg:prose-xl mx-auto">
+      <H1 title="Biografija" />
+      <Article>
         <figure>
           <Image
             src="/slike/marijana-canak.jpg"
@@ -22,12 +24,14 @@ const Biografija = async () => {
             height={1100}
           />
           <figcaption>
-            <p>Marijana Čanak, autorka fotografije Maja Tomić</p>
+            <p className="text-right text-sm">
+              Marijana Čanak, autorka fotografije Maja Tomić
+            </p>
           </figcaption>
         </figure>
-        <ReactMarkdown>{biografija?.uvod}</ReactMarkdown>
-        <ReactMarkdown>{biografija?.tekst}</ReactMarkdown>
-      </article>
+        <ReactMarkdown>{bio?.uvod}</ReactMarkdown>
+        <ReactMarkdown>{bio?.tekst}</ReactMarkdown>
+      </Article>
     </>
   )
 }
