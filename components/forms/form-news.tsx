@@ -48,97 +48,95 @@ const FormNews = ({ news }: { news?: Novost }) => {
   })
 
   return (
-    <>
-      {error && <FormError>{error}</FormError>}
-      <FormWrapper onSubmit={onSubmit}>
-        <FormBlock>
-          <label htmlFor="naslov">Naslov novosti</label>
-          <input
-            type="text"
-            id="naslov"
-            defaultValue={news?.naslov}
-            placeholder="Naslov novosti"
-            {...register("naslov")}
-          />
-          <FormError>{errors.naslov?.message}</FormError>
-        </FormBlock>
+    <FormWrapper onSubmit={onSubmit}>
+      <FormBlock>
+        <label htmlFor="naslov">Naslov novosti</label>
+        <input
+          type="text"
+          id="naslov"
+          defaultValue={news?.naslov}
+          placeholder="Naslov novosti"
+          {...register("naslov")}
+        />
+        <FormError>{errors.naslov?.message}</FormError>
+      </FormBlock>
 
-        <FormBlock>
-          <label htmlFor="slug">
-            URL Slug (npr. naslov-novosti, bez č, ć, ž, š, đ)
-          </label>
-          <input
-            type="text"
-            id="slug"
-            defaultValue={news?.slug}
-            placeholder="URL slug"
-            {...register("slug")}
-          />
-          <FormError>{errors.slug?.message}</FormError>
-        </FormBlock>
+      <FormBlock>
+        <label htmlFor="slug">
+          URL Slug (npr. naslov-novosti, bez č, ć, ž, š, đ)
+        </label>
+        <input
+          type="text"
+          id="slug"
+          defaultValue={news?.slug}
+          placeholder="URL slug"
+          {...register("slug")}
+        />
+        <FormError>{errors.slug?.message}</FormError>
+      </FormBlock>
 
-        <FormBlock>
-          <label htmlFor="uvod">Uvod novosti</label>
-          <Controller
-            name="uvod"
-            defaultValue={news?.uvod || ""}
-            control={control}
-            render={({ field }) => (
-              <SimpleMDE placeholder="Uvod novosti" id="uvod" {...field} />
-            )}
-          />
-          <FormError>{errors.uvod?.message}</FormError>
-        </FormBlock>
-
-        <FormBlock>
-          <label htmlFor="tekst">Tekst novosti</label>
-          <Controller
-            name="tekst"
-            defaultValue={news?.tekst || ""}
-            control={control}
-            render={({ field }) => (
-              <SimpleMDE placeholder="Tekst" id="tekst" {...field} />
-            )}
-          />
-          <FormError>{errors.tekst?.message}</FormError>
-        </FormBlock>
-
-        <Upload />
-
-        <FormBlock>
-          <label htmlFor="link">Spoljašnji Link</label>
-          <input
-            type="text"
-            defaultValue={news?.link || ""}
-            placeholder="Link"
-            {...register("link")}
-          />
-          <FormError>{errors.link?.message}</FormError>
-        </FormBlock>
-
-        <FormBlock>
-          <label htmlFor="status">Status novosti</label>
-          <select {...register("status")} id="status">
-            <option value="Objavljeno">Objavljena</option>
-            <option value="Nacrt">Nacrt</option>
-          </select>
-          <FormError>{errors.status?.message}</FormError>
-        </FormBlock>
-        <FormButtons>
-          <Button type="regular" title={news ? "Izmeni" : "Dodaj"} submit />
-          {news && (
-            <Button
-              type="delete"
-              title="Izbriši"
-              onClick={async () => {
-                await deleteNews(news.id)
-              }}
-              button
-            />
+      <FormBlock>
+        <label htmlFor="uvod">Uvod novosti</label>
+        <Controller
+          name="uvod"
+          defaultValue={news?.uvod || ""}
+          control={control}
+          render={({ field }) => (
+            <SimpleMDE placeholder="Uvod novosti" id="uvod" {...field} />
           )}
-        </FormButtons>
-      </FormWrapper>
-    </>
+        />
+        <FormError>{errors.uvod?.message}</FormError>
+      </FormBlock>
+
+      <FormBlock>
+        <label htmlFor="tekst">Tekst novosti</label>
+        <Controller
+          name="tekst"
+          defaultValue={news?.tekst || ""}
+          control={control}
+          render={({ field }) => (
+            <SimpleMDE placeholder="Tekst" id="tekst" {...field} />
+          )}
+        />
+        <FormError>{errors.tekst?.message}</FormError>
+      </FormBlock>
+
+      <Upload />
+
+      <FormBlock>
+        <label htmlFor="link">Spoljašnji Link</label>
+        <input
+          type="text"
+          defaultValue={news?.link || ""}
+          placeholder="Link"
+          {...register("link")}
+        />
+        <FormError>{errors.link?.message}</FormError>
+      </FormBlock>
+
+      <FormBlock>
+        <label htmlFor="status">Status novosti</label>
+        <select {...register("status")} id="status">
+          <option value="Objavljeno">Objavljena</option>
+          <option value="Nacrt">Nacrt</option>
+        </select>
+        <FormError>{errors.status?.message}</FormError>
+      </FormBlock>
+      <FormButtons>
+        <Button type="regular" title={news ? "Izmeni" : "Dodaj"} submit />
+        {news && (
+          <Button
+            type="delete"
+            title="Izbriši"
+            onClick={async () => {
+              await deleteNews(news.id)
+            }}
+            button
+          />
+        )}
+      </FormButtons>
+      {error && <FormError>{error}</FormError>}
+    </FormWrapper>
   )
 }
 

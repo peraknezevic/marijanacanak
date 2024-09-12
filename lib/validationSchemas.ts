@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-export const knjigeSchema = z.object({
+export const knjigaSchema = z.object({
   naslov: z.string().min(3).max(150),
   slug: z.string().min(3).max(150),
   sazetak: z.string().min(3).max(3000).optional().or(z.literal("")),
