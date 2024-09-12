@@ -1,15 +1,14 @@
 "use client"
 
+import { Knjiga as Book } from "@prisma/client"
 import BookInfoItem from "./book-info-item"
 import Button from "../ui/button"
 import H2 from "../ui/h2"
 import Image from "next/image"
-import { Knjiga } from "@prisma/client"
-import Link from "next/link"
 import ReactMarkdown from "react-markdown"
 import { imageKitLoader } from "@/lib/utils"
 
-const BookCard = ({ book }: { book: Knjiga }) => {
+const BookCard = ({ book }: { book: Book }) => {
   return (
     <li className="flex flex-col mt-4 xl:mt-8 mb-16 lg:mb-32 gap-16 max-w-3xl mx-auto">
       <div className="flex flex-col md:flex-row gap-16">
@@ -25,7 +24,7 @@ const BookCard = ({ book }: { book: Knjiga }) => {
           />
         </div>
         <div className="lg:px-6 py-4 lg:py-10 items-center text-xl leading-8">
-          <H2 title={book.naslov} slug={`knjige/${book.slug}`} />
+          <H2 title={book.naslov} slug={`knjige/${book.slug}`} uppercase />
 
           {book.izdavac && <BookInfoItem title="Izdavač" info={book.izdavac} />}
           {book.zanr && <BookInfoItem title="Žanr" info={book.zanr} />}

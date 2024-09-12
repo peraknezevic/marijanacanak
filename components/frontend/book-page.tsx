@@ -1,3 +1,5 @@
+"use client"
+
 import { Knjiga as Book } from "@prisma/client"
 import BookDetailsItem from "./book-details-item"
 import BookInfoItem from "./book-info-item"
@@ -6,15 +8,18 @@ import H1 from "../ui/h1"
 import H2 from "../ui/h2"
 import Image from "next/image"
 import ReactMarkdown from "react-markdown"
+import { imageKitLoader } from "@/lib/utils"
 
 const BookPage = ({ book }: { book: Book }) => {
   return (
-    <div className="flex flex-col mt-4 xl:mt-8 mb-16 lg:mb-32 gap-2 lg:gap-16 max-w-3xl mx-auto">
+    <div className="flex flex-col mt-4 xl:mt-16 mb-16 lg:mb-32 gap-2 lg:gap-16 max-w-3xl mx-auto">
       <div className="flex flex-col md:flex-row gap-8 xl:gap-16">
         <div className="flex flex-col gap-4 lg:gap-8 lg:w-1/2">
           <Image
             className="shadow-2xl border-2 border-zinc-400 mx-auto"
-            src={`/slike/knjige/${book.slug}.jpg`}
+            src={`/marijanacanak/slike/knjige/${book.slug}.jpg`}
+            loader={imageKitLoader}
+            quality={80}
             width={400}
             height={500}
             alt={book.naslov}
