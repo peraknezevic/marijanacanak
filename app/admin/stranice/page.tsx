@@ -1,5 +1,5 @@
-import AdminList from "@/components/admin-list"
-import Button from "@/components/button"
+import AdminList from "@/components/admin/admin-list"
+import Button from "@/components/ui/button"
 import { getPages } from "@/lib/data"
 
 const Page = async () => {

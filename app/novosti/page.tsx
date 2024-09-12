@@ -1,7 +1,7 @@
-import H1 from "@/components/h1"
-import H2 from "@/components/h2"
-import LinkBtn from "@/components/button"
-import NewsArticle from "@/components/article-news"
+import H1 from "@/components/ui/h1"
+import H2 from "@/components/ui/h2"
+import LinkBtn from "@/components/ui/button"
+import NewsArticle from "@/components/frontend/article-news"
 import ReactMarkdown from "react-markdown"
 import { getPublishedNews } from "@/lib/data"
 

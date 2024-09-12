@@ -1,5 +1,5 @@
-import H2 from "./h2"
-import LinkBtn from "./button"
+import H2 from "../ui/h2"
+import LinkBtn from "../ui/button"
 import NewsArticle from "./article-news"
 import ReactMarkdown from "react-markdown"
 import { Tekst } from "@prisma/client"

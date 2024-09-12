@@ -5,27 +5,27 @@ import "easymde/dist/easymde.min.css"
 import { Controller, useForm } from "react-hook-form"
 import React, { useState } from "react"
 
-import DeleteButton from "../../components/DeleteButton"
-import ErrorMessage from "../../components/ErrorMessage"
+import Button from "../ui/button"
+import FormBlock from "./form-block"
+import FormButtons from "./form-buttons"
+import FormError from "./form-error"
+import FormWrapper from "./form-wrapper"
 import { Knjiga } from "@prisma/client"
 import SimpleMDE from "react-simplemde-editor"
 import axios from "axios"
 import { knjigeSchema } from "@/lib/validationSchemas"
-import { useRouter } from "next/navigation"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 
-type KnjigaPodaci = z.infer<typeof knjigeSchema>
+type Book = z.infer<typeof knjigeSchema>
 
 const FormBook = ({ book }: { book?: Knjiga }) => {
-  const router = useRouter()
-
   const {
     register,
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<KnjigaPodaci>({
+  } = useForm<Book>({
     resolver: zodResolver(knjigeSchema),
   })
 
@@ -35,34 +35,28 @@ const FormBook = ({ book }: { book?: Knjiga }) => {
     try {
       if (book) await axios.patch("/api/knjige/" + book.id, data)
       else await axios.post("/api/knjige/", data)
-      router.push("/admin/knjige")
-      router.refresh()
     } catch (error) {
       setError("Unexpected error accured")
     }
   })
 
   return (
-    <div>
-      {error && (
-        <div className="alert alert-error">
-          <span>{error}</span>
-        </div>
-      )}
-      <form onSubmit={onSubmit}>
-        <div>
-          <label htmlFor="naziv">Naslov knjige </label>
+    <>
+      {error && <FormError>{error}</FormError>}
+      <FormWrapper onSubmit={onSubmit}>
+        <FormBlock>
+          <label htmlFor="naslov">Naslov knjige</label>
           <input
             type="text"
-            id="naziv"
+            id="naslov"
             defaultValue={book?.naslov}
             placeholder="Naslov knjige"
-            {...register("naziv")}
+            {...register("naslov")}
           />
-          <ErrorMessage>{errors.naziv?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.naslov?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="slug">
             URL Slug (npr. naslov-knjige, bez č, ć, ž, š, đ)
           </label>
@@ -73,10 +67,10 @@ const FormBook = ({ book }: { book?: Knjiga }) => {
             placeholder="URL Slug"
             {...register("slug")}
           />
-          <ErrorMessage>{errors.slug?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.slug?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="sazetak">Sažetak</label>
           <Controller
             name="sazetak"
@@ -86,10 +80,10 @@ const FormBook = ({ book }: { book?: Knjiga }) => {
               <SimpleMDE placeholder="Sazetak" id="sazetak" {...field} />
             )}
           />
-          <ErrorMessage>{errors.sazetak?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.sazetak?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="zanr">Žanr</label>
           <input
             type="text"
@@ -98,10 +92,10 @@ const FormBook = ({ book }: { book?: Knjiga }) => {
             placeholder="Žanr"
             {...register("zanr")}
           />
-          <ErrorMessage>{errors.zanr?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.zanr?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="zaIzdavaca">Za izdavača</label>
           <input
             type="text"
@@ -110,10 +104,10 @@ const FormBook = ({ book }: { book?: Knjiga }) => {
             placeholder="Za izdavača"
             {...register("zaIzdavaca")}
           />
-          <ErrorMessage>{errors.zaIzdavaca?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.zaIzdavaca?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="izdavac">Izdavač</label>
           <input
             type="text"
@@ -122,10 +116,10 @@ const FormBook = ({ book }: { book?: Knjiga }) => {
             placeholder="Izdavač"
             {...register("izdavac")}
           />
-          <ErrorMessage>{errors.izdavac?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.izdavac?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="godina">Godina izdanja (broj, bez tačke)</label>
           <input
             type="number"
@@ -136,10 +130,10 @@ const FormBook = ({ book }: { book?: Knjiga }) => {
               valueAsNumber: true,
             })}
           />
-          <ErrorMessage>{errors.godina?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.godina?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="urednik">Urednik</label>
           <input
             type="text"
@@ -148,10 +142,10 @@ const FormBook = ({ book }: { book?: Knjiga }) => {
             placeholder="Urednik"
             {...register("urednik")}
           />
-          <ErrorMessage>{errors.urednik?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.urednik?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="prevod">Prevod</label>
           <input
             type="text"
@@ -160,10 +154,10 @@ const FormBook = ({ book }: { book?: Knjiga }) => {
             placeholder="Prevod"
             {...register("prevod")}
           />
-          <ErrorMessage>{errors.prevod?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.prevod?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="lektura">Lektura</label>
           <input
             type="text"
@@ -172,10 +166,10 @@ const FormBook = ({ book }: { book?: Knjiga }) => {
             placeholder="Lektura i korektura"
             {...register("lektura")}
           />
-          <ErrorMessage>{errors.lektura?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.lektura?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="prelom">Prelom</label>
           <input
             type="text"
@@ -184,10 +178,10 @@ const FormBook = ({ book }: { book?: Knjiga }) => {
             placeholder="Prelom"
             {...register("prelom")}
           />
-          <ErrorMessage>{errors.prelom?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.prelom?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="dizajnNaslovnice">Ilustracija</label>
           <input
             type="text"
@@ -196,10 +190,10 @@ const FormBook = ({ book }: { book?: Knjiga }) => {
             placeholder="Ilustracija"
             {...register("dizajnNaslovnice")}
           />
-          <ErrorMessage>{errors.dizajnNaslovnice?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.dizajnNaslovnice?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="stampa">Štampa</label>
           <input
             type="text"
@@ -208,10 +202,10 @@ const FormBook = ({ book }: { book?: Knjiga }) => {
             placeholder="Štampa"
             {...register("stampa")}
           />
-          <ErrorMessage>{errors.stampa?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.stampa?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="obim">Obim</label>
           <input
             type="text"
@@ -220,10 +214,10 @@ const FormBook = ({ book }: { book?: Knjiga }) => {
             placeholder="Obim"
             {...register("obim")}
           />
-          <ErrorMessage>{errors.obim?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.obim?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="isbn">ISBN</label>
           <input
             type="text"
@@ -232,10 +226,10 @@ const FormBook = ({ book }: { book?: Knjiga }) => {
             placeholder="ISBN"
             {...register("isbn")}
           />
-          <ErrorMessage>{errors.isbn?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.isbn?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="kupovina">Link na kupovinu</label>
           <input
             type="text"
@@ -244,15 +238,24 @@ const FormBook = ({ book }: { book?: Knjiga }) => {
             placeholder="Link na kupovinu"
             {...register("kupovina")}
           />
-          <ErrorMessage>{errors.kupovina?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.kupovina?.message}</FormError>
+        </FormBlock>
 
-        <div className="form-actions">
-          <button className="btn">{book ? "Izmeni" : "Dodaj"}</button>
-          {knjiga && <DeleteButton id={book.id} cat="knjige" />}
-        </div>
-      </form>
-    </div>
+        <FormButtons>
+          <Button type="regular" title={book ? "Izmeni" : "Dodaj"} submit />
+          {book && (
+            <Button
+              type="delete"
+              title="Izbriši"
+              onClick={async () => {
+                await deleteBook(book.id)
+              }}
+              button
+            />
+          )}
+        </FormButtons>
+      </FormWrapper>
+    </>
   )
 }
 

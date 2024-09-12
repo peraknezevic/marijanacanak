@@ -5,14 +5,14 @@ import "easymde/dist/easymde.min.css"
 import { Controller, useForm } from "react-hook-form"
 import { createNews, deleteNews, updateNews } from "@/lib/actions"
 
-import Button from "@/components/button"
-import FormBlock from "@/components/form-block"
-import FormButtons from "@/components/form-buttons"
-import FormError from "@/components/form-error"
-import FormWrapper from "@/components/form-wrapper"
+import Button from "@/components/ui/button"
+import FormBlock from "@/components/forms/form-block"
+import FormButtons from "@/components/forms/form-buttons"
+import FormError from "@/components/forms/form-error"
+import FormWrapper from "@/components/forms/form-wrapper"
 import { Novost } from "@prisma/client"
 import SimpleMDE from "react-simplemde-editor"
-import Upload from "@/components/upload"
+import Upload from "@/components/forms/upload"
 import { novostSchema } from "@/lib/validationSchemas"
 import { useState } from "react"
 import { z } from "zod"
@@ -20,7 +20,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 
 type News = z.infer<typeof novostSchema>
 
-const FormNews = ({ newsItem }: { newsItem?: Novost }) => {
+const FormNews = ({ news }: { news?: Novost }) => {
   const [error, setError] = useState("")
 
   const {
@@ -32,10 +32,10 @@ const FormNews = ({ newsItem }: { newsItem?: Novost }) => {
     resolver: zodResolver(novostSchema),
   })
 
-  const onSubmit = handleSubmit(async (news) => {
+  const onSubmit = handleSubmit(async (data) => {
     try {
-      if (newsItem) await updateNews(newsItem.id, news)
-      else await createNews(news)
+      if (news) await updateNews(news.id, data)
+      else await createNews(data)
     } catch (error) {
       if (error instanceof z.ZodError) {
         setError("Validation failed")
@@ -56,7 +56,7 @@ const FormNews = ({ newsItem }: { newsItem?: Novost }) => {
           <input
             type="text"
             id="naslov"
-            defaultValue={newsItem?.naslov}
+            defaultValue={news?.naslov}
             placeholder="Naslov novosti"
             {...register("naslov")}
           />
@@ -70,7 +70,7 @@ const FormNews = ({ newsItem }: { newsItem?: Novost }) => {
           <input
             type="text"
             id="slug"
-            defaultValue={newsItem?.slug}
+            defaultValue={news?.slug}
             placeholder="URL slug"
             {...register("slug")}
           />
@@ -81,7 +81,7 @@ const FormNews = ({ newsItem }: { newsItem?: Novost }) => {
           <label htmlFor="uvod">Uvod novosti</label>
           <Controller
             name="uvod"
-            defaultValue={newsItem?.uvod || ""}
+            defaultValue={news?.uvod || ""}
             control={control}
             render={({ field }) => (
               <SimpleMDE placeholder="Uvod novosti" id="uvod" {...field} />
@@ -94,7 +94,7 @@ const FormNews = ({ newsItem }: { newsItem?: Novost }) => {
           <label htmlFor="tekst">Tekst novosti</label>
           <Controller
             name="tekst"
-            defaultValue={newsItem?.tekst || ""}
+            defaultValue={news?.tekst || ""}
             control={control}
             render={({ field }) => (
               <SimpleMDE placeholder="Tekst" id="tekst" {...field} />
@@ -109,7 +109,7 @@ const FormNews = ({ newsItem }: { newsItem?: Novost }) => {
           <label htmlFor="link">Spoljašnji Link</label>
           <input
             type="text"
-            defaultValue={newsItem?.link || ""}
+            defaultValue={news?.link || ""}
             placeholder="Link"
             {...register("link")}
           />
@@ -125,13 +125,13 @@ const FormNews = ({ newsItem }: { newsItem?: Novost }) => {
           <FormError>{errors.status?.message}</FormError>
         </FormBlock>
         <FormButtons>
-          <Button type="regular" title={newsItem ? "Izmeni" : "Dodaj"} submit />
-          {newsItem && (
+          <Button type="regular" title={news ? "Izmeni" : "Dodaj"} submit />
+          {news && (
             <Button
               type="delete"
               title="Izbriši"
               onClick={async () => {
-                await deleteNews(newsItem.id)
+                await deleteNews(news.id)
               }}
               button
             />

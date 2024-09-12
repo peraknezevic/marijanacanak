@@ -1,6 +1,6 @@
 import { Knjiga, Novost, Press, Stranica, Tekst } from "@prisma/client"
 
-import Button from "./button"
+import Button from "../ui/button"
 
 const AdminList = ({
   list,

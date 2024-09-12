@@ -1,6 +1,6 @@
 "use client"
 
-import Button from "./button"
+import Button from "../ui/button"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 

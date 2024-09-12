@@ -4,8 +4,11 @@ import "easymde/dist/easymde.min.css"
 
 import { Controller, useForm } from "react-hook-form"
 
-import DeleteButton from "../../components/DeleteButton"
-import ErrorMessage from "../../components/ErrorMessage"
+import Button from "../ui/button"
+import FormBlock from "./form-block"
+import FormButtons from "./form-buttons"
+import FormError from "./form-error"
+import FormWrapper from "./form-wrapper"
 import SimpleMDE from "react-simplemde-editor"
 import { Tekst } from "@prisma/client"
 import axios from "axios"
@@ -15,9 +18,9 @@ import { useState } from "react"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 
-type TekstPodaci = z.infer<typeof tekstSchema>
+type Story = z.infer<typeof tekstSchema>
 
-const FormStory = ({ tekst }: { tekst?: Tekst }) => {
+const FormStory = ({ story }: { story?: Tekst }) => {
   const [error, setError] = useState("")
   const router = useRouter()
 
@@ -26,13 +29,13 @@ const FormStory = ({ tekst }: { tekst?: Tekst }) => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<TekstPodaci>({
+  } = useForm<Story>({
     resolver: zodResolver(tekstSchema),
   })
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      if (tekst) await axios.patch("/api/tekstovi/" + tekst.id, data)
+      if (story) await axios.patch("/api/tekstovi/" + story.id, data)
       else await axios.post("/api/tekstovi/", data)
       router.push("/admin/price")
       router.refresh()
@@ -42,44 +45,40 @@ const FormStory = ({ tekst }: { tekst?: Tekst }) => {
   })
 
   return (
-    <div>
-      {error && (
-        <div className="alert alert-error">
-          <span>{error}</span>
-        </div>
-      )}
-      <form onSubmit={onSubmit}>
-        <div>
+    <>
+      {error && <FormError>{error}</FormError>}
+      <FormWrapper onSubmit={onSubmit}>
+        <FormBlock>
           <label htmlFor="naslov">Naslov priče</label>
           <input
             type="text"
             id="naslov"
-            defaultValue={tekst?.naslov}
+            defaultValue={story?.naslov}
             placeholder="Naslov priče"
             {...register("naslov")}
           />
-          <ErrorMessage>{errors.naslov?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.naslov?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="slug">
             URL Slug (npr. naslov-priče, bez č, ć, ž, š, đ)
           </label>
           <input
             type="text"
             id="slug"
-            defaultValue={tekst?.slug}
+            defaultValue={story?.slug}
             placeholder="URL slug"
             {...register("slug")}
           />
-          <ErrorMessage>{errors.slug?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.slug?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="uvod">Uvod priče ili tizer za Patreon</label>
           <Controller
             name="uvod"
-            defaultValue={tekst?.uvod || ""}
+            defaultValue={story?.uvod || ""}
             control={control}
             render={({ field }) => (
               <SimpleMDE
@@ -89,82 +88,91 @@ const FormStory = ({ tekst }: { tekst?: Tekst }) => {
               />
             )}
           />
-          <ErrorMessage>{errors.uvod?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.uvod?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="tekst">Tekst</label>
           <Controller
             name="tekst"
-            defaultValue={tekst?.tekst || ""}
+            defaultValue={story?.tekst || ""}
             control={control}
             render={({ field }) => (
               <SimpleMDE placeholder="Tekst" id="tekst" {...field} />
             )}
           />
-          <ErrorMessage>{errors.tekst?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.tekst?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <strong>Ako je priče na Patreonu:</strong>
-        </div>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="patreonLink">Patreon Link</label>
           <input
             type="text"
-            defaultValue={tekst?.patreonLink || ""}
+            defaultValue={story?.patreonLink || ""}
             placeholder="Patreon Link"
             {...register("patreonLink")}
           />
-          <ErrorMessage>{errors.patreonLink?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.patreonLink?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <strong>Ako je priče na drugom sajtu:</strong>
-        </div>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="nazivSpoljnogLinka">
             Naziv sajta na kom je priča
           </label>
           <input
             type="tekst"
             id="nazivSpoljnogLinka"
-            defaultValue={tekst?.nazivSpoljnogLinka || ""}
+            defaultValue={story?.nazivSpoljnogLinka || ""}
             placeholder="Naziv sajta na kom je priča"
             {...register("nazivSpoljnogLinka")}
           />
-          <ErrorMessage>{errors.nazivSpoljnogLinka?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.nazivSpoljnogLinka?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="spoljniLink">Link ka priči na drugom sajtu</label>
           <input
             type="tekst"
             id="spoljniLink"
-            defaultValue={tekst?.spoljniLink || ""}
+            defaultValue={story?.spoljniLink || ""}
             placeholder="Link ka priči na drugom sajtu"
             {...register("spoljniLink")}
           />
-          <ErrorMessage>{errors.spoljniLink?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.spoljniLink?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="spoljniLink">Status priče</label>
           <select {...register("status")}>
             <option value="Objavljeno">Objavljena</option>
             <option value="Nacrt">Nacrt</option>
           </select>
-          <ErrorMessage>{errors.status?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.status?.message}</FormError>
+        </FormBlock>
 
-        <div className="form-actions">
-          <button className="btn">{tekst ? "Izmeni" : "Dodaj"}</button>
-          {tekst && <DeleteButton id={tekst.id} cat="tekstovi" />}
-        </div>
-      </form>
-    </div>
+        <FormButtons>
+          <Button type="regular" title={story ? "Izmeni" : "Dodaj"} submit />
+          {story && (
+            <Button
+              type="delete"
+              title="Izbriši"
+              onClick={async () => {
+                await deleteStory(story.id)
+              }}
+              button
+            />
+          )}
+        </FormButtons>
+      </FormWrapper>
+    </>
   )
 }
 

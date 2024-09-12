@@ -1,6 +1,6 @@
-import H1 from "@/components/h1"
+import H1 from "@/components/ui/h1"
 import { Metadata } from "next"
-import StoryCard from "@/components/story-card"
+import StoryCard from "@/components/frontend/story-card"
 import { getPublishedStories } from "@/lib/data"
 
 const Tekstovi = async () => {

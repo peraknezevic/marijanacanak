@@ -1,5 +1,5 @@
-import AdminNavBar from "../../components/admin-navbar"
-import AdminPage from "@/components/admin-page"
+import AdminNavBar from "../../components/admin/admin-navbar"
+import AdminPage from "@/components/admin/admin-page"
 import { auth } from "@/auth"
 import { redirect } from "next/navigation"
 

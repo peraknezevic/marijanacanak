@@ -7,11 +7,11 @@ const FormNews = dynamic(() => import("@/components/forms/form-news"), {
 })
 
 const EditNewsPage = async ({ params }: { params: { id: string } }) => {
-  const newsItem = await getNewsById(params.id)
+  const news = await getNewsById(params.id)
 
-  if (!newsItem) notFound()
+  if (!news) notFound()
 
-  return <FormNews newsItem={newsItem} />
+  return <FormNews news={news} />
 }
 
 export default EditNewsPage

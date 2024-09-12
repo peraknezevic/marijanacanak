@@ -1,7 +1,7 @@
 import "./globals.css"
 
-import Footer from "@/components/footer"
-import Header from "@/components/header"
+import Footer from "@/components/frontend/footer"
+import Header from "@/components/frontend/header"
 import type { Metadata } from "next"
 import { Source_Sans_3 } from "next/font/google"
 

@@ -2,7 +2,7 @@
 
 import { IKUpload, ImageKitProvider } from "imagekitio-next"
 
-import Button from "./button"
+import Button from "../ui/button"
 import { useCopyToClipboard } from "usehooks-ts"
 import { useState } from "react"
 

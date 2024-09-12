@@ -4,29 +4,30 @@ import "easymde/dist/easymde.min.css"
 
 import { Controller, useForm } from "react-hook-form"
 
-import ErrorMessage from "../../components/ErrorMessage"
+import Button from "../ui/button"
+import FormBlock from "./form-block"
+import FormButtons from "./form-buttons"
+import FormError from "./form-error"
+import FormWrapper from "./form-wrapper"
 import SimpleMDE from "react-simplemde-editor"
 import { Stranica } from "@prisma/client"
 import axios from "axios"
 import { stranicaSchema } from "@/lib/validationSchemas"
-import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 
-type StranicaPodaci = z.infer<typeof stranicaSchema>
+type Page = z.infer<typeof stranicaSchema>
 
 const FormPage = ({ page }: { page?: Stranica }) => {
   const [error, setError] = useState("")
-  const [slugSuggestion, setSlugSuggestion] = useState(stranica?.slug || "")
-  const router = useRouter()
 
   const {
     register,
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<StranicaPodaci>({
+  } = useForm<Page>({
     resolver: zodResolver(stranicaSchema),
   })
 
@@ -34,22 +35,16 @@ const FormPage = ({ page }: { page?: Stranica }) => {
     try {
       if (page) await axios.patch("/api/stranice/" + page.slug, data)
       else await axios.post("/api/stranice/", data)
-      router.push("/admin/stranice")
-      router.refresh()
     } catch (error) {
       setError("Unexpected error accured")
     }
   })
 
   return (
-    <div>
-      {error && (
-        <div className="alert alert-error">
-          <span>{error}</span>
-        </div>
-      )}
-      <form onSubmit={onSubmit}>
-        <div>
+    <>
+      {error && <FormError>{error}</FormError>}
+      <FormWrapper onSubmit={onSubmit}>
+        <FormBlock>
           <label htmlFor="naslov">Naslov stranice</label>
           <input
             type="text"
@@ -58,10 +53,10 @@ const FormPage = ({ page }: { page?: Stranica }) => {
             placeholder="Naslov stranice"
             {...register("naslov")}
           />
-          <ErrorMessage>{errors.naslov?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.naslov?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="slug">
             URL Slug (npr. naslov-teksta, bez č, ć, ž, š, đ)
           </label>
@@ -72,10 +67,10 @@ const FormPage = ({ page }: { page?: Stranica }) => {
             placeholder="URL slug"
             {...register("slug")}
           />
-          <ErrorMessage>{errors.slug?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.slug?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="uvod">Uvod</label>
           <Controller
             name="uvod"
@@ -85,10 +80,10 @@ const FormPage = ({ page }: { page?: Stranica }) => {
               <SimpleMDE placeholder="Uvod" id="uvod" {...field} />
             )}
           />
-          <ErrorMessage>{errors.uvod?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.uvod?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="tekst">Tekst</label>
           <Controller
             name="tekst"
@@ -98,21 +93,22 @@ const FormPage = ({ page }: { page?: Stranica }) => {
               <SimpleMDE placeholder="Tekst" id="tekst" {...field} />
             )}
           />
-          <ErrorMessage>{errors.tekst?.message}</ErrorMessage>
-        </div>
+          <FormError>{errors.tekst?.message}</FormError>
+        </FormBlock>
 
-        <div>
+        <FormBlock>
           <label htmlFor="status">Status stranice</label>
           <select {...register("status")}>
             <option value="Objavljeno">Objavljena</option>
             <option value="Nacrt">Nacrt</option>
           </select>
-          <ErrorMessage>{errors.status?.message}</ErrorMessage>
-        </div>
-
-        <button className="btn">{page ? "Izmeni" : "Dodaj"}</button>
-      </form>
-    </div>
+          <FormError>{errors.status?.message}</FormError>
+        </FormBlock>
+        <FormButtons>
+          <Button type="regular" title={page ? "Izmeni" : "Dodaj"} submit />
+        </FormButtons>
+      </FormWrapper>
+    </>
   )
 }
 

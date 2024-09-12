@@ -4,7 +4,7 @@ import BookInfoItem from "./book-info-item"
 import Image from "next/image"
 import { Knjiga } from "@prisma/client"
 import Link from "next/link"
-import LinkBtn from "./button"
+import LinkBtn from "../ui/button"
 import ReactMarkdown from "react-markdown"
 import { imageKitLoader } from "@/lib/utils"
 

@@ -1,5 +1,5 @@
-import BookCard from "@/components/book-card"
-import H1 from "@/components/h1"
+import BookCard from "@/components/frontend/book-card"
+import H1 from "@/components/ui/h1"
 import { Metadata } from "next"
 import { getBooks } from "@/lib/data"
 

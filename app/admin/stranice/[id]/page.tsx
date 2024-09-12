@@ -7,7 +7,7 @@ const FormPage = dynamic(() => import("@/components/forms/form-page"), {
 })
 
 const EditPage = async ({ params }: { params: { id: string } }) => {
-  const page = getPageById(params.id)
+  const page = await getPageById(params.id)
 
   if (!page) notFound()
 

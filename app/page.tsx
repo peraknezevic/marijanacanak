@@ -5,8 +5,8 @@ import {
   getPageBySlug,
 } from "@/lib/data"
 
-import Button from "@/components/button"
-import Image from "@/components/image"
+import Button from "@/components/ui/button"
+import Image from "@/components/frontend/image"
 import Link from "next/link"
 
 const Home = async () => {

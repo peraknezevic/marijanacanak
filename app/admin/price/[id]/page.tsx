@@ -7,11 +7,11 @@ const FormStory = dynamic(() => import("@/components/forms/form-story"), {
 })
 
 const EditStoryPage = async ({ params }: { params: { id: string } }) => {
-  const tekst = await getStoryById(params.id)
+  const story = await getStoryById(params.id)
 
-  if (!tekst) notFound()
+  if (!story) notFound()
 
-  return <FormStory tekst={tekst} />
+  return <FormStory story={story} />
 }
 
 export default EditStoryPage

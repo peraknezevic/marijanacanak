@@ -1,5 +1,5 @@
-import H1 from "@/components/h1"
-import NewsArticle from "@/components/article-news"
+import H1 from "@/components/ui/h1"
+import NewsArticle from "@/components/frontend/article-news"
 import ReactMarkdown from "react-markdown"
 import { getStoryBySlug } from "@/lib/data"
 import { notFound } from "next/navigation"

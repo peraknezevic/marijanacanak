@@ -1,7 +1,7 @@
 import { Knjiga as Book } from "@prisma/client"
 import BookDetailsItem from "./book-details-item"
 import BookInfoItem from "./book-info-item"
-import Button from "./button"
+import Button from "../ui/button"
 import Image from "next/image"
 import Link from "next/link"
 import ReactMarkdown from "react-markdown"

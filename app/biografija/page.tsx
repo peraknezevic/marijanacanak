@@ -1,5 +1,5 @@
-import Article from "@/components/article"
-import H1 from "@/components/h1"
+import Article from "@/components/frontend/article"
+import H1 from "@/components/ui/h1"
 import Image from "next/image"
 import { Metadata } from "next"
 import React from "react"

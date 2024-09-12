@@ -1,4 +1,4 @@
-import Logo from "./logo"
+import Logo from "../ui/logo"
 import NavBar from "./navbar"
 import Patreon from "./patreon"
 

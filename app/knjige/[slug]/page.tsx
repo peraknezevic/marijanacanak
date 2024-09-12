@@ -1,4 +1,4 @@
-import BookPage from "@/components/book-page"
+import BookPage from "@/components/frontend/book-page"
 import { getBookBySlug } from "@/lib/data"
 import { notFound } from "next/navigation"
 

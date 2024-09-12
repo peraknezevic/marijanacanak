@@ -1,6 +1,6 @@
 import AdminNavBarItem from "./admin-navbar-item"
-import H1 from "./h1"
-import SignOutButton from "@/components/sign-out-button"
+import H1 from "../ui/h1"
+import SignOutButton from "@/components/ui/sign-out-button"
 import { auth } from "@/auth"
 import { redirect } from "next/navigation"
 

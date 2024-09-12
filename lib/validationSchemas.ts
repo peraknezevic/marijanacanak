@@ -1,7 +1,7 @@
 import { z } from "zod"
 
 export const knjigeSchema = z.object({
-  naziv: z.string().min(3).max(150),
+  naslov: z.string().min(3).max(150),
   slug: z.string().min(3).max(150),
   sazetak: z.string().min(3).max(3000).optional().or(z.literal("")),
   zanr: z.string().min(3).max(150).optional().or(z.literal("")),
@@ -27,7 +27,7 @@ export const tekstSchema = z.object({
   patreonLink: z.string().min(3).max(200).optional().or(z.literal("")),
   nazivSpoljnogLinka: z.string().min(3).max(150).optional().or(z.literal("")),
   spoljniLink: z.string().min(10).max(150).optional().or(z.literal("")),
-  status: z.enum(["Objavljeno", "Nacrt"]),
+  status: z.enum(["Objavljeno", "Nacrt"]).default("Objavljeno"),
 })
 
 export const stranicaSchema = z.object({
@@ -35,14 +35,14 @@ export const stranicaSchema = z.object({
   slug: z.string().min(3).max(150),
   uvod: z.string().min(3).max(2000).optional().or(z.literal("")),
   tekst: z.string().min(10).optional().or(z.literal("")),
-  status: z.enum(["Objavljeno", "Nacrt"]),
+  status: z.enum(["Objavljeno", "Nacrt"]).default("Objavljeno"),
 })
 
 export const pressSchema = z.object({
   naslov: z.string().min(3).max(150),
   opis: z.string().min(3).max(1500),
   link: z.string().min(3).max(150),
-  status: z.enum(["Objavljeno", "Nacrt"]),
+  status: z.enum(["Objavljeno", "Nacrt"]).default("Objavljeno"),
 })
 
 export const novostSchema = z.object({
