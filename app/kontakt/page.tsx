@@ -1,5 +1,10 @@
 "use client"
 
+import Button from "@/components/ui/button"
+import FormBlock from "@/components/forms/form-block"
+import FormButtons from "@/components/forms/form-buttons"
+import FormWrapper from "@/components/forms/form-wrapper"
+import H1 from "@/components/ui/h1"
 import { useState } from "react"
 
 const Kontakt = () => {
@@ -30,14 +35,14 @@ const Kontakt = () => {
   }
 
   return (
-    <>
-      <h1>Kontakt</h1>
-      <form onSubmit={handleSubmit} className="mb-24" id="kontaktForm">
-        <div>
+    <div className="max-w-3xl mx-auto my-16 min-h-full">
+      <H1 title="Kontakt" />
+      <FormWrapper onSubmit={handleSubmit}>
+        <FormBlock>
           <label htmlFor="name">Ime</label>
           <input type="text" name="name" required placeholder="Ime" />
-        </div>
-        <div>
+        </FormBlock>
+        <FormBlock>
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -45,23 +50,23 @@ const Kontakt = () => {
             required
             placeholder="email@example.com"
           />
-        </div>
-        <div>
+        </FormBlock>
+        <FormBlock>
           <label htmlFor="message">Poruka</label>
           <textarea
             name="message"
             required
             rows={3}
             placeholder="Poruka"
+            className="border border-zinc-400 px-2 py-2 text-lg"
           ></textarea>
-        </div>
+        </FormBlock>
         {poruka && <p className="font-bold text-xl">{poruka}</p>}
-
-        <button type="submit" className="btn">
-          Pošalji
-        </button>
-      </form>
-    </>
+        <FormButtons>
+          <Button type="regular" title="Pošalji" submit />
+        </FormButtons>
+      </FormWrapper>
+    </div>
   )
 }
 

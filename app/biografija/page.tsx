@@ -24,7 +24,9 @@ const Biografija = async () => {
             height={1100}
           />
           <figcaption>
-            <p>Marijana Čanak, autorka fotografije Maja Tomić</p>
+            <p className="text-right text-sm">
+              Marijana Čanak, autorka fotografije Maja Tomić
+            </p>
           </figcaption>
         </figure>
         <ReactMarkdown>{bio?.uvod}</ReactMarkdown>

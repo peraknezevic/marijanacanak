@@ -1,10 +1,11 @@
 "use client"
 
 import BookInfoItem from "./book-info-item"
+import Button from "../ui/button"
+import H2 from "../ui/h2"
 import Image from "next/image"
 import { Knjiga } from "@prisma/client"
 import Link from "next/link"
-import LinkBtn from "../ui/button"
 import ReactMarkdown from "react-markdown"
 import { imageKitLoader } from "@/lib/utils"
 
@@ -24,9 +25,7 @@ const BookCard = ({ book }: { book: Knjiga }) => {
           />
         </div>
         <div className="lg:px-6 py-4 lg:py-10 items-center text-xl leading-8">
-          <h2 className="uppercase">
-            <Link href={`knjige/${book.slug}`}>{book.naslov}</Link>
-          </h2>
+          <H2 title={book.naslov} slug={`knjige/${book.slug}`} />
 
           {book.izdavac && <BookInfoItem title="Izdavač" info={book.izdavac} />}
           {book.zanr && <BookInfoItem title="Žanr" info={book.zanr} />}
@@ -34,22 +33,20 @@ const BookCard = ({ book }: { book: Knjiga }) => {
             <BookInfoItem title="Godina izdanja" info={book.godina} />
           )}
           <BookInfoItem>
-            <LinkBtn
+            <Button
               href={`knjige/${book.slug}`}
               title="više o ovom izdanju"
-              type="regular"
+              type="small"
             />
-          </BookInfoItem>
-          {book.kupovina && (
-            <BookInfoItem>
-              <LinkBtn
+            {book.kupovina && (
+              <Button
                 href={book.kupovina}
                 title="naruči knjigu"
-                type="regular"
+                type="small"
                 external
               />
-            </BookInfoItem>
-          )}
+            )}
+          </BookInfoItem>
         </div>
       </div>
       <div className="[&>p]:text-left [&>p]:text-xl [&>p]:mb-4">

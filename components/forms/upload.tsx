@@ -52,7 +52,7 @@ const Upload = () => {
   const onSuccess = (res: any) => {
     console.log("Success", res)
 
-    setImageUrl(res.name)
+    setImageUrl(res.url)
   }
   return (
     <>
@@ -72,7 +72,7 @@ const Upload = () => {
           <Button
             onClick={handleCopy(imageUrl)}
             type="small"
-            title="kopiraj sliku"
+            title="kopiraj link slike"
             button
           />
         )}

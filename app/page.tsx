@@ -6,6 +6,7 @@ import {
 } from "@/lib/data"
 
 import Button from "@/components/ui/button"
+import H2 from "@/components/ui/h2"
 import Image from "@/components/frontend/image"
 import Link from "next/link"
 
@@ -39,7 +40,9 @@ const Home = async () => {
             />
           </Link>
           <figcaption>
-            <p>Marijana Čanak, fotografija: Maja Tomić</p>
+            <p className="text-right text-sm">
+              Marijana Čanak, fotografija: Maja Tomić
+            </p>
           </figcaption>
         </figure>
       </div>
@@ -55,15 +58,20 @@ const Home = async () => {
             />
           </Link>
           <figcaption>
-            <p>knjige Marijane Čanak, fotografija: Maja Tomić</p>
+            <p className="text-right text-sm">
+              knjige Marijane Čanak, fotografija: Maja Tomić
+            </p>
           </figcaption>
         </figure>
       </div>
       <div className="order-4">
-        <h2>Knjige</h2>
+        <H2 title="Knjige" />
         {books.map((book) => (
           <p key={book.id} className="mb-1">
-            <Link href={`/knjige/${book.slug}`} className="underline">
+            <Link
+              href={`/knjige/${book.slug}`}
+              className="text-slate-900 cursor-pointer hover:text-slate-700 underline"
+            >
               {book.naslov}
             </Link>{" "}
             ({book.izdavac})
@@ -76,10 +84,13 @@ const Home = async () => {
 
       {news.length !== 0 && (
         <div className="order-5">
-          <h2>Novosti</h2>
+          <H2 title="Novosti" />
           {news.map((item) => (
             <p key={item.id} className="mb-1">
-              <Link href={`novosti/${item.slug}`} className="underline">
+              <Link
+                href={`novosti/${item.slug}`}
+                className="text-slate-900 cursor-pointer hover:text-slate-700 underline"
+              >
                 {item.naslov}
               </Link>
             </p>
@@ -91,12 +102,12 @@ const Home = async () => {
       )}
 
       <div className="order-6">
-        <h2>Priče</h2>
+        <H2 title="Priče" />
         {stories.map((story) => (
           <p key={story.id} className="mb-1">
             <Link
               href={story.spoljniLink || story.patreonLink || ""}
-              className="underline"
+              className="underline text-slate-900 cursor-pointer hover:text-slate-700"
             >
               {story.naslov}
             </Link>

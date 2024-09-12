@@ -101,7 +101,9 @@ const FormNews = ({ news }: { news?: Novost }) => {
         <FormError>{errors.tekst?.message}</FormError>
       </FormBlock>
 
-      <Upload />
+      <FormBlock>
+        <Upload />
+      </FormBlock>
 
       <FormBlock>
         <label htmlFor="link">Spoljašnji Link</label>

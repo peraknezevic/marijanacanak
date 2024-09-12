@@ -2,8 +2,9 @@ import { Knjiga as Book } from "@prisma/client"
 import BookDetailsItem from "./book-details-item"
 import BookInfoItem from "./book-info-item"
 import Button from "../ui/button"
+import H1 from "../ui/h1"
+import H2 from "../ui/h2"
 import Image from "next/image"
-import Link from "next/link"
 import ReactMarkdown from "react-markdown"
 
 const BookPage = ({ book }: { book: Book }) => {
@@ -20,7 +21,7 @@ const BookPage = ({ book }: { book: Book }) => {
           />
         </div>
         <div className="lg:px-6 py-4 lg:py-10 items-center text-xl leading-8 lg:w-1/2">
-          <h2 className="uppercase">{book.naslov}</h2>
+          <H1 title={book.naslov} small />
 
           {book.izdavac && <BookInfoItem title="Izdavač" info={book.izdavac} />}
           {book.zanr && <BookInfoItem title="Žanr" info={book.zanr} />}
@@ -33,7 +34,7 @@ const BookPage = ({ book }: { book: Book }) => {
                 href={book.kupovina}
                 title="Naruči knjigu"
                 external
-                type="regular"
+                type="small"
               />
             </BookInfoItem>
           )}
@@ -44,7 +45,7 @@ const BookPage = ({ book }: { book: Book }) => {
       </div>
 
       <div className="knjiga-vise">
-        <h2>Više o izdanju</h2>
+        <H2 title="Više o izdanju" />
         {book.zanr && <BookDetailsItem title="Žanr" info={book.zanr} />}
         {book.godina && (
           <BookDetailsItem title="Godina izdanja" info={book.godina} />

@@ -3,7 +3,7 @@ const FormWrapper = ({
   onSubmit,
 }: {
   children: React.ReactNode
-  onSubmit: () => void
+  onSubmit: (() => void) | ((e: any) => Promise<void>)
 }) => {
   return (
     <form
