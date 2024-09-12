@@ -8,7 +8,7 @@ const Page = async () => {
   return (
     <>
       <Button
-        href="admin/knjige/nova"
+        href="/admin/knjige/nova"
         title="Dodaj novu knjigu"
         type="regular"
       />

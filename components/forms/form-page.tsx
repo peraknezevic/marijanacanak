@@ -33,7 +33,7 @@ const FormPage = ({ page }: { page?: Stranica }) => {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      if (page) await updatePage(page.slug, data)
+      if (page) await updatePage(page.id, data)
       else await createPage(data)
     } catch (error) {
       if (error instanceof z.ZodError) {

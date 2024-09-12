@@ -1,9 +1,10 @@
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
+
 import crypto from "crypto"
 
 const privateKey = process.env.PRIVATE_KEY
 
-export async function GET(request: { url: string | URL }) {
+export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const token = searchParams.get("token") || crypto.randomUUID()
   const expire =
