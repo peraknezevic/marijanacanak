@@ -7,7 +7,7 @@ const Footer = () => {
       <Patreon text="Podrži nastajanje novih priča" />
       <div>
         <p>
-          &copy; 2023 Marijana Čanak |{" "}
+          &copy; 2023.-2024. Marijana Čanak |{" "}
           <Link href="/politika-privatnosti">Politika privatnosti</Link> |
           Dizajn sajta: <a href="https://peraknezevic.com">Pera Knežević</a> |
           v2.0

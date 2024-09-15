@@ -6,7 +6,7 @@ const AdminList = ({
   list,
   href,
 }: {
-  list: Array<Novost | Tekst | Knjiga | Stranica | Press>
+  list: { naslov: string; id: string }[]
   href: string
 }) => {
   return (

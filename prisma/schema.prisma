@@ -78,6 +78,7 @@ model Knjiga {
   obim             String?
   isbn             String?
   kupovina         String?
+  status           Status  @default(Objavljeno)
 }
 
 model Tekst {

@@ -1,20 +1,11 @@
-import {
-  getLatestBooks,
-  getLatestPublishedNews,
-  getLatestPublishedStories,
-  getPageBySlug,
-} from "@/lib/data"
-
 import Button from "@/components/ui/button"
 import H2 from "@/components/ui/h2"
 import Image from "@/components/frontend/image"
 import Link from "next/link"
+import { getHomepageData } from "@/lib/data"
 
 const Home = async () => {
-  const bio = await getPageBySlug("biografija")
-  const stories = await getLatestPublishedStories(5)
-  const books = await getLatestBooks(6)
-  const news = await getLatestPublishedNews(5)
+  const [bio, news, stories, books] = await getHomepageData()
 
   return (
     <div className="grid lg:grid-cols-2 lg:grid-rows-2 max-w-5xl mx-auto my-8 xl:my-16 gap-8 xl:gap-16 text-lg">
@@ -106,7 +97,7 @@ const Home = async () => {
         {stories.map((story) => (
           <p key={story.id} className="mb-1">
             <Link
-              href={story.spoljniLink || story.patreonLink || ""}
+              href={story.spoljniLink || story.patreonLink || story.slug || ""}
               className="underline text-slate-900 cursor-pointer hover:text-slate-700"
             >
               {story.naslov}

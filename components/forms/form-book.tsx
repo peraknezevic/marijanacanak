@@ -245,6 +245,15 @@ const FormBook = ({ book }: { book?: Knjiga }) => {
         <FormError>{errors.kupovina?.message}</FormError>
       </FormBlock>
 
+      <FormBlock>
+        <label htmlFor="status">Status teksta o knjizi</label>
+        <select {...register("status")} id="status">
+          <option value="Objavljeno">Objavljen</option>
+          <option value="Nacrt">Nacrt</option>
+        </select>
+        <FormError>{errors.status?.message}</FormError>
+      </FormBlock>
+
       <FormButtons>
         <Button type="regular" title={book ? "Izmeni" : "Dodaj"} submit />
         {book && (

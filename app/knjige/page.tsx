@@ -1,10 +1,10 @@
 import BookCard from "@/components/frontend/book-card"
 import H1 from "@/components/ui/h1"
 import { Metadata } from "next"
-import { getBooks } from "@/lib/data"
+import { getPublishedBooks } from "@/lib/data"
 
 const Knjige = async () => {
-  const books = await getBooks()
+  const books = await getPublishedBooks()
 
   return (
     <>

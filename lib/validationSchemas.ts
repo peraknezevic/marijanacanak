@@ -17,6 +17,7 @@ export const knjigaSchema = z.object({
   obim: z.string().min(3).max(150).optional().or(z.literal("")),
   isbn: z.string().min(3).max(150).optional().or(z.literal("")),
   kupovina: z.string().min(3).max(150).optional().or(z.literal("")),
+  status: z.enum(["Objavljeno", "Nacrt"]).default("Objavljeno"),
 })
 
 export const tekstSchema = z.object({
