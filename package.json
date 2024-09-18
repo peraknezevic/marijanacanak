@@ -14,7 +14,7 @@
     "@prisma/client": "^5.19.1",
     "easymde": "^2.18.0",
     "imagekitio-next": "^1.0.0",
-    "next": "^14.2.9",
+    "next": "^14.2.12",
     "next-auth": "^5.0.0-beta.20",
     "react": "19.0.0-rc-3dfd5d9e-20240910",
     "react-dom": "19.0.0-rc-3dfd5d9e-20240910",
