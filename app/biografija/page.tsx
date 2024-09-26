@@ -18,10 +18,11 @@ const Biografija = async () => {
       <Article>
         <figure>
           <Image
-            src="/slike/marijana-canak.jpg"
+            src="https://ik.imagekit.io/tkrwfvazw/marijanacanak/slike/homepage/marijana-canak.jpg"
             alt="Marijana Čanak"
             width={1600}
             height={1100}
+            className="rounded-2xl"
           />
           <figcaption>
             <p className="text-right text-sm">
