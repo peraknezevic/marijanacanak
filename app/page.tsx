@@ -97,7 +97,12 @@ const Home = async () => {
         {stories.map((story) => (
           <p key={story.id} className="mb-1">
             <Link
-              href={story.spoljniLink || story.patreonLink || story.slug || ""}
+              href={
+                story.spoljniLink ||
+                story.patreonLink ||
+                `/price/${story.slug}` ||
+                ""
+              }
               className="underline text-slate-900 cursor-pointer hover:text-slate-700"
             >
               {story.naslov}
