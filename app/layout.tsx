@@ -1,5 +1,6 @@
 import "./globals.css"
 
+import { Analytics } from "@vercel/analytics/next"
 import Footer from "@/components/frontend/footer"
 import Header from "@/components/frontend/header"
 import type { Metadata } from "next"
@@ -40,7 +41,10 @@ export default function RootLayout({
         className={`${source.className} max-w-7xl px-6 xl:mx-auto text-slate-900`}
       >
         <Header />
-        <main className="h-full min-h-screen">{children}</main>
+        <main className="h-full min-h-screen">
+          {children}
+          <Analytics />
+        </main>
         <Footer />
       </body>
     </html>
