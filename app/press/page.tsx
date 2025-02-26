@@ -4,6 +4,7 @@ import Link from "next/link"
 import NewsArticle from "@/components/frontend/article-news"
 import ReactMarkdown from "react-markdown"
 import { getPublishedPress } from "@/lib/data"
+import rehypeRaw from "rehype-raw"
 
 const Press = async () => {
   const press = await getPublishedPress()
@@ -17,7 +18,9 @@ const Press = async () => {
             <Link href={item.link}>
               <H2 title={item.naslov} />
             </Link>
-            <ReactMarkdown className="text-left">{item.opis}</ReactMarkdown>
+            <ReactMarkdown className="text-left" rehypePlugins={[rehypeRaw]}>
+              {item.opis}
+            </ReactMarkdown>
             <hr />
           </NewsArticle>
         ))}

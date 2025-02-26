@@ -4,6 +4,7 @@ import LinkBtn from "@/components/ui/button"
 import NewsArticle from "@/components/frontend/article-news"
 import ReactMarkdown from "react-markdown"
 import { getPublishedNews } from "@/lib/data"
+import rehypeRaw from "rehype-raw"
 
 const Novosti = async () => {
   const news = await getPublishedNews()
@@ -18,8 +19,12 @@ const Novosti = async () => {
         {news.map((item) => (
           <NewsArticle key={item.id}>
             <H2 title={item.naslov} slug={`novosti/${item.slug}`} />
-            <ReactMarkdown className="text-left">{item.uvod}</ReactMarkdown>
-            <ReactMarkdown className="text-left">{item.tekst}</ReactMarkdown>
+            <ReactMarkdown className="text-left" rehypePlugins={[rehypeRaw]}>
+              {item.uvod}
+            </ReactMarkdown>
+            <ReactMarkdown className="text-left" rehypePlugins={[rehypeRaw]}>
+              {item.tekst}
+            </ReactMarkdown>
             {item.link && (
               <LinkBtn href={item.link} title="Više informacija" type="small" />
             )}
