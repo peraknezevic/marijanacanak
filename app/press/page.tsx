@@ -18,9 +18,11 @@ const Press = async () => {
             <Link href={item.link}>
               <H2 title={item.naslov} />
             </Link>
-            <ReactMarkdown className="text-left" rehypePlugins={[rehypeRaw]}>
-              {item.opis}
-            </ReactMarkdown>
+            <div className="text-left">
+              <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+                {item.opis}
+              </ReactMarkdown>
+            </div>
             <hr />
           </NewsArticle>
         ))}

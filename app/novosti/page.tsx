@@ -19,12 +19,16 @@ const Novosti = async () => {
         {news.map((item) => (
           <NewsArticle key={item.id}>
             <H2 title={item.naslov} slug={`novosti/${item.slug}`} />
-            <ReactMarkdown className="text-left" rehypePlugins={[rehypeRaw]}>
-              {item.uvod}
-            </ReactMarkdown>
-            <ReactMarkdown className="text-left" rehypePlugins={[rehypeRaw]}>
-              {item.tekst}
-            </ReactMarkdown>
+            <div className="text-left">
+              <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+                {item.uvod}
+              </ReactMarkdown>
+            </div>
+            <div className="text-left">
+              <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+                {item.tekst}
+              </ReactMarkdown>
+            </div>
             {item.link && (
               <LinkBtn href={item.link} title="Više informacija" type="small" />
             )}
