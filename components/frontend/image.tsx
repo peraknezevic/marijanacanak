@@ -1,6 +1,6 @@
 "use client"
 
-import { IKImage } from "imagekitio-next"
+import { IKImage } from "imagekitio-react"
 
 const urlEndpoint = process.env.NEXT_PUBLIC_URL_ENDPOINT
 

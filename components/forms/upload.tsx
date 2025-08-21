@@ -1,6 +1,6 @@
 "use client"
 
-import { IKUpload, ImageKitProvider } from "imagekitio-next"
+import { IKUpload, ImageKitProvider } from "imagekitio-react"
 
 import Button from "../ui/button"
 import { useCopyToClipboard } from "usehooks-ts"
