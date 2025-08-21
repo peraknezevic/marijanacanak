@@ -1,6 +1,6 @@
 "use client"
 
-import { IKUpload, ImageKitProvider } from "imagekitio-react"
+import { IKUpload, IKContext } from "imagekitio-react"
 
 import Button from "../ui/button"
 import { useCopyToClipboard } from "usehooks-ts"
@@ -10,10 +10,10 @@ const urlEndpoint = process.env.NEXT_PUBLIC_URL_ENDPOINT
 const publicKey = process.env.NEXT_PUBLIC_PUBLIC_KEY
 const authenticator = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/upload-auth")
+    const res = await fetch("/api/upload-auth")
 
     if (!res.ok) {
-      throw new Error("Request failed" + res.text())
+      throw new Error("Request failed" + (await res.text()))
     }
 
     const data = await res.json()
@@ -56,7 +56,7 @@ const Upload = () => {
   }
   return (
     <>
-      <ImageKitProvider
+      <IKContext
         urlEndpoint={urlEndpoint}
         publicKey={publicKey}
         authenticator={authenticator}
@@ -76,7 +76,7 @@ const Upload = () => {
             button
           />
         )}
-      </ImageKitProvider>
+      </IKContext>
     </>
   )
 }
