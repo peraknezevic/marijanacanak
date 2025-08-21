@@ -3,7 +3,6 @@
 import "easymde/dist/easymde.min.css"
 
 import { Controller, useForm } from "react-hook-form"
-import { createPress, deletePress, updatePress } from "@/lib/actions"
 
 import Button from "@/components/ui/button"
 import FormBlock from "./form-block"
@@ -19,7 +18,13 @@ import { zodResolver } from "@hookform/resolvers/zod"
 
 type PressT = z.infer<typeof pressSchema>
 
-const FormPress = ({ pressItem }: { pressItem?: Press }) => {
+type FormPressProps = {
+  pressItem?: Press
+  onSubmitAction: (data: PressT) => Promise<any>
+  onDeleteAction?: () => Promise<any>
+}
+
+const FormPress = ({ pressItem, onSubmitAction, onDeleteAction }: FormPressProps) => {
   const [error, setError] = useState("")
 
   const {
@@ -33,8 +38,7 @@ const FormPress = ({ pressItem }: { pressItem?: Press }) => {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      if (pressItem) await updatePress(pressItem.id, data)
-      else await createPress(data)
+      await onSubmitAction(data)
     } catch (error) {
       if (error instanceof z.ZodError) {
         setError("Validation failed")
@@ -95,12 +99,12 @@ const FormPress = ({ pressItem }: { pressItem?: Press }) => {
 
       <FormButtons>
         <Button type="regular" title={pressItem ? "Izmeni" : "Dodaj"} submit />
-        {pressItem && (
+        {pressItem && onDeleteAction && (
           <Button
             type="delete"
             title="Izbriši"
             onClick={async () => {
-              await deletePress(pressItem.id)
+              await onDeleteAction()
             }}
             button
           />

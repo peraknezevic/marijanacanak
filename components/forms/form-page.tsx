@@ -3,7 +3,6 @@
 import "easymde/dist/easymde.min.css"
 
 import { Controller, useForm } from "react-hook-form"
-import { createPage, deletePage, updatePage } from "@/lib/actions"
 
 import Button from "../ui/button"
 import FormBlock from "./form-block"
@@ -19,7 +18,13 @@ import { zodResolver } from "@hookform/resolvers/zod"
 
 type Page = z.infer<typeof stranicaSchema>
 
-const FormPage = ({ page }: { page?: Stranica }) => {
+type FormPageProps = {
+  page?: Stranica
+  onSubmitAction: (data: Page) => Promise<any>
+  onDeleteAction?: () => Promise<any>
+}
+
+const FormPage = ({ page, onSubmitAction, onDeleteAction }: FormPageProps) => {
   const [error, setError] = useState("")
 
   const {
@@ -33,8 +38,7 @@ const FormPage = ({ page }: { page?: Stranica }) => {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      if (page) await updatePage(page.id, data)
-      else await createPage(data)
+      await onSubmitAction(data)
     } catch (error) {
       if (error instanceof z.ZodError) {
         setError("Validation failed")
@@ -110,12 +114,12 @@ const FormPage = ({ page }: { page?: Stranica }) => {
       </FormBlock>
       <FormButtons>
         <Button type="regular" title={page ? "Izmeni" : "Dodaj"} submit />
-        {page && (
+        {page && onDeleteAction && (
           <Button
             type="delete"
             title="Izbriši"
             onClick={async () => {
-              await deletePage(page.id)
+              await onDeleteAction()
             }}
             button
           />

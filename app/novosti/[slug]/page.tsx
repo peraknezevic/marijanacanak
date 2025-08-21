@@ -5,8 +5,9 @@ import { getNewsBySlug } from "@/lib/data"
 import { notFound } from "next/navigation"
 import rehypeRaw from "rehype-raw"
 
-const Novost = async ({ params }: { params: { slug: string } }) => {
-  const newsItem = await getNewsBySlug(params.slug)
+const Novost = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params
+  const newsItem = await getNewsBySlug(slug)
 
   if (!newsItem) notFound()
 

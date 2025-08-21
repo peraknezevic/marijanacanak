@@ -3,7 +3,6 @@
 import "easymde/dist/easymde.min.css"
 
 import { Controller, useForm } from "react-hook-form"
-import { createStory, deleteStory, updateStory } from "@/lib/actions"
 
 import Button from "../ui/button"
 import FormBlock from "./form-block"
@@ -19,7 +18,13 @@ import { zodResolver } from "@hookform/resolvers/zod"
 
 type Story = z.infer<typeof tekstSchema>
 
-const FormStory = ({ story }: { story?: Tekst }) => {
+type FormStoryProps = {
+  story?: Tekst
+  onSubmitAction: (data: Story) => Promise<any>
+  onDeleteAction?: () => Promise<any>
+}
+
+const FormStory = ({ story, onSubmitAction, onDeleteAction }: FormStoryProps) => {
   const [error, setError] = useState("")
   const {
     register,
@@ -32,8 +37,7 @@ const FormStory = ({ story }: { story?: Tekst }) => {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      if (story) await updateStory(story.id, data)
-      else await createStory(data)
+      await onSubmitAction(data)
     } catch (error) {
       if (error instanceof z.ZodError) {
         setError("Validation failed")
@@ -157,12 +161,12 @@ const FormStory = ({ story }: { story?: Tekst }) => {
 
       <FormButtons>
         <Button type="regular" title={story ? "Izmeni" : "Dodaj"} submit />
-        {story && (
+        {story && onDeleteAction && (
           <Button
             type="delete"
             title="Izbriši"
             onClick={async () => {
-              await deleteStory(story.id)
+              await onDeleteAction()
             }}
             button
           />

@@ -3,7 +3,6 @@
 import "easymde/dist/easymde.min.css"
 
 import { Controller, useForm } from "react-hook-form"
-import { createNews, deleteNews, updateNews } from "@/lib/actions"
 
 import Button from "@/components/ui/button"
 import FormBlock from "@/components/forms/form-block"
@@ -20,7 +19,13 @@ import { zodResolver } from "@hookform/resolvers/zod"
 
 type News = z.infer<typeof novostSchema>
 
-const FormNews = ({ news }: { news?: Novost }) => {
+type FormNewsProps = {
+  news?: Novost
+  onSubmitAction: (data: News) => Promise<any>
+  onDeleteAction?: () => Promise<any>
+}
+
+const FormNews = ({ news, onSubmitAction, onDeleteAction }: FormNewsProps) => {
   const [error, setError] = useState("")
 
   const {
@@ -34,8 +39,7 @@ const FormNews = ({ news }: { news?: Novost }) => {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      if (news) await updateNews(news.id, data)
-      else await createNews(data)
+      await onSubmitAction(data)
     } catch (error) {
       if (error instanceof z.ZodError) {
         setError("Validation failed")
@@ -126,12 +130,12 @@ const FormNews = ({ news }: { news?: Novost }) => {
       </FormBlock>
       <FormButtons>
         <Button type="regular" title={news ? "Izmeni" : "Dodaj"} submit />
-        {news && (
+        {news && onDeleteAction && (
           <Button
             type="delete"
             title="Izbriši"
             onClick={async () => {
-              await deleteNews(news.id)
+              await onDeleteAction()
             }}
             button
           />

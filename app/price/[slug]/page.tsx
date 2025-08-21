@@ -5,8 +5,9 @@ import { getStoryBySlug } from "@/lib/data"
 import { notFound } from "next/navigation"
 import prisma from "@/prisma/client"
 
-const Tekst = async ({ params }: { params: { slug: string } }) => {
-  const story = await getStoryBySlug(params.slug)
+const Tekst = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params
+  const story = await getStoryBySlug(slug)
 
   if (!story) notFound()
   return (

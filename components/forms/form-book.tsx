@@ -3,7 +3,6 @@
 import "easymde/dist/easymde.min.css"
 
 import { Controller, useForm } from "react-hook-form"
-import { createBook, deleteBook, updateBook } from "@/lib/actions"
 
 import Button from "../ui/button"
 import FormBlock from "./form-block"
@@ -19,7 +18,13 @@ import { zodResolver } from "@hookform/resolvers/zod"
 
 type Book = z.infer<typeof knjigaSchema>
 
-const FormBook = ({ book }: { book?: Knjiga }) => {
+type FormBookProps = {
+  book?: Knjiga
+  onSubmitAction: (data: Book) => Promise<any>
+  onDeleteAction?: () => Promise<any>
+}
+
+const FormBook = ({ book, onSubmitAction, onDeleteAction }: FormBookProps) => {
   const {
     register,
     control,
@@ -33,8 +38,7 @@ const FormBook = ({ book }: { book?: Knjiga }) => {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      if (book) await updateBook(book.id, data)
-      else await createBook(data)
+      await onSubmitAction(data)
     } catch (error) {
       if (error instanceof z.ZodError) {
         setError("Validation failed")
@@ -256,12 +260,12 @@ const FormBook = ({ book }: { book?: Knjiga }) => {
 
       <FormButtons>
         <Button type="regular" title={book ? "Izmeni" : "Dodaj"} submit />
-        {book && (
+        {book && onDeleteAction && (
           <Button
             type="delete"
             title="Izbriši"
             onClick={async () => {
-              await deleteBook(book.id)
+              await onDeleteAction()
             }}
             button
           />

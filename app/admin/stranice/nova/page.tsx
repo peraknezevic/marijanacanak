@@ -1,11 +1,12 @@
 import dynamic from "next/dynamic"
+import { createPage } from "@/lib/actions"
 
 const FormPage = dynamic(() => import("@/components/forms/form-page"), {
-  ssr: false,
+  ssr: !!false,
 })
 
 const CreatePage = () => {
-  return <FormPage />
+  return <FormPage onSubmitAction={createPage} />
 }
 
 export default CreatePage
