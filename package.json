@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "engines": {
-    "node": "22.x"
+    "node": ">=24"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.8.0",
